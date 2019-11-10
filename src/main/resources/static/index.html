@@ -1,0 +1,128 @@
+<!DOCTYPE html >
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title id="title">bootstrap风格的html5表单验证示例</title>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js">
+    </script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <style>
+        html, body
+        {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        .form-horizontal .control-group
+        {
+            margin-bottom: 16px;
+        }
+        .wrap
+        {
+            height: 100%;
+            display: -webkit-box;
+            -webkit-box-align: center;
+            -webkit-box-pack: center;
+            overflow: auto;
+        }
+        .main
+        {
+            width: 600px;
+        }
+        .info
+        {
+            margin-bottom: 20px;
+            font-size: 21px;
+            line-height: 40px;
+            color: #333;
+            border: 0;
+            border-bottom: 1px solid #e5e5e5;
+        }
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <form class="main form-horizontal">
+        <fieldset>
+            <legend>配置</legend>
+            <div class="control-group">
+                <label class="control-label">
+                    FPS（帧率）：</label>
+                <div class="controls">
+                    <input id="FPS" name="FPS" type="number" placeholder="FPS" class="input-xlarge"
+                           required οnchange="checkPasswords()">
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">
+                    DPS（每秒跨过数据量）：</label>
+                <div class="controls">
+                    <input name="DPS" id="DPS" type="number" placeholder="DPS" class="input-xlarge" required>
+                </div>
+            </div>
+<!--            <legend>管理员信息</legend>-->
+            <div class="control-group">
+                <label class="control-label">
+                    画质：
+                    </label>
+                <div class="controls">
+                    <label class="radio">
+                        <input id="720p" type="radio" value="720p" name="quality" checked="checked">
+                        720p
+                    </label>
+                    <label class="radio">
+                        <input id="360p" type="radio" value="360p" name="quality">
+                        360p
+                    </label>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">
+                    同屏柱子数量：</label>
+                <div class="controls">
+                    <input id="numOfBarsInChart" name="numOfBarsInChart" type="number" value="10" class="input-xlarge" required>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">
+                    重新排序间隔时间：</label>
+                <div class="controls">
+                    <input id="ti" name="ti" type="number" value="1" class="input-xlarge" required>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">
+                    重新排序所花时间：</label>
+                <div class="controls">
+                    <input id="tic" name="tic" type="text" value="0.5" class="input-xlarge" required>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">
+                </label>
+                <div class="controls">
+                    <button class="btn" onclick="check()" id="ok">
+                        检查参数</button>
+                    <button class="btn" type="reset">
+                        重 置</button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+<script>
+    function check() {
+        var FPS = document.getElementById('FPS');
+        var DPS = document.getElementById('DPS');
+        var numOfBarsInChart = document.getElementById('numOfBarsInChart');
+        var ti = document.getElementById('ti');
+        var tic = document.getElementById('tic');
+        var quality720p = document.getElementById('720p');
+        var quality360p = document.getElementById('360p');
+        console.log(FPS, DPS, numOfBarsInChart, ti, tic, quality720p, quality360p);
+    }
+</script>
+</body>
+</html>
