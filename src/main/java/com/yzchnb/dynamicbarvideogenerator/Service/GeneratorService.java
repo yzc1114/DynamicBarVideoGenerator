@@ -14,7 +14,7 @@ import java.util.HashMap;
 
 @Service
 public class GeneratorService {
-    public String generateVideo(GeneratorConfiguation generatorConfiguation, File csvFile) throws Exception{
+    public String generateVideo(GeneratorConfiguation generatorConfiguation, File csvFile, String generateDir) throws Exception{
         //TODO 生成视频，存到本地，返回视频url
         //TODO 读取文件内容，将types记录下来
         try{
@@ -44,7 +44,7 @@ public class GeneratorService {
             for (int i = 1; i < splitedfirstLine.length; i++) {
                 types.add(splitedfirstLine[i]);
             }
-            CenterProcessor centerController = new CenterProcessor(generatorConfiguation, types, frameCount);
+            CenterProcessor centerController = new CenterProcessor(generatorConfiguation, types, frameCount,generateDir);
             while(true){
                 String lineStr = bufferedReader.readLine();
                 //skipping lines
@@ -58,7 +58,7 @@ public class GeneratorService {
                 centerController.consumeDataLine(line);
             }
             centerController.dispose();
-            return centerController.waitResult();
+            return "/resources/movies/" +centerController.waitResult();
 
         }catch (IOException e){
             e.printStackTrace();

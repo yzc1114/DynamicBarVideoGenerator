@@ -92,7 +92,7 @@ public class ImageGenerator {
                 continue;
             }
             int real_bar_position=(int)(bar.getPosition()*heightOfBarChart)+originY;
-            int bar_length=(int)(widthOfBarChart*bar.getValue()/frame.getPeekDegree());
+            int bar_length=(int)(widthOfBarChart*(bar.getValue()-frame.getBaseDegree())/(frame.getPeekDegree()-frame.getBaseDegree()));
 
             graphics.setColor(Color.BLACK);
             graphics.setFont(name_font);

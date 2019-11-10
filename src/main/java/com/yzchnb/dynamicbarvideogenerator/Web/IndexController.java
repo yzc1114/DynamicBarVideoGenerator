@@ -3,6 +3,7 @@ package com.yzchnb.dynamicbarvideogenerator.Web;
 import com.yzchnb.dynamicbarvideogenerator.ConfigurationEntity.GeneratorConfiguation;
 import com.yzchnb.dynamicbarvideogenerator.ConfigurationEntity.UserInputConfiguration;
 import com.yzchnb.dynamicbarvideogenerator.Service.GeneratorService;
+import com.yzchnb.dynamicbarvideogenerator.Utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
@@ -17,8 +18,6 @@ import java.util.ArrayList;
 public class IndexController {
     @Autowired
     GeneratorService generatorService;
-    @Value("${uploadDataFilePath}")
-    String dataFilePath;
 
     @RequestMapping(value = "/generateVideo", method = RequestMethod.POST, consumes = {MediaType.ALL_VALUE})
     @ResponseBody
@@ -48,8 +47,7 @@ public class IndexController {
             System.out.println("上传失败");
             return "上传失败";
         }
-        File tempFile = new File(dataFilePath + userInputConfiguration.hashCode() + ".csv");
-
+        File tempFile = new File(Utils.getDataFileDir() + userInputConfiguration.hashCode() + ".csv");
         try{
             multipartFile.transferTo(tempFile);
         }catch (Exception e){
@@ -58,7 +56,7 @@ public class IndexController {
         }
         //TODO 上传csv文件
         try{
-            return generatorService.generateVideo(generatorConfiguation, tempFile);
+            return generatorService.generateVideo(generatorConfiguation, tempFile,Utils.getMoviesDir());
         }catch (Exception e){
             e.printStackTrace();
             return e.getMessage();
