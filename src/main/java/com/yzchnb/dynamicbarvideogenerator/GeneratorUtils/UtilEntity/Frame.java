@@ -7,7 +7,6 @@ public class Frame {
     private List<Bar> bars;
     private Integer peekValue;
     private Integer peekDegree;
-
     public List<Bar> getBars() {
         return bars;
     }
@@ -15,10 +14,8 @@ public class Frame {
     public Integer getPeekValue() {
         return peekValue;
     }
-
-    public Frame(ArrayList<Bar> bars, Integer peekValue){
-        this.bars = bars;
-        this.peekValue = peekValue;
+    public Integer getPeekDegree(){
+        return peekDegree;
     }
 
     public Frame(List<Bar> bars) {
