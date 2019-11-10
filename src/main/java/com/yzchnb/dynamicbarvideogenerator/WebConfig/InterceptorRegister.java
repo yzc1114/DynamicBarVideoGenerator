@@ -14,7 +14,8 @@ public class InterceptorRegister extends WebMvcConfigurerAdapter {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         //定义到新文件夹
         registry.addResourceHandler("/**")
-                .addResourceLocations("classpath:/static/");
+                .addResourceLocations("classpath:/static/")
+                .addResourceLocations("classpath:/resources/");
         //定义到硬盘
 //        registry.addResourceHandler("/picture/**")
 //                .addResourceLocations("file:D:/picture/");
