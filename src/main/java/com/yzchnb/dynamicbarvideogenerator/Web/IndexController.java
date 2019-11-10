@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.awt.*;
 import java.io.File;
+import java.util.ArrayList;
 
 @RestController
 public class IndexController {
@@ -24,6 +25,24 @@ public class IndexController {
     public String generateVideo(@ModelAttribute UserInputConfiguration userInputConfiguration, @RequestParam(value = "file") MultipartFile multipartFile){
         //System.out.println(userInputConfiguration);
         //UserInputConfiguration userInputConfiguration1 = new UserInputConfiguration();
+//        ArrayList<String> classNames = new ArrayList<String>(){
+//            {
+//                add("media.datasink.E.Handler");
+//                add("javax.media.datasink.E.Handler");
+//                add("com.sun.media.datasink.E.Handler");
+//                add("com.ibm.media.datasink.E.Handler");
+//            }
+//        };
+//        classNames.forEach((name) -> {
+//            try{
+//                System.out.println(name);
+//                Class.forName(name);
+//            }catch (ClassNotFoundException e){
+//                e.printStackTrace();
+//            }
+//        });
+
+
         GeneratorConfiguation generatorConfiguation = new GeneratorConfiguation(userInputConfiguration);
         if(multipartFile.isEmpty()){
             System.out.println("上传失败");
