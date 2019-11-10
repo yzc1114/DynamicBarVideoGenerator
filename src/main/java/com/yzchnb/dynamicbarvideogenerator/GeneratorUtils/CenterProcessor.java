@@ -131,7 +131,6 @@ public class CenterProcessor implements ImageProvider, FrameSavedListener {
     @Override
     public byte[] getImage(int i) {
         BufferedImage bufferedImage;
-
         while((bufferedImage = bufferedImages.poll()) == null){
             if(dataEnd){
                 return new byte[0];
