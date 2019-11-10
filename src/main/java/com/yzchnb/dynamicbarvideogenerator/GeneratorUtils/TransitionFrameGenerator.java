@@ -15,6 +15,8 @@ public class TransitionFrameGenerator {
 
     private GeneratorConfiguation generatorConfiguation;
 
+    private HashMap<String, Double> lastType2Position = null;
+
     public TransitionFrameGenerator(GeneratorConfiguation generatorConfiguation){
         this.generatorConfiguation = generatorConfiguation;
     }
@@ -44,8 +46,15 @@ public class TransitionFrameGenerator {
         //
         Line firstLine = lines.get(0);
         Line lastLine = lines.get(lines.size() - 1);
-        HashMap<String, Double> firstLineType2Position = getType2Position(firstLine, numOfBarsInChart);
+
+        HashMap<String, Double> firstLineType2Position;
+        if(lastType2Position == null){
+            firstLineType2Position = getType2Position(firstLine, numOfBarsInChart);
+        }else{
+            firstLineType2Position = lastType2Position;
+        }
         HashMap<String, Double> lastLineType2Position = getType2Position(lastLine, numOfBarsInChart);
+        lastType2Position = lastLineType2Position;
 
         //根据一头一尾的line的position数据，分配每个bar的位置。
         for (int i = 0; i < lines.size(); i++) {
@@ -72,13 +81,12 @@ public class TransitionFrameGenerator {
 
     private ArrayList<Frame> generateUnsortingFrames(List<Line> lines){
         ArrayList<Frame> frames = new ArrayList<>(lines.size());
-        int numOfBarsInChart = generatorConfiguation.getUserInputConfiguration().getNumOfBarsInChart();
+        //int numOfBarsInChart = generatorConfiguation.getUserInputConfiguration().getNumOfBarsInChart();
         if(lines.size() == 0){
             return frames;
         }
         //分析第一行得到line的数据，然后得到type的排名，之后的position全部按照那个来。
-        Line firstLine = lines.get(0);
-        HashMap<String, Double> type2Position = getType2Position(firstLine, numOfBarsInChart);
+        //Line firstLine = lines.get(0);
 
         for (int i = 0; i < lines.size(); i++) {
             Line line = lines.get(i);
@@ -88,7 +96,7 @@ public class TransitionFrameGenerator {
                 bars.add(new Bar(type, value))
             );
             bars.forEach((bar) -> {
-                bar.setPosition(type2Position.get(bar.getTypeName()));
+                bar.setPosition(lastType2Position.get(bar.getTypeName()));
             });
 
             Frame frame = new Frame(bars);

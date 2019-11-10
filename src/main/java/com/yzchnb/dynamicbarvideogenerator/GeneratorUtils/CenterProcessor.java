@@ -57,7 +57,8 @@ public class CenterProcessor implements ImageProvider, FrameSavedListener {
         this.bufferedImages = new ConcurrentLinkedQueue<>();
         this.transitionFrameGenerator = new TransitionFrameGenerator(generatorConfiguation);
         this.imageGenerator = new ImageGenerator(generatorConfiguation);
-        this.videoSavingPath = resourceBundle.getString("generatedMoviePath") + generatorConfiguation.hashCode() + ".mov";
+        //this.videoSavingPath = resourceBundle.getString("generatedMoviePath") + generatorConfiguation.hashCode() + ".mov";
+        this.videoSavingPath = "./movies/" + generatorConfiguation.hashCode() + ".avi";
         this.startSavingMovie();
     }
 
