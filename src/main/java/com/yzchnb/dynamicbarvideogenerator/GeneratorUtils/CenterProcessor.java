@@ -1,12 +1,13 @@
 package com.yzchnb.dynamicbarvideogenerator.GeneratorUtils;
-
 import com.yzchnb.dynamicbarvideogenerator.ConfigurationEntity.GeneratorConfiguation;
 import com.yzchnb.dynamicbarvideogenerator.ConfigurationEntity.UserInputConfiguration;
 import com.yzchnb.dynamicbarvideogenerator.GeneratorUtils.UtilEntity.Frame;
 import com.yzchnb.dynamicbarvideogenerator.GeneratorUtils.UtilEntity.Line;
 import org.jim2mov.core.*;
 import org.jim2mov.utils.MovieUtils;
+import org.springframework.util.ResourceUtils;
 
+import javax.media.MediaLocator;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -40,6 +41,8 @@ public class CenterProcessor implements ImageProvider, FrameSavedListener {
     }
     //视频生成地址。
     private String videoSavingPath;
+    //视频名字
+    private String videoName;
     //连续帧生成器，向它提供数据和配置文件，返回可以直接生成图片的帧数据
     private TransitionFrameGenerator transitionFrameGenerator;
     //图片生成器，向它提供帧数据，能够得到一帧图片
@@ -47,8 +50,9 @@ public class CenterProcessor implements ImageProvider, FrameSavedListener {
     //用于生成视频的线程
     private Thread savingMovieThread;
 
+
     //构造函数
-    public CenterProcessor(GeneratorConfiguation generatorConfiguation, ArrayList<String> types, int frameCount){
+    public CenterProcessor(GeneratorConfiguation generatorConfiguation, ArrayList<String> types, int frameCount,String generateDir){
         this.generatorConfiguation = generatorConfiguation;
         this.userInputConfiguration = generatorConfiguation.getUserInputConfiguration();
         this.linesSize = (int)(userInputConfiguration.getTi() * userInputConfiguration.getFPS());
@@ -57,7 +61,8 @@ public class CenterProcessor implements ImageProvider, FrameSavedListener {
         this.bufferedImages = new ConcurrentLinkedQueue<>();
         this.transitionFrameGenerator = new TransitionFrameGenerator(generatorConfiguation);
         this.imageGenerator = new ImageGenerator(generatorConfiguation);
-        this.videoSavingPath = resourceBundle.getString("generatedMoviePath") + generatorConfiguation.hashCode() + ".mov";
+        this.videoName=generatorConfiguation.hashCode() + ".mov";
+        this.videoSavingPath =generateDir+this.videoName;
         this.startSavingMovie();
     }
 
@@ -120,7 +125,7 @@ public class CenterProcessor implements ImageProvider, FrameSavedListener {
         if(!finished || !success){
             return null;
         }
-        return videoSavingPath;
+        return videoName;
     }
 
     @Override

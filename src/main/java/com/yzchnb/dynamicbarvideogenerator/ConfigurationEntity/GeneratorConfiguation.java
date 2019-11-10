@@ -17,6 +17,7 @@ public class GeneratorConfiguation {
     private double originX;
     private double originY;
     private double widthOfBar;
+    private String dirPath;
 
     public UserInputConfiguration getUserInputConfiguration() {
         return userInputConfiguration;

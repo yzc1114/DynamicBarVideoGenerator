@@ -8,10 +8,13 @@ public class Frame {
     private List<Bar> bars;
     private Integer peekValue;
     private Integer peekDegree;
+    private Integer baseDegree;
     public List<Bar> getBars() {
         return bars;
     }
-
+    public Integer getBaseDegree(){
+        return baseDegree;
+    }
     public Integer getPeekValue() {
         return peekValue;
     }
@@ -33,6 +36,7 @@ public class Frame {
             return;
         }
         this.peekValue = peekValue;
+        this.baseDegree=0;
     }
 
     public void calPeekDegree() {
@@ -47,6 +51,7 @@ public class Frame {
                 max_v = Math.max(max_v, bar.getValue());
             }
         }
-        peekDegree = Math.max((max_v - min_v) * 2, peekValue);
+        peekDegree = Math.max((max_v - min_v) * 2, peekValue*5/4);
+        baseDegree = min_v*9/10;
     }
 }
