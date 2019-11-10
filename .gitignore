@@ -29,5 +29,5 @@ build/
 
 ### VS Code ###
 .vscode/
-/datafile/*
+/datafiles/*
 /movies/*
