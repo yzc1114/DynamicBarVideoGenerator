@@ -29,6 +29,8 @@ public class CenterProcessor implements ImageProvider, FrameSavedListener {
     private boolean finished = false;
     //表示视频生成是否成功
     private boolean success = false;
+    //
+    private boolean dataEnd = false;
     //总的帧数
     private int frameCount;
     //获取资源文件
@@ -64,12 +66,16 @@ public class CenterProcessor implements ImageProvider, FrameSavedListener {
         //TODO 获取一行的数据。持有并转化。
         lines.add(line);
         if(lines.size() == linesSize){
-            //到一次性生成帧的数量，传递给过度帧生成器
-            ArrayList<Frame> frames = transitionFrameGenerator.generateFrames(lines);
-            lines.clear();
-            for (int i = 0; i < frames.size(); i++) {
-                bufferedImages.offer(imageGenerator.generateImage(frames.get(i)));
-            }
+            transferToTransitionFrameGenerator();
+        }
+    }
+
+    private void transferToTransitionFrameGenerator() {
+        //到一次性生成帧的数量，传递给过度帧生成器
+        ArrayList<Frame> frames = transitionFrameGenerator.generateFrames(lines);
+        lines.clear();
+        for (int i = 0; i < frames.size(); i++) {
+            bufferedImages.offer(imageGenerator.generateImage(frames.get(i)));
         }
     }
 
@@ -96,7 +102,12 @@ public class CenterProcessor implements ImageProvider, FrameSavedListener {
             finished = true;
 
         });
-        savingMovieThread.run();
+        savingMovieThread.start();
+    }
+
+    public void dispose() {
+        transferToTransitionFrameGenerator();
+        dataEnd = true;
     }
 
     public String waitResult() {
@@ -120,7 +131,12 @@ public class CenterProcessor implements ImageProvider, FrameSavedListener {
     @Override
     public byte[] getImage(int i) {
         BufferedImage bufferedImage;
-        while((bufferedImage = bufferedImages.poll()) == null);
+
+        while((bufferedImage = bufferedImages.poll()) == null){
+            if(dataEnd){
+                return new byte[0];
+            }
+        }
         try{
             return MovieUtils.bufferedImageToJPEG(bufferedImage, 1.0f);
         }catch (IOException e){
@@ -128,4 +144,5 @@ public class CenterProcessor implements ImageProvider, FrameSavedListener {
             return new byte[0];
         }
     }
+
 }

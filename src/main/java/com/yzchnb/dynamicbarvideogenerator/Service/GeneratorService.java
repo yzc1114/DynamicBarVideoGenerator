@@ -57,6 +57,7 @@ public class GeneratorService {
                 Line line = boxLine(lineStr, types);
                 centerController.consumeDataLine(line);
             }
+            centerController.dispose();
             return centerController.waitResult();
 
         }catch (IOException e){
