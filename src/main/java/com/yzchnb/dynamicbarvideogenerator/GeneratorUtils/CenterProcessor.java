@@ -51,7 +51,7 @@ public class CenterProcessor implements ImageProvider, FrameSavedListener {
     public CenterProcessor(GeneratorConfiguation generatorConfiguation, ArrayList<String> types, int frameCount){
         this.generatorConfiguation = generatorConfiguation;
         this.userInputConfiguration = generatorConfiguation.getUserInputConfiguration();
-        this.linesSize = (int)userInputConfiguration.getTi() * userInputConfiguration.getFPS();
+        this.linesSize = (int)(userInputConfiguration.getTi() * userInputConfiguration.getFPS());
         this.lines = new ArrayList<>(linesSize);
         this.frameCount = frameCount;
         this.bufferedImages = new ConcurrentLinkedQueue<>();
