@@ -1,6 +1,7 @@
 package com.yzchnb.dynamicbarvideogenerator.GeneratorUtils.UtilEntity;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class Frame {
@@ -31,11 +32,21 @@ public class Frame {
             this.peekDegree = 10;
             return;
         }
-        int count = 0;
-        while(peekValue / ((int)Math.pow(10, count)) != 0){
-            count += 1;
-        }
-        this.peekDegree = (int) (Math.ceil(peekValue / Math.pow(10, count)) * Math.pow(10, count));
         this.peekValue = peekValue;
+    }
+
+    public void calPeekDegree() {
+        bars.sort(Comparator.comparingDouble((bar) ->
+            -bar.getPosition()
+        ));
+        int min_v = Integer.MAX_VALUE;
+        int max_v = Integer.MIN_VALUE;
+        for(Bar bar :bars){
+            if(bar.getPosition()<=1){
+                min_v = Math.min(min_v, bar.getValue());
+                max_v = Math.max(max_v, bar.getValue());
+            }
+        }
+        peekDegree = Math.max((max_v - min_v) * 2, peekValue);
     }
 }

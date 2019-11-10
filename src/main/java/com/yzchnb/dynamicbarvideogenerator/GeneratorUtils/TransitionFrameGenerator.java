@@ -64,6 +64,7 @@ public class TransitionFrameGenerator {
             });
 
             Frame frame = new Frame(bars);
+            frame.calPeekDegree();
             frames.add(frame);
         }
         return frames;
@@ -91,6 +92,7 @@ public class TransitionFrameGenerator {
             });
 
             Frame frame = new Frame(bars);
+            frame.calPeekDegree();
             frames.add(frame);
         }
         return frames;
@@ -101,7 +103,9 @@ public class TransitionFrameGenerator {
         HashMap<String, Integer> firstLineType2Value = line.getType2Value();
         List<Bar> firstBars = new ArrayList<>(firstLineType2Value.size());
         firstLineType2Value.forEach((type, value) -> firstBars.add(new Bar(type, value)));
-        firstBars.sort(Comparator.comparingInt(Bar::getValue));
+        firstBars.sort(Comparator.comparingInt((bar) ->
+            -bar.getValue()
+        ));
         for (int i = 0; i < firstBars.size(); i++) {
             if(i < numOfBarsInChart){
                 firstBars.get(i).setPosition((double)i / numOfBarsInChart);
