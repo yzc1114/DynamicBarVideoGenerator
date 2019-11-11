@@ -23,7 +23,7 @@ public class TransitionFrameGenerator {
 
     public Frame generateFrame(Frame lastFrame, Line currLine){
         //TODO 增加配置选项 加速度
-        double aInc = 0.05;
+        double aInc = 0.15;
         double aDec = 0.5;
         double waitingTime = 10;
         //决定出加速和减速的加速度
