@@ -50,6 +50,9 @@ public class CenterProcessor implements ImageProvider, FrameSavedListener {
     //用于生成视频的线程
     private Thread savingMovieThread;
 
+    //与11月10日 晚11:55编辑
+    private Frame lastFrame = null;
+
 
     //构造函数
     public CenterProcessor(GeneratorConfiguation generatorConfiguation, ArrayList<String> types, int frameCount,String generateDir){
@@ -69,20 +72,23 @@ public class CenterProcessor implements ImageProvider, FrameSavedListener {
     //获取一行的数据，持有它，直到行数到达转化的
     public void consumeDataLine(Line line){
         //TODO 获取一行的数据。持有并转化。
-        lines.add(line);
-        if(lines.size() == linesSize){
-            transferToTransitionFrameGenerator();
-        }
+        Frame currFrame = transitionFrameGenerator.generateFrame(lastFrame, line);
+        bufferedImages.offer(imageGenerator.generateImage(currFrame));
+        lastFrame = currFrame;
+//        lines.add(line);
+//        if(lines.size() == linesSize){
+//            transferToTransitionFrameGenerator();
+//        }
     }
 
-    private void transferToTransitionFrameGenerator() {
-        //到一次性生成帧的数量，传递给过度帧生成器
-        ArrayList<Frame> frames = transitionFrameGenerator.generateFrames(lines);
-        lines.clear();
-        for (int i = 0; i < frames.size(); i++) {
-            bufferedImages.offer(imageGenerator.generateImage(frames.get(i)));
-        }
-    }
+//    private void transferToTransitionFrameGenerator() {
+//        //到一次性生成帧的数量，传递给过度帧生成器
+//        ArrayList<Frame> frames = transitionFrameGenerator.generateFrames(lines);
+//        lines.clear();
+//        for (int i = 0; i < frames.size(); i++) {
+//            bufferedImages.offer(imageGenerator.generateImage(frames.get(i)));
+//        }
+//    }
 
     private void startSavingMovie() {
         savingMovieThread = new Thread(() -> {
@@ -111,7 +117,7 @@ public class CenterProcessor implements ImageProvider, FrameSavedListener {
     }
 
     public void dispose() {
-        transferToTransitionFrameGenerator();
+//        transferToTransitionFrameGenerator();
         dataEnd = true;
     }
 
