@@ -50,6 +50,8 @@ public class ImageGenerator {
         //需要将bars重新排序，按照一定的顺序绘图，不会导致帧的重叠。
         bars.sort(Comparator.comparing(Bar::getTypeName));
 
+
+
         //定义数值字体的大小
         int value_font_size_px=widthOfBar*2/3;
         int value_font_size_pt=value_font_size_px*4/3;
@@ -83,8 +85,14 @@ public class ImageGenerator {
         graphics.fillRect(0,0, width, height);
 
         graphics.setColor(Color.BLACK);
-        graphics.drawRect(originX,originY,(int)widthOfBarChart,(int)heightOfBarChart);
-
+        //graphics.drawRect(originX,originY,(int)widthOfBarChart,(int)heightOfBarChart);
+        //绘制时间
+        int time_font_size_px=width/30;
+        int time_font_size_pt=time_font_size_px*4/3;
+        Font time_font=new Font("黑体",Font.PLAIN,time_font_size_pt);
+        graphics.setFont(time_font);
+        FontMetrics t_fm=graphics.getFontMetrics();
+        graphics.drawString(frame.getTimeStr(),(width-t_fm.stringWidth(frame.getTimeStr()))/2,2*time_font_size_px);
 
         for(int i=0;i<bars.size();++i){
             Bar bar=bars.get(i);
@@ -99,7 +107,7 @@ public class ImageGenerator {
             graphics.drawString(bar.getTypeName(),(originX-n_fm.stringWidth(bar.getTypeName()))/2,real_bar_position+(name_font_size_px+widthOfBar)/2);
 
             graphics.setColor(bar.getColor());
-            graphics.fillRect(originX,real_bar_position,bar_length,widthOfBar);
+            graphics.fillRect(originX,real_bar_position,bar_length,Math.min(widthOfBar,originY+(int)heightOfBarChart-real_bar_position));
 
             graphics.setFont(value_font);
             graphics.drawString(bar.getValue().toString(),originX+bar_length,real_bar_position+(value_font_size_px+widthOfBar)/2);

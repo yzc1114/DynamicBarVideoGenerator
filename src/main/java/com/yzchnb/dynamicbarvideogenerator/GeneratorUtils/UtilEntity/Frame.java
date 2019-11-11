@@ -10,6 +10,10 @@ public class Frame {
     private Integer peekDegree;
     private Integer baseDegree;
     private String timeStr;
+
+    public String getTimeStr(){
+        return timeStr;
+    }
     public List<Bar> getBars() {
         return bars;
     }
@@ -53,7 +57,7 @@ public class Frame {
             }
         }
         peekDegree = Math.max((max_v - min_v) * 2, peekValue*5/4);
-        baseDegree = min_v*9/10;
+        baseDegree = min_v/2;
     }
 
     public void setTimeStr(String timeStr) {

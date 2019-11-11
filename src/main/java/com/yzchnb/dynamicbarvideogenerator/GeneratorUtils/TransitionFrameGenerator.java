@@ -43,6 +43,7 @@ public class TransitionFrameGenerator {
             }));
             Frame frame = new Frame(bars);
             frame.calPeekDegree();
+            frame.setTimeStr(currLine.getLocalDateTime().toString());
             return frame;
         }
         List<Bar> lastBars = lastFrame.getBars();
