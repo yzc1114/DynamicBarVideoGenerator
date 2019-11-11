@@ -34,6 +34,8 @@ public class CenterProcessor implements ImageProvider, FrameSavedListener {
     private boolean dataEnd = false;
     //总的帧数
     private int frameCount;
+    //已生成帧数
+    private int savedFrameNum;
     //获取资源文件
     private static final ResourceBundle resourceBundle;
     static{
@@ -72,6 +74,7 @@ public class CenterProcessor implements ImageProvider, FrameSavedListener {
     //获取一行的数据，持有它，直到行数到达转化的
     public void consumeDataLine(Line line){
         //TODO 获取一行的数据。持有并转化。
+        while(bufferedImages.size()>10);
         Frame currFrame = transitionFrameGenerator.generateFrame(lastFrame, line);
         bufferedImages.offer(imageGenerator.generateImage(currFrame));
         lastFrame = currFrame;
@@ -133,9 +136,12 @@ public class CenterProcessor implements ImageProvider, FrameSavedListener {
         }
         return videoName;
     }
-
+    public Double getRate(){
+        return (double)savedFrameNum/frameCount;
+    }
     @Override
     public void frameSaved(int i) {
+        savedFrameNum = i;
         System.out.println("saved frame " + i);
     }
 

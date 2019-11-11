@@ -56,8 +56,8 @@ public class Frame {
                 max_v = Math.max(max_v, bar.getValue());
             }
         }
-        peekDegree = Math.max((max_v - min_v) * 2, peekValue*5/4);
-        baseDegree = min_v/2;
+        peekDegree = max_v*5/4;
+        baseDegree = 0;
     }
 
     public void setTimeStr(String timeStr) {

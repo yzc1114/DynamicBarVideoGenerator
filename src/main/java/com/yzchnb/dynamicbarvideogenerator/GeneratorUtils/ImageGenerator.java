@@ -29,7 +29,7 @@ public class ImageGenerator {
         //TODO 以下数据的计算应放置在配置读取处，读取完配置后立刻算出这些数据
         //TODO 因为这些数据应该由连续帧生成器使用，并计算出bar的position。
 
-        double marginHorizontal = width / 20.0;
+        double marginHorizontal = width / 15.0;
         double marginVertical = height / 20.0;
         int originX = (int)marginHorizontal;
         int originY = height / 6;
@@ -77,7 +77,7 @@ public class ImageGenerator {
 
         //调整画布位置以适应柱形图相应名字信息
         originX=Math.max(originX,name_max_width_px+width/40);
-        marginHorizontal=Math.max(marginHorizontal,value_max_width_px+width/40);
+        marginHorizontal=Math.max(marginHorizontal,value_max_width_px);
         widthOfBarChart=width-originX-marginHorizontal;
 
         //TODO 接下来只需要按照顺序绘图
