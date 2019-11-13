@@ -10,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;
@@ -21,26 +22,11 @@ public class IndexController {
 
     @RequestMapping(value = "/generateVideo", method = RequestMethod.POST, consumes = {MediaType.ALL_VALUE})
     @ResponseBody
-    public String generateVideo(@ModelAttribute UserInputConfiguration userInputConfiguration, @RequestParam(value = "file") MultipartFile multipartFile){
+    public String generateVideo(@ModelAttribute UserInputConfiguration userInputConfiguration,
+                                @RequestParam(value = "file") MultipartFile multipartFile,
+                                HttpServletRequest request){
         //System.out.println(userInputConfiguration);
         //UserInputConfiguration userInputConfiguration1 = new UserInputConfiguration();
-//        ArrayList<String> classNames = new ArrayList<String>(){
-//            {
-//                add("media.datasink.E.Handler");
-//                add("javax.media.datasink.E.Handler");
-//                add("com.sun.media.datasink.E.Handler");
-//                add("com.ibm.media.datasink.E.Handler");
-//            }
-//        };
-//        classNames.forEach((name) -> {
-//            try{
-//                System.out.println(name);
-//                Class.forName(name);
-//            }catch (ClassNotFoundException e){
-//                e.printStackTrace();
-//            }
-//        });
-
 
         GeneratorConfiguation generatorConfiguation = new GeneratorConfiguation(userInputConfiguration);
         if(multipartFile.isEmpty()){
@@ -48,6 +34,7 @@ public class IndexController {
             return "上传失败";
         }
         File tempFile = new File(Utils.getDataFileDir() + userInputConfiguration.hashCode() + ".csv");
+        request.getSession(true).setAttribute("fileId",userInputConfiguration.hashCode());
         try{
             multipartFile.transferTo(tempFile);
         }catch (Exception e){
@@ -56,10 +43,23 @@ public class IndexController {
         }
         //TODO 上传csv文件
         try{
-            return generatorService.generateVideo(generatorConfiguation, tempFile,Utils.getMoviesDir());
+            String result=generatorService.generateVideo(generatorConfiguation, tempFile,Utils.getMoviesDir(),
+                    request.getSession().getAttribute("fileId").toString());
+            request.getSession().removeAttribute("fileId");
+            return result;
         }catch (Exception e){
             e.printStackTrace();
             return e.getMessage();
+        }
+    }
+
+    @RequestMapping(value = "/getRate", method = RequestMethod.GET)
+    @ResponseBody
+    public Double getRateOfGeneration(HttpServletRequest request){
+        if(request.getSession().getAttribute("fileId")!=null){
+            return generatorService.getRateOfGeneration(request.getSession().getAttribute("fileId").toString());
+        }else{
+            return Double.NaN;
         }
     }
 }

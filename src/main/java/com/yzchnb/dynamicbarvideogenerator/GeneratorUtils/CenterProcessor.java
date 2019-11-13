@@ -34,6 +34,8 @@ public class CenterProcessor implements ImageProvider, FrameSavedListener {
     private boolean dataEnd = false;
     //总的帧数
     private int frameCount;
+    //已生成帧数
+    private int savedFrameNum;
     //获取资源文件
     private static final ResourceBundle resourceBundle;
     static{
@@ -134,9 +136,12 @@ public class CenterProcessor implements ImageProvider, FrameSavedListener {
         }
         return videoName;
     }
-
+    public Double getRate(){
+        return (double)savedFrameNum/frameCount;
+    }
     @Override
     public void frameSaved(int i) {
+        savedFrameNum = i;
         System.out.println("saved frame " + i);
     }
 

@@ -11,10 +11,12 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 public class GeneratorService {
-    public String generateVideo(GeneratorConfiguation generatorConfiguation, File csvFile, String generateDir) throws Exception{
+    private ConcurrentHashMap<String,CenterProcessor> processorMap=new ConcurrentHashMap<>();
+    public String generateVideo(GeneratorConfiguation generatorConfiguation, File csvFile, String generateDir, String fileId) throws Exception{
         //TODO 生成视频，存到本地，返回视频url
         //TODO 读取文件内容，将types记录下来
         try{
@@ -45,6 +47,7 @@ public class GeneratorService {
                 types.add(splitedfirstLine[i]);
             }
             CenterProcessor centerController = new CenterProcessor(generatorConfiguation, types, frameCount,generateDir);
+            processorMap.put(fileId,centerController);
             while(true){
                 String lineStr = bufferedReader.readLine();
                 //skipping lines
@@ -58,7 +61,9 @@ public class GeneratorService {
                 centerController.consumeDataLine(line);
             }
             centerController.dispose();
-            return "/resources/movies/" +centerController.waitResult();
+            String result = "/resources/movies/" +centerController.waitResult();
+            processorMap.remove(fileId);
+            return result;
 
         }catch (IOException e){
             e.printStackTrace();
@@ -81,5 +86,13 @@ public class GeneratorService {
         }
         line.setType2Value(type2Value);
         return line;
+    }
+
+    public Double getRateOfGeneration(String fileId){
+        if(!processorMap.containsKey(fileId)){
+            return Double.NaN;
+        }else{
+            return processorMap.get(fileId).getRate();
+        }
     }
 }
