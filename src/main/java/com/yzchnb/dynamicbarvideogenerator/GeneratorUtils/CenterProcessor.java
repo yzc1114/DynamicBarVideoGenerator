@@ -72,6 +72,7 @@ public class CenterProcessor implements ImageProvider, FrameSavedListener {
     //获取一行的数据，持有它，直到行数到达转化的
     public void consumeDataLine(Line line){
         //TODO 获取一行的数据。持有并转化。
+        while(bufferedImages.size()>10);
         Frame currFrame = transitionFrameGenerator.generateFrame(lastFrame, line);
         bufferedImages.offer(imageGenerator.generateImage(currFrame));
         lastFrame = currFrame;
