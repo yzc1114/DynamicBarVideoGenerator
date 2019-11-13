@@ -2,10 +2,12 @@ package com.yzchnb.dynamicbarvideogenerator.GeneratorUtils.UtilEntity;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 
 public class Frame {
     private List<Bar> bars;
+    private ArrayList<HashSet<String>> visiteds = new ArrayList<>();
     private Integer peekValue;
     private Integer peekDegree;
     private Integer baseDegree;
@@ -62,5 +64,13 @@ public class Frame {
 
     public void setTimeStr(String timeStr) {
         this.timeStr = timeStr;
+    }
+
+    public ArrayList<HashSet<String>> getVisiteds() {
+        return visiteds;
+    }
+
+    public void setVisiteds(ArrayList<HashSet<String>> visiteds) {
+        this.visiteds = visiteds;
     }
 }
