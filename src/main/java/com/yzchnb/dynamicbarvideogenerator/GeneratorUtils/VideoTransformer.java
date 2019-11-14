@@ -47,7 +47,7 @@ public class VideoTransformer {
         if(!sourceVideo.delete()){
             System.out.println("原视频删除失败。");
         }
-        return targetVideoPath;
+        return targetFile.getName();
     }
 
     public static void main(String[] args) {

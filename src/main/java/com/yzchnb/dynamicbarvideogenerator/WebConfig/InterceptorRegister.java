@@ -20,6 +20,7 @@ public class InterceptorRegister implements WebMvcConfigurer {
         //定义到硬盘
 //        registry.addResourceHandler("/picture/**")
 //                .addResourceLocations("file:D:/picture/");
-
+        registry.addResourceHandler("/movie/**")
+                .addResourceLocations("classpath:/resources/resources/movies/");
     }
 }

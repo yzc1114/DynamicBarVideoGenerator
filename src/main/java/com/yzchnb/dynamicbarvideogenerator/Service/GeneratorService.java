@@ -61,7 +61,7 @@ public class GeneratorService {
                 centerController.consumeDataLine(line);
             }
             centerController.dispose();
-            String result = "/resources/movies/" +centerController.waitResult();
+            String result = "movies/" + centerController.waitResult();
             processorMap.remove(fileId);
             return result;
 
