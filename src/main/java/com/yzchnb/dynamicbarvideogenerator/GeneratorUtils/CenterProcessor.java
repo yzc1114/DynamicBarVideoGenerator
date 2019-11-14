@@ -9,6 +9,7 @@ import org.springframework.util.ResourceUtils;
 
 import javax.media.MediaLocator;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -126,14 +127,16 @@ public class CenterProcessor implements ImageProvider, FrameSavedListener {
     public String waitResult() {
         try{
             savingMovieThread.join();
-        }catch (InterruptedException e){
+            VideoTransformer videoTransformer = new VideoTransformer();
+            File videoSavedFile = new File(videoSavingPath);
+            if(!videoSavedFile.exists()){
+                throw new Exception("视频生成失败。");
+            }
+            return videoTransformer.transformVideo(new File(videoSavingPath));
+        }catch (Exception e){
             e.printStackTrace();
             return null;
         }
-        if(!finished || !success){
-            return null;
-        }
-        return videoName;
     }
     public Double getRate(){
         return (double)savedFrameNum/frameCount;

@@ -26,6 +26,13 @@
     Author: BootstrapMade
     Author URL: https://bootstrapmade.com
   ======================================================= -->
+  <style>
+    .config-form{
+      width:60%;
+      text-align: left;
+      margin:auto;
+    }
+  </style>
 </head>
 
 <body data-spy="scroll">
@@ -68,10 +75,20 @@
 
   <!-- Section: intro -->
   <section id="intro" class="intro">
-    <div class="slogan">
-      <h1>This is Ninestars</h1>
-      <p>make awesome stuff with Bootstrap framework</p>
-      <a href="#about" class="btn btn-skin scroll">Learn more</a>
+    <div class="container">
+      <div class="row">
+        <div class="slogan col-sm-4 col-md-4">
+          <h1>This is Ninestars</h1>
+          <p>make awesome stuff with Bootstrap framework</p>
+          <a href="#about" class="btn btn-skin scroll">Learn more</a>
+        </div>
+        <div class="slogan col-sm-4 col-md-8">
+          <!-- video -->
+          <p>Demo Video</p>
+          <video autoplay muted loop controls style="height:60%; width:60%;" src="demo.mp4">
+          </video>
+        </div>
+      </div>
     </div>
   </section>
   <!-- /Section: intro -->
@@ -81,22 +98,51 @@
     <div class="heading-about marginbot-50">
       <div class="container">
         <div class="row">
-          <div class="col-lg-8 col-lg-offset-2">
+          <div class="col-lg-4 col-md-4">
+            <h4>Data Format</h4>
+            <p>
+              We are using csv file to be the input file. .......
+            </p>
+          </div>
+          <div class="col-lg-8 col-md-8">
 
-            <div class="section-heading">
-              <h2>About us</h2>
-              <p>Lorem ipsum dolor sit amet, no nisl mentitum recusabo per, vim at blandit qualisque dissentiunt. Diam efficiantur conclusionemque ut has</p>
-              <form action="" method="post" role="form" class="contactForm">
+            <div class="section-heading row">
+              <h4>Generator Configuration</h4>
+              <p>Customize your configuration and generate your video with your data.</p>
+              <form method="post" role="form" class="contactForm config-form">
                 <div class="form-group">
-                  <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                  <label for="FPS">FPS</label>
+                  <input type="number" name="FPS" class="form-control" id="FPS" data-rule="required" placeholder="Frames count per second"  />
                   <div class="validation"></div>
                 </div>
                 <div class="form-group">
-                  <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
+                  <label for="DPS">DPS</label>
+                  <input type="number" name="DPS" class="form-control" id="DPS" data-rule="required" placeholder="Data lines per second"  />
                   <div class="validation"></div>
                 </div>
                 <div class="form-group">
-                  <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
+                  <label for="BFC">Buffered Frame Count</label>
+                  <input type="number" class="form-control" name="BFC" id="BFC" data-rule="required" placeholder="Buffered Frame Count (the BIGGER the bar starts moving LATER.)"/>
+                  <div class="validation"></div>
+                </div>
+                <div class="form-group">
+                  <label for="NumOfBarsInChart" >Num Of Bars In Chart</label>
+                  <input type="number" class="form-control" name="NumOfBarsInChart" id="NumOfBarsInChart" data-rule="required" placeholder="Num Of Bars In Chart (Needs to be smaller than your data type count)"/>
+                  <div class="validation"></div>
+                </div>
+                <div class="form-group">
+                  <label for="Height">Video Height</label>
+                  <input type="number" class="form-control" name="Height" id="Height" data-rule="required" placeholder="Video Height (Example: 1080) "/>
+                  <div class="validation"></div>
+                </div>
+                <div class="form-group">
+                  <label for="Width">Video Width</label>
+                  <input type="number" class="form-control" name="Width" id="Width" data-rule="required" placeholder="Video Width (Example: 1920)"/>
+                  <div class="validation"></div>
+                </div>
+                <div class="form-group">
+                  <label for="File">Data File</label>
+                  <input type="file" class="form-control" name="File" id="File" placeholder="File" />
                   <div class="validation"></div>
                 </div>
                 <div class="form-group">
@@ -104,7 +150,7 @@
                   <div class="validation"></div>
                 </div>
 
-                <div class="text-center"><button type="submit" class="btn btn-skin">Send Message</button></div>
+                <div class="text-center"><button type="submit" class="btn btn-skin" onclick="">Send Message</button></div>
               </form>
 <!--              <form id="config" class="">-->
 <!--                <div class="mb-3 form-group">-->
@@ -455,6 +501,13 @@
   <!-- Custom Theme JavaScript -->
   <script src="js/custom.js"></script>
   <script src="contactform/contactform.js"></script>
+
+  <script>
+    function generate() {
+      //检查参数。
+      //调用视频生成器。
+    }
+  </script>
 
 </body>
 

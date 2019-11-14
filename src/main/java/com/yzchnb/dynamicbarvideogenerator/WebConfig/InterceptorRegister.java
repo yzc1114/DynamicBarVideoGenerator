@@ -2,10 +2,11 @@ package com.yzchnb.dynamicbarvideogenerator.WebConfig;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @Configuration
-public class InterceptorRegister extends WebMvcConfigurerAdapter {
+public class InterceptorRegister implements WebMvcConfigurer {
 
     /*
      * 注册静态文件的自定义映射路径
@@ -19,6 +20,6 @@ public class InterceptorRegister extends WebMvcConfigurerAdapter {
         //定义到硬盘
 //        registry.addResourceHandler("/picture/**")
 //                .addResourceLocations("file:D:/picture/");
-        super.addResourceHandlers(registry);
+
     }
 }
