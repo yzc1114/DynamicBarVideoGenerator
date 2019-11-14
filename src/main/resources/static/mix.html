@@ -12,7 +12,11 @@
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<!--    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">-->
 
+<!--    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">-->
+<!--    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>-->
+<!--    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
     <!-- Custom fonts for this template -->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
@@ -69,91 +73,120 @@
     <section id="about" class="about-section text-center">
         <div class="container">
             <div class="row">
-                <div class="col-lg-8 mx-auto">
-                    <h2 class="text-white mb-4">Built with Bootstrap 4</h2>
-                    <p class="text-white-50">Grayscale is a free Bootstrap theme created by Start Bootstrap. It can be
-                        yours right now, simply download the template on
-                        <a href="http://startbootstrap.com/template-overviews/grayscale/">the preview page</a>. The
-                        theme is open source, and you can use it for any purpose, personal or commercial.</p>
+                <div class="col-lg-3 col-md-3"></div>
+                <div class="col-lg-6 col-md-6">
+                    <form id="config" class="">
+                        <div class="mb-3 form-group">
+                            <label for="FPS" class="col-sm-2">Username</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">FPS</span>
+                                </div>
+                                <input type="number" class="form-control" id="FPS" placeholder="FPS" required>
+                                <div class="invalid-feedback" style="width: 100%;">
+                                    FPS is required.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 form-group">
+                            <label for="DPS">DPS</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">DPS</span>
+                                </div>
+                                <input type="number" class="form-control" id="DPS" placeholder="DPS" required>
+                                <div class="invalid-feedback" style="width: 100%;">
+                                    DPS is required.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 form-group">
+                            <label for="BFC">BFC</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">BFC</span>
+                                </div>
+                                <input type="number" class="form-control" id="BFC" placeholder="Buffered Frame Count" required>
+                                <div class="invalid-feedback" style="width: 100%;">
+                                    Buffered Frame Count is required.
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
+                <div class="col-lg-3 col-md-3"></div>
             </div>
+        </div>
+<!--            <fieldset>-->
+<!--                <legend>配置</legend>-->
+<!--                <div class="control-group">-->
+<!--                    <label class="control-label">-->
+<!--                        FPS（帧率）：</label>-->
+<!--                    <div class="controls">-->
+<!--                        <input id="FPS"  name="FPS" type="number" placeholder="FPS" class="input-xlarge form-control" required-->
+<!--                               οnchange="checkPasswords()">-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="control-group">-->
+<!--                    <label class="control-label">-->
+<!--                        DPS（每秒处理数据量）：</label>-->
+<!--                    <div class="controls">-->
+<!--                        <input name="DPS" id="DPS" type="number" placeholder="DPS" class="input-xlarge form-control" required>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                &lt;!&ndash;            <legend>管理员信息</legend>&ndash;&gt;-->
+<!--                <div class="control-group">-->
+<!--                    <label class="control-label">-->
+<!--                        画质：-->
+<!--                    </label>-->
+<!--                    <div class="controls">-->
+<!--                        <label class="radio form-check-label">-->
+<!--                            <input id="720p" class="form-check-input" type="radio" value="720p" name="quality" checked="checked">-->
+<!--                            720p-->
+<!--                        </label>-->
+<!--                        <label class="radio form-check-label">-->
+<!--                            <input id="360p" class="form-check-input" type="radio" value="360p" name="quality">-->
+<!--                            360p-->
+<!--                        </label>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="control-group">-->
+<!--                    <label class="control-label">-->
+<!--                        同屏数据数量：</label>-->
+<!--                    <div class="controls">-->
+<!--                        <input id="numOfBarsInChart" name="numOfBarsInChart" type="number" value="10"-->
+<!--                               class="input-xlarge" required>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="control-group">-->
+<!--                    <label class="control-label">-->
+<!--                        排序缓冲帧数：</label>-->
+<!--                    <div class="controls">-->
+<!--                        <input id="bufferedTime" name="bufferedTime" type="number" value="1" class="input-xlarge" required>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                <div class="control-group">-->
+<!--                    <label class="control-label">-->
+<!--                    </label>-->
+<!--                    <div class="controls">-->
+<!--                        <button class="btn" onclick="check()" id="ok">-->
+<!--                            检查参数</button>-->
+<!--                        <button class="btn" type="reset">-->
+<!--                            重 置</button>-->
+<!--                        <button class="btn" onclick="getMovie()">-->
+<!--                            提交-->
+<!--                        </button>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </fieldset>-->
             <img src="img/ipad.png" class="img-fluid" alt="">
-            <form id="config" class="main form-horizontal" action="JavaScript:void(0)">
-                <fieldset>
-                    <legend>配置</legend>
-                    <div class="control-group">
-                        <label class="control-label">
-                            FPS（帧率）：</label>
-                        <div class="controls">
-                            <input id="FPS" name="FPS" type="number" placeholder="FPS" class="input-xlarge" required
-                                οnchange="checkPasswords()">
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label class="control-label">
-                            DPS（每秒处理数据量）：</label>
-                        <div class="controls">
-                            <input name="DPS" id="DPS" type="number" placeholder="DPS" class="input-xlarge" required>
-                        </div>
-                    </div>
-                    <!--            <legend>管理员信息</legend>-->
-                    <div class="control-group">
-                        <label class="control-label">
-                            画质：
-                        </label>
-                        <div class="controls">
-                            <label class="radio">
-                                <input id="720p" type="radio" value="720p" name="quality" checked="checked">
-                                720p
-                            </label>
-                            <label class="radio">
-                                <input id="360p" type="radio" value="360p" name="quality">
-                                360p
-                            </label>
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label class="control-label">
-                            同屏数据数量：</label>
-                        <div class="controls">
-                            <input id="numOfBarsInChart" name="numOfBarsInChart" type="number" value="10"
-                                class="input-xlarge" required>
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label class="control-label">
-                            重新排序间隔时间：</label>
-                        <div class="controls">
-                            <input id="ti" name="ti" type="number" value="1" class="input-xlarge" required>
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label class="control-label">
-                            重新排序所花时间：</label>
-                        <div class="controls">
-                            <input id="tic" name="tic" type="text" value="0.5" class="input-xlarge" required>
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label class="control-label">
-                        </label>
-                        <div class="controls">
-                            <button class="btn" onclick="check()" id="ok">
-                                检查参数</button>
-                            <button class="btn" type="reset">
-                                重 置</button>
-                            <button class="btn" onclick="getMovie()">
-                                提交
-                            </button>
-                        </div>
-                    </div>
-                </fieldset>
-            </form>
 
             <div id="progress_bar">
 
             </div>
-        </div>
     </section>
 
     <!-- Projects Section -->
@@ -166,53 +199,54 @@
                     <img class="img-fluid mb-3 mb-lg-0" src="img/bg-masthead.jpg" alt="">
                 </div>
                 <div class="col-xl-4 col-lg-5">
-                    <div class="featured-text text-center text-lg-left">
-                        <h4>Shoreline</h4>
-                        <p class="text-black-50 mb-0">Grayscale is open source and MIT licensed. This means you can use
-                            it for any project - even commercial projects! Download it, customize it, and publish your
-                            website!</p>
-                    </div>
+<!--                    <div class="featured-text text-center text-lg-left">-->
+<!--                        <h4>Shoreline</h4>-->
+<!--                        <p class="text-black-50 mb-0">Grayscale is open source and MIT licensed. This means you can use-->
+<!--                            it for any project - even commercial projects! Download it, customize it, and publish your-->
+<!--                            website!</p>-->
+<!--                    </div>-->
+
                 </div>
             </div>
 
-            <!-- Project One Row -->
-            <div class="row justify-content-center no-gutters mb-5 mb-lg-0">
-                <div class="col-lg-6">
-                    <img class="img-fluid" src="img/demo-image-01.jpg" alt="">
-                </div>
-                <div class="col-lg-6">
-                    <div class="bg-black text-center h-100 project">
-                        <div class="d-flex h-100">
-                            <div class="project-text w-100 my-auto text-center text-lg-left">
-                                <h4 class="text-white">Misty</h4>
-                                <p class="mb-0 text-white-50">An example of where you can put an image of a project, or
-                                    anything else, along with a description.</p>
-                                <hr class="d-none d-lg-block mb-0 ml-0">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<!--            &lt;!&ndash; Project One Row &ndash;&gt;-->
+<!--            <div class="row justify-content-center no-gutters mb-5 mb-lg-0">-->
+<!--                <div class="col-lg-6">-->
+<!--                    <img class="img-fluid" src="img/demo-image-01.jpg" alt="">-->
+<!--                </div>-->
+<!--                <div class="col-lg-6">-->
+<!--                    <div class="bg-black text-center h-100 project">-->
+<!--                        <div class="d-flex h-100">-->
+<!--                            <div class="project-text w-100 my-auto text-center text-lg-left">-->
+<!--                                <h4 class="text-white">Misty</h4>-->
+<!--                                <p class="mb-0 text-white-50">An example of where you can put an image of a project, or-->
+<!--                                    anything else, along with a description.</p>-->
+<!--                                <hr class="d-none d-lg-block mb-0 ml-0">-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
 
-            <!-- Project Two Row -->
-            <div class="row justify-content-center no-gutters">
-                <div class="col-lg-6">
-                    <img class="img-fluid" src="img/demo-image-02.jpg" alt="">
-                </div>
-                <div class="col-lg-6 order-lg-first">
-                    <div class="bg-black text-center h-100 project">
-                        <div class="d-flex h-100">
-                            <div class="project-text w-100 my-auto text-center text-lg-right">
-                                <h4 class="text-white">Mountains</h4>
-                                <p class="mb-0 text-white-50">Another example of a project with its respective
-                                    description. These sections work well responsively as well, try this theme on a
-                                    small screen!</p>
-                                <hr class="d-none d-lg-block mb-0 mr-0">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<!--            &lt;!&ndash; Project Two Row &ndash;&gt;-->
+<!--            <div class="row justify-content-center no-gutters">-->
+<!--                <div class="col-lg-6">-->
+<!--                    <img class="img-fluid" src="img/demo-image-02.jpg" alt="">-->
+<!--                </div>-->
+<!--                <div class="col-lg-6 order-lg-first">-->
+<!--                    <div class="bg-black text-center h-100 project">-->
+<!--                        <div class="d-flex h-100">-->
+<!--                            <div class="project-text w-100 my-auto text-center text-lg-right">-->
+<!--                                <h4 class="text-white">Mountains</h4>-->
+<!--                                <p class="mb-0 text-white-50">Another example of a project with its respective-->
+<!--                                    description. These sections work well responsively as well, try this theme on a-->
+<!--                                    small screen!</p>-->
+<!--                                <hr class="d-none d-lg-block mb-0 mr-0">-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
 
         </div>
     </section>
@@ -313,39 +347,47 @@
 
 
     <script>
-        $(document).ready(() => {
-            getRate();
-        })
-        function getRate() {
-            $("#config").hide();
-            $("#progress_bar").hide();
-            $.get("/getRate", result => {
-                console.log(result)
-                if (result == "NaN") {
-                    $("#config").show();
-                } else {
-                    $("#progress_bar").show();
-                }
-            })
-        }
+        // $(document).ready(() => {
+        //     getRate();
+        // })
+        // function getRate() {
+        //     $("#config").hide();
+        //     $("#progress_bar").hide();
+        //     $.get("/getRate", result => {
+        //         console.log(result)
+        //         if (result == "NaN") {
+        //             $("#config").show();
+        //         } else {
+        //             $("#progress_bar").show();
+        //         }
+        //     })
+        // }
         function getMovie() {
-            $("#config").hide();
-            $("#progress_bar").hide();
-            var timerId = setInterval(getRate, 1000);
-            var form = new FormData();
-            form.append("FPS", $("#FPS").val())
-            form.append("DPS", $("#DPS").val())
-            console.log(form);
-            $.ajax({
-                type: 'POST',
-                url: "/generateVideo",
-                data: form,
-                processData: false,   // jQuery不要去处理发送的数据
-                contentType: false,   // jQuery不要去设置Content-Type请求头
-                success: function (res) {
-                    console.log(res)
-                }
+            //$("#config").hide();
+            //$("#progress_bar").hide();
+            //var timerId = setInterval(getRate, 1000);
+
+            //var form = new FormData();
+            var t = $("#config").serializeArray();
+            var d = {};
+            $.each(t, function(){
+                d[this.name] = this.value;
             });
+            console.log(JSON.stringify(d));
+            // form.append("FPS", $("#FPS").val())
+            // form.append("DPS", $("#DPS").val())
+            // form.append("")
+            // console.log(form);
+            // $.ajax({
+            //     type: 'POST',
+            //     url: "/generateVideo",
+            //     data: form,
+            //     processData: false,   // jQuery不要去处理发送的数据
+            //     contentType: false,   // jQuery不要去设置Content-Type请求头
+            //     success: function (res) {
+            //         console.log(res)
+            //     }
+            // });
         }
     </script>
 </body>

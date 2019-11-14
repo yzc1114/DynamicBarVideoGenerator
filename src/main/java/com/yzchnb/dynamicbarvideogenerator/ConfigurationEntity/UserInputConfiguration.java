@@ -13,9 +13,8 @@ public class UserInputConfiguration implements Serializable {
     private int height;
     private int FPS;
     private int DPS;
-    private double Ti;
-    private double Tic;
     private int numOfBarsInChart;
+    private int bufferedTime;
 
     public int getWidth() {
         return width;
@@ -47,22 +46,6 @@ public class UserInputConfiguration implements Serializable {
 
     public void setDPS(int DPS) {
         this.DPS = DPS;
-    }
-
-    public double getTi() {
-        return Ti;
-    }
-
-    public void setTi(double ti) {
-        Ti = ti;
-    }
-
-    public double getTic() {
-        return Tic;
-    }
-
-    public void setTic(double tic) {
-        Tic = tic;
     }
 
     public int getNumOfBarsInChart() {
