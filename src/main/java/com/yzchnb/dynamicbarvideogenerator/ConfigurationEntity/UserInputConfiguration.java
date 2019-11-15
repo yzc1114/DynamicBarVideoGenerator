@@ -2,7 +2,6 @@ package com.yzchnb.dynamicbarvideogenerator.ConfigurationEntity;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.Serializable;
 
@@ -14,8 +13,14 @@ public class UserInputConfiguration implements Serializable {
     private int FPS;
     private int DPS;
     private int numOfBarsInChart;
-    private int bufferedTime;
+    private int bufferedFrameCount;
 
+    public int getBufferedFrameCount(){
+        return bufferedFrameCount;
+    }
+    public void setBufferedFrameCount(int bufferedFrameCount){
+        this.bufferedFrameCount=bufferedFrameCount;
+    }
     public int getWidth() {
         return width;
     }

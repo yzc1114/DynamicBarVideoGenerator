@@ -1,6 +1,6 @@
 package com.yzchnb.dynamicbarvideogenerator.GeneratorUtils;
 
-import com.yzchnb.dynamicbarvideogenerator.ConfigurationEntity.GeneratorConfiguation;
+import com.yzchnb.dynamicbarvideogenerator.ConfigurationEntity.GeneratorConfiguration;
 import com.yzchnb.dynamicbarvideogenerator.ConfigurationEntity.UserInputConfiguration;
 import com.yzchnb.dynamicbarvideogenerator.GeneratorUtils.UtilEntity.Bar;
 import com.yzchnb.dynamicbarvideogenerator.GeneratorUtils.UtilEntity.Frame;
@@ -10,11 +10,11 @@ import java.awt.image.BufferedImage;
 import java.util.Comparator;
 
 public class ImageGenerator {
-    private GeneratorConfiguation generatorConfiguation;
+    private GeneratorConfiguration generatorConfiguration;
     private UserInputConfiguration userInputConfiguration;
-    public ImageGenerator(GeneratorConfiguation generatorConfiguation){
-        this.generatorConfiguation = generatorConfiguation;
-        this.userInputConfiguration = generatorConfiguation.getUserInputConfiguration();
+    public ImageGenerator(GeneratorConfiguration generatorConfiguration){
+        this.generatorConfiguration = generatorConfiguration;
+        this.userInputConfiguration = generatorConfiguration.getUserInputConfiguration();
     }
     public BufferedImage generateImage(Frame frame) {
 

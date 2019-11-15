@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 @Component
 @Scope("prototype")
-public class GeneratorConfiguation {
+public class GeneratorConfiguration {
     private UserInputConfiguration userInputConfiguration;
     private double widthOfBarChart;
     private double heightOfBarChart;
@@ -60,7 +60,7 @@ public class GeneratorConfiguation {
         this.types = types;
     }
 
-    public GeneratorConfiguation(UserInputConfiguration userInputConfiguration){
+    public GeneratorConfiguration(UserInputConfiguration userInputConfiguration){
         this.userInputConfiguration = userInputConfiguration;
         marginHorizontal = userInputConfiguration.getWidth() / 20.0;
         marginVertical = userInputConfiguration.getHeight() / 20.0;

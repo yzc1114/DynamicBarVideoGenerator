@@ -1,13 +1,11 @@
 package com.yzchnb.dynamicbarvideogenerator.GeneratorUtils;
-import com.yzchnb.dynamicbarvideogenerator.ConfigurationEntity.GeneratorConfiguation;
+import com.yzchnb.dynamicbarvideogenerator.ConfigurationEntity.GeneratorConfiguration;
 import com.yzchnb.dynamicbarvideogenerator.ConfigurationEntity.UserInputConfiguration;
 import com.yzchnb.dynamicbarvideogenerator.GeneratorUtils.UtilEntity.Frame;
 import com.yzchnb.dynamicbarvideogenerator.GeneratorUtils.UtilEntity.Line;
 import org.jim2mov.core.*;
 import org.jim2mov.utils.MovieUtils;
-import org.springframework.util.ResourceUtils;
 
-import javax.media.MediaLocator;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -24,7 +22,7 @@ public class CenterProcessor implements ImageProvider, FrameSavedListener {
     //并发链表队列，用于给视频生成器提供数据
     private ConcurrentLinkedQueue<BufferedImage> bufferedImages;
     //生成器所需全部配置内容
-    private GeneratorConfiguation generatorConfiguation;
+    private GeneratorConfiguration generatorConfiguration;
     //用户输入的配置内容
     private UserInputConfiguration userInputConfiguration;
     //标志视频生成是否结束
@@ -58,15 +56,15 @@ public class CenterProcessor implements ImageProvider, FrameSavedListener {
 
 
     //构造函数
-    public CenterProcessor(GeneratorConfiguation generatorConfiguation, ArrayList<String> types, int frameCount,String generateDir){
-        this.generatorConfiguation = generatorConfiguation;
-        this.userInputConfiguration = generatorConfiguation.getUserInputConfiguration();
+    public CenterProcessor(GeneratorConfiguration generatorConfiguration, ArrayList<String> types, int frameCount, String generateDir){
+        this.generatorConfiguration = generatorConfiguration;
+        this.userInputConfiguration = generatorConfiguration.getUserInputConfiguration();
         this.lines = new ArrayList<>(linesSize);
         this.frameCount = frameCount;
         this.bufferedImages = new ConcurrentLinkedQueue<>();
-        this.transitionFrameGenerator = new TransitionFrameGenerator(generatorConfiguation);
-        this.imageGenerator = new ImageGenerator(generatorConfiguation);
-        this.videoName = generatorConfiguation.hashCode() + ".avi";
+        this.transitionFrameGenerator = new TransitionFrameGenerator(generatorConfiguration);
+        this.imageGenerator = new ImageGenerator(generatorConfiguration);
+        this.videoName = generatorConfiguration.hashCode() + ".avi";
         this.videoSavingPath =generateDir+this.videoName;
         this.startSavingMovie();
     }
@@ -98,13 +96,13 @@ public class CenterProcessor implements ImageProvider, FrameSavedListener {
             DefaultMovieInfoProvider dmip = new DefaultMovieInfoProvider(videoSavingPath);
             //TODO 读取配置，获得长和宽。
             // 设置帧频率
-            dmip.setFPS(generatorConfiguation.getUserInputConfiguration().getFPS());
+            dmip.setFPS(generatorConfiguration.getUserInputConfiguration().getFPS());
             // 设置帧数--一张图片一帧
             dmip.setNumberOfFrames(frameCount);
             // 设置视频高度
-            dmip.setMWidth(generatorConfiguation.getUserInputConfiguration().getWidth());
+            dmip.setMWidth(generatorConfiguration.getUserInputConfiguration().getWidth());
             // 设置视频宽度
-            dmip.setMHeight(generatorConfiguation.getUserInputConfiguration().getHeight());
+            dmip.setMHeight(generatorConfiguration.getUserInputConfiguration().getHeight());
             try{
                 new Jim2Mov(this, dmip, this).saveMovie(MovieInfoProvider.TYPE_AVI_MJPEG);
             }catch (MovieSaveException e){

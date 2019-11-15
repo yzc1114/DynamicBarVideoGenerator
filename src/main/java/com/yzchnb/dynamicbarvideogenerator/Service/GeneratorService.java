@@ -1,6 +1,6 @@
 package com.yzchnb.dynamicbarvideogenerator.Service;
 
-import com.yzchnb.dynamicbarvideogenerator.ConfigurationEntity.GeneratorConfiguation;
+import com.yzchnb.dynamicbarvideogenerator.ConfigurationEntity.GeneratorConfiguration;
 import com.yzchnb.dynamicbarvideogenerator.ConfigurationEntity.UserInputConfiguration;
 import com.yzchnb.dynamicbarvideogenerator.GeneratorUtils.CenterProcessor;
 import com.yzchnb.dynamicbarvideogenerator.GeneratorUtils.UtilEntity.Line;
@@ -16,7 +16,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @Service
 public class GeneratorService {
     private ConcurrentHashMap<String,CenterProcessor> processorMap=new ConcurrentHashMap<>();
-    public String generateVideo(GeneratorConfiguation generatorConfiguation, File csvFile, String generateDir, String fileId) throws Exception{
+    public String generateVideo(GeneratorConfiguration generatorConfiguration, File csvFile, String generateDir, String fileId) throws Exception{
         //TODO 生成视频，存到本地，返回视频url
         //TODO 读取文件内容，将types记录下来
         try{
@@ -29,7 +29,7 @@ public class GeneratorService {
             String firstLine = bufferedReader.readLine();
             String[] splitedfirstLine = firstLine.split(",");
 
-            UserInputConfiguration userInputConfiguration = generatorConfiguation.getUserInputConfiguration();
+            UserInputConfiguration userInputConfiguration = generatorConfiguration.getUserInputConfiguration();
             int DPS = userInputConfiguration.getDPS();
             int FPS = userInputConfiguration.getFPS();
             if(DPS % FPS != 0){
@@ -46,7 +46,7 @@ public class GeneratorService {
             for (int i = 1; i < splitedfirstLine.length; i++) {
                 types.add(splitedfirstLine[i]);
             }
-            CenterProcessor centerController = new CenterProcessor(generatorConfiguation, types, frameCount,generateDir);
+            CenterProcessor centerController = new CenterProcessor(generatorConfiguration, types, frameCount,generateDir);
             processorMap.put(fileId,centerController);
             while(true){
                 String lineStr = bufferedReader.readLine();
@@ -61,7 +61,7 @@ public class GeneratorService {
                 centerController.consumeDataLine(line);
             }
             centerController.dispose();
-            String result = "movies/" + centerController.waitResult();
+            String result = "/movies/" + centerController.waitResult();
             processorMap.remove(fileId);
             return result;
 

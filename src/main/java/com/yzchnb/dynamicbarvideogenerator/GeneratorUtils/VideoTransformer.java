@@ -20,8 +20,44 @@ public class VideoTransformer {
         String strCmd = "ffmpeg -i " + sourceVideo.getAbsolutePath() + " -f mp4 -vcodec h264 " + targetVideoPath;
         //启动线程运行进程。等待进程结束
         Thread t = new Thread(() -> {
-            try{
+            try {
                 Process process = Runtime.getRuntime().exec(strCmd);
+                Thread input = new Thread(() -> {
+                    BufferedReader in = new BufferedReader(new InputStreamReader(process.getInputStream()));
+                    String line = null;
+                    try {
+                        while ((line = in.readLine()) != null) {
+                            System.out.println("input:"+line);
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } finally {
+                        try {
+                            in.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+                Thread error=new Thread(() -> {
+                    BufferedReader in = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+                    String line = null;
+                    try {
+                        while ((line = in.readLine()) != null) {
+                            System.out.println("error:"+line);
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } finally {
+                        try {
+                            in.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+                input.start();
+                error.start();
                 process.waitFor();
                 this.finished = true;
             }catch (IOException | InterruptedException e){

@@ -1,21 +1,17 @@
 package com.yzchnb.dynamicbarvideogenerator.Web;
 
-import com.yzchnb.dynamicbarvideogenerator.ConfigurationEntity.GeneratorConfiguation;
+import com.yzchnb.dynamicbarvideogenerator.ConfigurationEntity.GeneratorConfiguration;
 import com.yzchnb.dynamicbarvideogenerator.ConfigurationEntity.UserInputConfiguration;
 import com.yzchnb.dynamicbarvideogenerator.Service.GeneratorService;
 import com.yzchnb.dynamicbarvideogenerator.Utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
-import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.awt.*;
 import java.io.*;
-import java.util.ArrayList;
 
 @RestController
 public class IndexController {
@@ -30,42 +26,56 @@ public class IndexController {
                                 HttpServletRequest request){
         //System.out.println(userInputConfiguration);
         //UserInputConfiguration userInputConfiguration1 = new UserInputConfiguration();
+        if(request.getSession(false)!=null){
+            if(request.getSession(false).getAttribute("fileId")!=null){
+                return null;
+            }
+        }
+        request.getSession(true).setAttribute("fileId",userInputConfiguration.hashCode());
 
-        GeneratorConfiguation generatorConfiguation = new GeneratorConfiguation(userInputConfiguration);
+        GeneratorConfiguration generatorConfiguration = new GeneratorConfiguration(userInputConfiguration);
         if(multipartFile.isEmpty()){
             System.out.println("上传失败");
             return "上传失败";
         }
         File tempFile = new File(Utils.getDataFileDir() + userInputConfiguration.hashCode() + ".csv");
-        request.getSession(true).setAttribute("fileId",userInputConfiguration.hashCode());
+
         try{
             multipartFile.transferTo(tempFile);
         }catch (Exception e){
             e.printStackTrace();
             return e.getMessage();
         }
+        String result=null;
         //上传csv文件
         try{
-            String result = generatorService.generateVideo(generatorConfiguation, tempFile, Utils.getMoviesDir(),
+             result = generatorService.generateVideo(generatorConfiguration, tempFile, Utils.getMoviesDir(),
                     request.getSession().getAttribute("fileId").toString());
-            request.getSession().removeAttribute("fileId");
-            return result;
+
         }catch (Exception e){
             e.printStackTrace();
-            return e.getMessage();
+            result =e.getMessage();
+        }finally {
+            request.getSession(true).removeAttribute("fileId");
+            return result;
         }
     }
 
     @RequestMapping(value = "/getRate", method = RequestMethod.GET)
     @ResponseBody
     public Double getRateOfGeneration(HttpServletRequest request){
-        if(request.getSession().getAttribute("fileId")!=null){
+        if(request.getSession(false)!=null&&request.getSession(false).getAttribute("fileId")!=null){
             return generatorService.getRateOfGeneration(request.getSession().getAttribute("fileId").toString());
         }else{
             return Double.NaN;
         }
     }
 
+    @RequestMapping(value = "createSession",method = RequestMethod.GET)
+    @ResponseBody
+    public void createSession(HttpServletRequest request){
+        request.getSession(true);
+    }
 
     @RequestMapping(value = "/download", method = RequestMethod.GET)
     public void download(@RequestParam("fileName") String fileName, HttpServletResponse response){

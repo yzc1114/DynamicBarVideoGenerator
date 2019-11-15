@@ -1,6 +1,6 @@
 package com.yzchnb.dynamicbarvideogenerator.GeneratorUtils;
 
-import com.yzchnb.dynamicbarvideogenerator.ConfigurationEntity.GeneratorConfiguation;
+import com.yzchnb.dynamicbarvideogenerator.ConfigurationEntity.GeneratorConfiguration;
 import com.yzchnb.dynamicbarvideogenerator.GeneratorUtils.UtilEntity.Bar;
 import com.yzchnb.dynamicbarvideogenerator.GeneratorUtils.UtilEntity.Frame;
 import com.yzchnb.dynamicbarvideogenerator.GeneratorUtils.UtilEntity.Line;
@@ -9,12 +9,12 @@ import java.util.*;
 
 public class TransitionFrameGenerator {
 
-    private GeneratorConfiguation generatorConfiguation;
+    private GeneratorConfiguration generatorConfiguration;
 
     private HashMap<String, Double> lastType2Position = null;
 
-    public TransitionFrameGenerator(GeneratorConfiguation generatorConfiguation){
-        this.generatorConfiguation = generatorConfiguation;
+    public TransitionFrameGenerator(GeneratorConfiguration generatorConfiguration){
+        this.generatorConfiguration = generatorConfiguration;
     }
 
 //    public Frame generateFrame(Frame lastFrame, Line currLine){
@@ -112,8 +112,8 @@ public class TransitionFrameGenerator {
         //决定出加速和减速的加速度
 
 
-        double t = 1.0 / generatorConfiguation.getUserInputConfiguration().getFPS();
-        HashMap<String, Double> targetType2Position = getType2Position(currLine, generatorConfiguation.getUserInputConfiguration().getNumOfBarsInChart());
+        double t = 1.0 / generatorConfiguration.getUserInputConfiguration().getFPS();
+        HashMap<String, Double> targetType2Position = getType2Position(currLine, generatorConfiguration.getUserInputConfiguration().getNumOfBarsInChart());
         HashMap<Double, String> targetPosition2Type = new HashMap<>();
         targetType2Position.forEach((type, position) -> targetPosition2Type.put(position, type));
         HashMap<String, Integer> targetType2Value = currLine.getType2Value();
