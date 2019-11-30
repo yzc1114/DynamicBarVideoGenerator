@@ -4,8 +4,8 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 
 public class Line {
-    private LocalDateTime localDateTime;
-    private HashMap<String, Integer> type2Value;
+    private LocalDateTime localDateTime = null;
+    private HashMap<String, Integer> type2Value = null;
 
     public LocalDateTime getLocalDateTime() {
         return localDateTime;

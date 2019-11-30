@@ -14,6 +14,7 @@ public class UserInputConfiguration implements Serializable {
     private int DPS;
     private int numOfBarsInChart;
     private int bufferedFrameCount;
+    private boolean predict;
 
     public int getBufferedFrameCount(){
         return bufferedFrameCount;
@@ -59,5 +60,13 @@ public class UserInputConfiguration implements Serializable {
 
     public void setNumOfBarsInChart(int numOfBarsInChart) {
         this.numOfBarsInChart = numOfBarsInChart;
+    }
+
+    public boolean isPredict() {
+        return predict;
+    }
+
+    public void setPredict(boolean predict) {
+        this.predict = predict;
     }
 }

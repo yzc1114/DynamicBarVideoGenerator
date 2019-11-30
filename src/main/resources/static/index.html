@@ -37,321 +37,328 @@
 
 <body data-spy="scroll">
 
-  <div class="container">
-    <ul id="gn-menu" class="gn-menu-main">
-      <li class="gn-trigger">
-        <a class="gn-icon gn-icon-menu"><span>Menu</span></a>
-        <nav class="gn-menu-wrapper">
-          <div class="gn-scroller">
-            <ul class="gn-menu">
-<!--              <li class="gn-search-item">-->
-<!--                <input placeholder="Search" type="search" class="gn-search">-->
-<!--                <a class="gn-icon gn-icon-search"><span>Search</span></a>-->
-<!--              </li>-->
-              <li>
-                <a href="#configuration" class="gn-icon gn-icon-download">Configuration</a>
-              </li>
-              <li><a href="#generate" class="gn-icon gn-icon-cog">Generate</a></li>
-<!--              <li><a href="#works" class="gn-icon gn-icon-help">Works</a></li>-->
-<!--              <li>-->
-<!--                <a href="#contact" class="gn-icon gn-icon-archive">Contact</a>-->
-<!--              </li>-->
-            </ul>
-          </div>
-          <!-- /gn-scroller -->
-        </nav>
-      </li>
-      <li><a href="index.html">Dynamic Bar Chart</a></li>
-<!--      <li class="hidden-xs">-->
-<!--        <ul class="company-social">-->
-<!--          <li class="social-facebook"><a href="#" target="_blank"><i class="fa fa-facebook"></i></a></li>-->
-<!--          <li class="social-twitter"><a href="#" target="_blank"><i class="fa fa-twitter"></i></a></li>-->
-<!--          <li class="social-dribble"><a href="#" target="_blank"><i class="fa fa-dribbble"></i></a></li>-->
-<!--          <li class="social-google"><a href="#" target="_blank"><i class="fa fa-google-plus"></i></a></li>-->
-<!--        </ul>-->
-<!--      </li>-->
-    </ul>
-  </div>
+<div class="container">
+  <ul id="gn-menu" class="gn-menu-main">
+    <li class="gn-trigger">
+      <a class="gn-icon gn-icon-menu"><span>Menu</span></a>
+      <nav class="gn-menu-wrapper">
+        <div class="gn-scroller">
+          <ul class="gn-menu">
+            <!--              <li class="gn-search-item">-->
+            <!--                <input placeholder="Search" type="search" class="gn-search">-->
+            <!--                <a class="gn-icon gn-icon-search"><span>Search</span></a>-->
+            <!--              </li>-->
+            <li>
+              <a href="#configuration" class="gn-icon gn-icon-download">Configuration</a>
+            </li>
+            <li><a href="#generate" class="gn-icon gn-icon-cog">Generate</a></li>
+            <!--              <li><a href="#works" class="gn-icon gn-icon-help">Works</a></li>-->
+            <!--              <li>-->
+            <!--                <a href="#contact" class="gn-icon gn-icon-archive">Contact</a>-->
+            <!--              </li>-->
+          </ul>
+        </div>
+        <!-- /gn-scroller -->
+      </nav>
+    </li>
+    <li><a href="index.html">Dynamic Bar Chart</a></li>
+    <!--      <li class="hidden-xs">-->
+    <!--        <ul class="company-social">-->
+    <!--          <li class="social-facebook"><a href="#" target="_blank"><i class="fa fa-facebook"></i></a></li>-->
+    <!--          <li class="social-twitter"><a href="#" target="_blank"><i class="fa fa-twitter"></i></a></li>-->
+    <!--          <li class="social-dribble"><a href="#" target="_blank"><i class="fa fa-dribbble"></i></a></li>-->
+    <!--          <li class="social-google"><a href="#" target="_blank"><i class="fa fa-google-plus"></i></a></li>-->
+    <!--        </ul>-->
+    <!--      </li>-->
+  </ul>
+</div>
 
-  <!-- Section: intro -->
-  <section id="intro" class="intro">
+<!-- Section: intro -->
+<section id="intro" class="intro">
+  <div class="container">
+    <div class="row">
+      <div class="slogan col-sm-4 col-md-4">
+        <h1>Dynamic Bar Chart Video Generator</h1>
+        <p>make awesome bar chart race video with only csv data file</p>
+        <a href="#configuration" class="btn btn-skin scroll">Get Started</a>
+      </div>
+      <div class="slogan col-sm-4 col-md-8">
+        <!-- video -->
+        <h2>Demo Video</h2>
+        <video autoplay muted loop controls style="height:60%; width:60%;" src="demo.mp4">
+        </video>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- /Section: intro -->
+
+<!-- Section: configuration -->
+<section id="configuration" class="home-section text-center bg-gray">
+  <div class="heading-about marginbot-50">
     <div class="container">
       <div class="row">
-        <div class="slogan col-sm-4 col-md-4">
-          <h1>Dynamic Bar Chart Video Generator</h1>
-          <p>make awesome bar chart race video with only csv data file</p>
-          <a href="#configuration" class="btn btn-skin scroll">Get Started</a>
+        <div class="col-lg-4 col-md-4">
+          <h4>Data Format</h4>
+          <p>
+            We are using csv file to be the input file. .......
+          </p>
         </div>
-        <div class="slogan col-sm-4 col-md-8">
-          <!-- video -->
-          <h2>Demo Video</h2>
-          <video autoplay muted loop controls style="height:60%; width:60%;" src="demo.mp4">
-          </video>
+        <div class="col-lg-8 col-md-8">
+
+          <div class="section-heading row">
+            <h4>Generator Configuration</h4>
+            <p>Customize your configuration and generate your video with your data.</p>
+            <form id="config" method="post" role="form" class="contactForm config-form">
+              <div class="form-group">
+                <label for="FPS">FPS</label>
+                <input oninput="bar_model.canShowGenerateButton(false)" type="number" name="FPS" class="form-control" id="FPS" data-rule="required"
+                       placeholder="Frames count per second (Recommend: 30)" />
+                <div class="validation"></div>
+              </div>
+              <div class="form-group">
+                <label for="DPS">DPS</label>
+                <input oninput="bar_model.canShowGenerateButton(false)" type="number" name="DPS" class="form-control" id="DPS" data-rule="required"
+                       placeholder="Data lines per second (Recommend: 30)" />
+                <div class="validation"></div>
+              </div>
+              <div class="form-group">
+                <label for="BFC">Buffered Frame Count</label>
+                <input oninput="bar_model.canShowGenerateButton(false)" type="number" class="form-control" name="bufferedFrameCount" id="BFC" data-rule="required"
+                       placeholder="Buffered Frame Count (the BIGGER the bar starts moving LATER. Recommend: 5)" />
+                <div class="validation"></div>
+              </div>
+              <div class="form-group">
+                <label for="NumOfBarsInChart">Num Of Bars In Chart</label>
+                <input oninput="bar_model.canShowGenerateButton(false)" type="number" class="form-control" name="numOfBarsInChart" id="NumOfBarsInChart"
+                       data-rule="required"
+                       placeholder="Num Of Bars In Chart (Needs to be smaller than your data type count.)" />
+                <div class="validation"></div>
+              </div>
+              <div class="form-group">
+                <label for="Height">Video Height</label>
+                <input oninput="bar_model.canShowGenerateButton(false)" type="number" class="form-control" name="height" id="Height" data-rule="required"
+                       placeholder="Video Height (Example: 1080) " />
+                <div class="validation"></div>
+              </div>
+              <div class="form-group">
+                <label for="Width">Video Width</label>
+                <input oninput="bar_model.canShowGenerateButton(false)" type="number" class="form-control" name="width" id="Width" data-rule="required"
+                       placeholder="Video Width (Example: 1920)" />
+                <div class="validation"></div>
+              </div>
+              <div class="form-group">
+                <label for="Predict">Predict Data</label>
+                <input type="checkbox" style="margin-left: 5px" name="predict" id="Predict"/>
+                <div class="validation"></div>
+              </div>
+              <div class="form-group">
+                <label for="File">Data File</label>
+                <input oninput="bar_model.canShowGenerateButton(false)" type="file" class="form-control" name="file" id="File" placeholder="File" />
+                <div class="validation"></div>
+              </div>
+<!--              <div class="form-group">-->
+<!--                  <textarea class="form-control" name="message" rows="5"-->
+<!--                            data-msg="Please write something for us" placeholder="Message"></textarea>-->
+<!--                <div class="validation"></div>-->
+<!--              </div>-->
+
+              <div data-bind="if : canShowGenerateButton" class="text-center"><button type="button" class="btn btn-skin" onclick="generate()">Generate Video</button>
+              </div>
+              <div data-bind="ifnot: canShowGenerateButton" class="text-center"><button type="button" class="btn btn-skin" onclick="checkParams()">Check Params</button>
+              </div>
+            </form>
+            <!--              <form id="config" class="">-->
+            <!--                <div class="mb-3 form-group">-->
+            <!--                  <label for="FPS" class="col-sm-2">Username</label>-->
+            <!--                  <div class="input-group">-->
+            <!--                    <div class="input-group-prepend">-->
+            <!--                      <span class="input-group-text">FPS</span>-->
+            <!--                    </div>-->
+            <!--                    <input type="number" class="form-control" id="FPS" placeholder="FPS" required>-->
+            <!--                    <div class="invalid-feedback" style="width: 100%;">-->
+            <!--                      FPS is required.-->
+            <!--                    </div>-->
+            <!--                  </div>-->
+            <!--                </div>-->
+
+            <!--                <div class="mb-3 form-group">-->
+            <!--                  <label for="DPS">DPS</label>-->
+            <!--                  <div class="input-group">-->
+            <!--                    <div class="input-group-prepend">-->
+            <!--                      <span class="input-group-text">DPS</span>-->
+            <!--                    </div>-->
+            <!--                    <input type="number" class="form-control" id="DPS" placeholder="DPS" required>-->
+            <!--                    <div class="invalid-feedback" style="width: 100%;">-->
+            <!--                      DPS is required.-->
+            <!--                    </div>-->
+            <!--                  </div>-->
+            <!--                </div>-->
+
+            <!--                <div class="mb-3 form-group">-->
+            <!--                  <label for="BFC">BFC</label>-->
+            <!--                  <div class="input-group">-->
+            <!--                    <div class="input-group-prepend">-->
+            <!--                      <span class="input-group-text">BFC</span>-->
+            <!--                    </div>-->
+            <!--                    <input type="number" class="form-control" id="BFC" placeholder="Buffered Frame Count" required>-->
+            <!--                    <div class="invalid-feedback" style="width: 100%;">-->
+            <!--                      Buffered Frame Count is required.-->
+            <!--                    </div>-->
+            <!--                  </div>-->
+            <!--                </div>-->
+            <!--              </form>-->
+          </div>
+
         </div>
       </div>
     </div>
-  </section>
-  <!-- /Section: intro -->
+  </div>
+  <!--    <div class="container">-->
 
-  <!-- Section: configuration -->
-  <section id="configuration" class="home-section text-center bg-gray">
-    <div class="heading-about marginbot-50">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-4 col-md-4">
-            <h4>Data Format</h4>
-            <p>
-              We are using csv file to be the input file. .......
-            </p>
-          </div>
-          <div class="col-lg-8 col-md-8">
+  <!--      <div class="row">-->
+  <!--        <div class="col-xs-6 col-sm-3 col-md-3">-->
 
-            <div class="section-heading row">
-              <h4>Generator Configuration</h4>
-              <p>Customize your configuration and generate your video with your data.</p>
-              <form id="config" method="post" role="form" class="contactForm config-form">
-                <div class="form-group">
-                  <label for="FPS">FPS</label>
-                  <input type="number" name="FPS" class="form-control" id="FPS" data-rule="required"
-                    placeholder="Frames count per second" />
-                  <div class="validation"></div>
-                </div>
-                <div class="form-group">
-                  <label for="DPS">DPS</label>
-                  <input type="number" name="DPS" class="form-control" id="DPS" data-rule="required"
-                    placeholder="Data lines per second" />
-                  <div class="validation"></div>
-                </div>
-                <div class="form-group">
-                  <label for="BFC">Buffered Frame Count</label>
-                  <input type="number" class="form-control" name="bufferedFrameCount" id="BFC" data-rule="required"
-                    placeholder="Buffered Frame Count (the BIGGER the bar starts moving LATER.)" />
-                  <div class="validation"></div>
-                </div>
-                <div class="form-group">
-                  <label for="NumOfBarsInChart">Num Of Bars In Chart</label>
-                  <input type="number" class="form-control" name="numOfBarsInChart" id="NumOfBarsInChart"
-                    data-rule="required"
-                    placeholder="Num Of Bars In Chart (Needs to be smaller than your data type count)" />
-                  <div class="validation"></div>
-                </div>
-                <div class="form-group">
-                  <label for="Height">Video Height</label>
-                  <input type="number" class="form-control" name="height" id="Height" data-rule="required"
-                    placeholder="Video Height (Example: 1080) " />
-                  <div class="validation"></div>
-                </div>
-                <div class="form-group">
-                  <label for="Width">Video Width</label>
-                  <input type="number" class="form-control" name="width" id="Width" data-rule="required"
-                    placeholder="Video Width (Example: 1920)" />
-                  <div class="validation"></div>
-                </div>
-                <div class="form-group">
-                  <label for="File">Data File</label>
-                  <input type="file" class="form-control" name="file" id="File" placeholder="File" />
-                  <div class="validation"></div>
-                </div>
-                <div class="form-group">
-                  <textarea class="form-control" name="message" rows="5"
-                    data-msg="Please write something for us" placeholder="Message"></textarea>
-                  <div class="validation"></div>
-                </div>
+  <!--          <div class="team boxed-grey">-->
+  <!--            <div class="inner">-->
+  <!--              <h5>Anna Hanaceck</h5>-->
+  <!--              <p class="subtitle">Pixel Crafter</p>-->
+  <!--              <div class="avatar"><img src="img/team/1.jpg" alt="" class="img-responsive" /></div>-->
+  <!--            </div>-->
+  <!--          </div>-->
 
-                <div class="text-center"><button type="button" class="btn btn-skin" onclick="generate()">Generate Video</button>
-                </div>
-              </form>
-              <!--              <form id="config" class="">-->
-              <!--                <div class="mb-3 form-group">-->
-              <!--                  <label for="FPS" class="col-sm-2">Username</label>-->
-              <!--                  <div class="input-group">-->
-              <!--                    <div class="input-group-prepend">-->
-              <!--                      <span class="input-group-text">FPS</span>-->
-              <!--                    </div>-->
-              <!--                    <input type="number" class="form-control" id="FPS" placeholder="FPS" required>-->
-              <!--                    <div class="invalid-feedback" style="width: 100%;">-->
-              <!--                      FPS is required.-->
-              <!--                    </div>-->
-              <!--                  </div>-->
-              <!--                </div>-->
+  <!--        </div>-->
+  <!--        <div class="col-xs-6 col-sm-3 col-md-3">-->
 
-              <!--                <div class="mb-3 form-group">-->
-              <!--                  <label for="DPS">DPS</label>-->
-              <!--                  <div class="input-group">-->
-              <!--                    <div class="input-group-prepend">-->
-              <!--                      <span class="input-group-text">DPS</span>-->
-              <!--                    </div>-->
-              <!--                    <input type="number" class="form-control" id="DPS" placeholder="DPS" required>-->
-              <!--                    <div class="invalid-feedback" style="width: 100%;">-->
-              <!--                      DPS is required.-->
-              <!--                    </div>-->
-              <!--                  </div>-->
-              <!--                </div>-->
+  <!--          <div class="team boxed-grey">-->
+  <!--            <div class="inner">-->
+  <!--              <h5>Maura Daniels</h5>-->
+  <!--              <p class="subtitle">Ruby on Rails</p>-->
+  <!--              <div class="avatar"><img src="img/team/2.jpg" alt="" class="img-responsive" /></div>-->
+  <!--            </div>-->
 
-              <!--                <div class="mb-3 form-group">-->
-              <!--                  <label for="BFC">BFC</label>-->
-              <!--                  <div class="input-group">-->
-              <!--                    <div class="input-group-prepend">-->
-              <!--                      <span class="input-group-text">BFC</span>-->
-              <!--                    </div>-->
-              <!--                    <input type="number" class="form-control" id="BFC" placeholder="Buffered Frame Count" required>-->
-              <!--                    <div class="invalid-feedback" style="width: 100%;">-->
-              <!--                      Buffered Frame Count is required.-->
-              <!--                    </div>-->
-              <!--                  </div>-->
-              <!--                </div>-->
-              <!--              </form>-->
-            </div>
+  <!--          </div>-->
+  <!--        </div>-->
+  <!--        <div class="col-xs-6 col-sm-3 col-md-3">-->
 
-          </div>
-        </div>
-      </div>
-    </div>
-<!--    <div class="container">-->
+  <!--          <div class="team boxed-grey">-->
+  <!--            <div class="inner">-->
+  <!--              <h5>Jack Briane</h5>-->
+  <!--              <p class="subtitle">jQuery Ninja</p>-->
+  <!--              <div class="avatar"><img src="img/team/3.jpg" alt="" class="img-responsive" /></div>-->
+  <!--            </div>-->
+  <!--          </div>-->
 
-<!--      <div class="row">-->
-<!--        <div class="col-xs-6 col-sm-3 col-md-3">-->
+  <!--        </div>-->
+  <!--        <div class="col-xs-6 col-sm-3 col-md-3">-->
 
-<!--          <div class="team boxed-grey">-->
-<!--            <div class="inner">-->
-<!--              <h5>Anna Hanaceck</h5>-->
-<!--              <p class="subtitle">Pixel Crafter</p>-->
-<!--              <div class="avatar"><img src="img/team/1.jpg" alt="" class="img-responsive" /></div>-->
-<!--            </div>-->
-<!--          </div>-->
+  <!--          <div class="team boxed-grey">-->
+  <!--            <div class="inner">-->
+  <!--              <h5>Tom Petterson</h5>-->
+  <!--              <p class="subtitle">Typographer</p>-->
+  <!--              <div class="avatar"><img src="img/team/4.jpg" alt="" class="img-responsive" /></div>-->
+  <!--            </div>-->
+  <!--          </div>-->
 
-<!--        </div>-->
-<!--        <div class="col-xs-6 col-sm-3 col-md-3">-->
-
-<!--          <div class="team boxed-grey">-->
-<!--            <div class="inner">-->
-<!--              <h5>Maura Daniels</h5>-->
-<!--              <p class="subtitle">Ruby on Rails</p>-->
-<!--              <div class="avatar"><img src="img/team/2.jpg" alt="" class="img-responsive" /></div>-->
-<!--            </div>-->
-
-<!--          </div>-->
-<!--        </div>-->
-<!--        <div class="col-xs-6 col-sm-3 col-md-3">-->
-
-<!--          <div class="team boxed-grey">-->
-<!--            <div class="inner">-->
-<!--              <h5>Jack Briane</h5>-->
-<!--              <p class="subtitle">jQuery Ninja</p>-->
-<!--              <div class="avatar"><img src="img/team/3.jpg" alt="" class="img-responsive" /></div>-->
-<!--            </div>-->
-<!--          </div>-->
-
-<!--        </div>-->
-<!--        <div class="col-xs-6 col-sm-3 col-md-3">-->
-
-<!--          <div class="team boxed-grey">-->
-<!--            <div class="inner">-->
-<!--              <h5>Tom Petterson</h5>-->
-<!--              <p class="subtitle">Typographer</p>-->
-<!--              <div class="avatar"><img src="img/team/4.jpg" alt="" class="img-responsive" /></div>-->
-<!--            </div>-->
-<!--          </div>-->
-
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-  </section>
-  <!-- /Section: about -->
+  <!--        </div>-->
+  <!--      </div>-->
+  <!--    </div>-->
+</section>
+<!-- /Section: about -->
 
 
-  <!-- Section: generate -->
-  <section id="generate" class="home-section text-center">
+<!-- Section: generate -->
+<section id="generate" class="home-section text-center">
 
-    <div class="heading-about marginbot-50">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-8 col-lg-offset-2">
+  <div class="heading-about marginbot-50">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
 
-            <div data-bind="ifnot: finished" class="section-heading">
-              <h2>Generate Rate</h2>
-              <div class="progress progress-striped active">
-                <div class="progress-bar progress-bar-info " role="progressbar" aria-valuenow="60" aria-valuemin="0"
-                  aria-valuemax="100" data-bind="style : {width:progress_rate_str}">
-                  <span class="sr-only" data-bind="text:progress_rate_str()+' 完成'"></span>
-                  <span data-bind="text: generate_str"></span>
-                </div>
+          <div data-bind="if: !finished()" class="section-heading">
+            <h2>Generate Rate</h2>
+            <div class="progress progress-striped active">
+              <div class="progress-bar progress-bar-info " role="progressbar" aria-valuenow="60" aria-valuemin="0"
+                   aria-valuemax="100" data-bind="style : {width:progress_rate_str}">
+                <span class="sr-only" data-bind="text:progress_rate_str()+' 完成'"></span>
+                <span data-bind="text: generate_str"></span>
               </div>
             </div>
-            <div data-bind="if: finished" class="">
-              <div class="">
-                <video autoplay muted loop controls style="height:60%; width:60%;" data-bind="attr:{src:movie_url}">
-                </video>
-              </div>
-              <div class="">
-                <a  class="btn btn-skin btn-info" data-bind="attr:{download:movie_url().split('/')[2],href:movie_url}">Download</a>
-              </div>
+          </div>
+          <div data-bind="if: finished" class="">
+            <div class="">
+              <video autoplay muted loop controls style="height:60%; width:60%;" data-bind="attr:{src:movie_url}">
+              </video>
+            </div>
+            <div class="">
+              <a  class="btn btn-skin btn-info" data-bind="attr:{download:movie_url().split('/')[2],href:movie_url}">Download</a>
             </div>
           </div>
         </div>
       </div>
     </div>
-<!--    <div class="container">-->
-<!--      <div class="row">-->
-<!--        <div class="col-sm-3 col-md-3">-->
+  </div>
+  <!--    <div class="container">-->
+  <!--      <div class="row">-->
+  <!--        <div class="col-sm-3 col-md-3">-->
 
-<!--          <div class="service-box">-->
-<!--            <div class="service-icon">-->
-<!--              <i class="fa fa-code fa-3x"></i>-->
-<!--            </div>-->
-<!--            <div class="service-desc">-->
-<!--              <h5>Print</h5>-->
-<!--              <p>Vestibulum tincidunt enim in pharetra malesuada. Duis semper magna metus electram accommodare.</p>-->
-<!--            </div>-->
-<!--          </div>-->
+  <!--          <div class="service-box">-->
+  <!--            <div class="service-icon">-->
+  <!--              <i class="fa fa-code fa-3x"></i>-->
+  <!--            </div>-->
+  <!--            <div class="service-desc">-->
+  <!--              <h5>Print</h5>-->
+  <!--              <p>Vestibulum tincidunt enim in pharetra malesuada. Duis semper magna metus electram accommodare.</p>-->
+  <!--            </div>-->
+  <!--          </div>-->
 
-<!--        </div>-->
-<!--        <div class="col-sm-3 col-md-3">-->
+  <!--        </div>-->
+  <!--        <div class="col-sm-3 col-md-3">-->
 
-<!--          <div class="service-box">-->
-<!--            <div class="service-icon">-->
-<!--              <i class="fa fa-suitcase fa-3x"></i>-->
-<!--            </div>-->
-<!--            <div class="service-desc">-->
-<!--              <h5>Web Design</h5>-->
-<!--              <p>Vestibulum tincidunt enim in pharetra malesuada. Duis semper magna metus electram accommodare.</p>-->
-<!--            </div>-->
-<!--          </div>-->
+  <!--          <div class="service-box">-->
+  <!--            <div class="service-icon">-->
+  <!--              <i class="fa fa-suitcase fa-3x"></i>-->
+  <!--            </div>-->
+  <!--            <div class="service-desc">-->
+  <!--              <h5>Web Design</h5>-->
+  <!--              <p>Vestibulum tincidunt enim in pharetra malesuada. Duis semper magna metus electram accommodare.</p>-->
+  <!--            </div>-->
+  <!--          </div>-->
 
-<!--        </div>-->
-<!--        <div class="col-sm-3 col-md-3">-->
+  <!--        </div>-->
+  <!--        <div class="col-sm-3 col-md-3">-->
 
-<!--          <div class="service-box">-->
-<!--            <div class="service-icon">-->
-<!--              <i class="fa fa-cog fa-3x"></i>-->
-<!--            </div>-->
-<!--            <div class="service-desc">-->
-<!--              <h5>Photography</h5>-->
-<!--              <p>Vestibulum tincidunt enim in pharetra malesuada. Duis semper magna metus electram accommodare.</p>-->
-<!--            </div>-->
-<!--          </div>-->
+  <!--          <div class="service-box">-->
+  <!--            <div class="service-icon">-->
+  <!--              <i class="fa fa-cog fa-3x"></i>-->
+  <!--            </div>-->
+  <!--            <div class="service-desc">-->
+  <!--              <h5>Photography</h5>-->
+  <!--              <p>Vestibulum tincidunt enim in pharetra malesuada. Duis semper magna metus electram accommodare.</p>-->
+  <!--            </div>-->
+  <!--          </div>-->
 
-<!--        </div>-->
-<!--        <div class="col-sm-3 col-md-3">-->
+  <!--        </div>-->
+  <!--        <div class="col-sm-3 col-md-3">-->
 
-<!--          <div class="service-box">-->
-<!--            <div class="service-icon">-->
-<!--              <i class="fa fa-rocket fa-3x"></i>-->
-<!--            </div>-->
-<!--            <div class="service-desc">-->
-<!--              <h5>Cloud System</h5>-->
-<!--              <p>Vestibulum tincidunt enim in pharetra malesuada. Duis semper magna metus electram accommodare.</p>-->
-<!--            </div>-->
-<!--          </div>-->
+  <!--          <div class="service-box">-->
+  <!--            <div class="service-icon">-->
+  <!--              <i class="fa fa-rocket fa-3x"></i>-->
+  <!--            </div>-->
+  <!--            <div class="service-desc">-->
+  <!--              <h5>Cloud System</h5>-->
+  <!--              <p>Vestibulum tincidunt enim in pharetra malesuada. Duis semper magna metus electram accommodare.</p>-->
+  <!--            </div>-->
+  <!--          </div>-->
 
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-  </section>
-  <!-- /Section: services -->
+  <!--        </div>-->
+  <!--      </div>-->
+  <!--    </div>-->
+</section>
+<!-- /Section: services -->
 
 
-  <!-- Section: works -->
+<!-- Section: works -->
 <!--  <section id="works" class="home-section text-center bg-gray">-->
 <!--    <div class="heading-works marginbot-50">-->
 <!--      <div class="container">-->
@@ -428,9 +435,9 @@
 <!--      </div>-->
 <!--    </div>-->
 <!--  </section>-->
-  <!-- /Section: works -->
+<!-- /Section: works -->
 
-  <!-- Section: contact -->
+<!-- Section: contact -->
 <!--  <section id="contact" class="home-section text-center">-->
 <!--    <div class="heading-contact marginbot-50">-->
 <!--      <div class="container">-->
@@ -501,114 +508,155 @@
 
 <!--    </div>-->
 <!--  </section>-->
-  <!-- /Section: contact -->
+<!-- /Section: contact -->
 
-  <footer>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12 col-lg-12">
-          <p>&copy; Ninestars - Theme</p>
-          <div class="credits">
-            <!-- 
-              All the links in the footer should remain intact. 
-              You can delete the links only if you purchased the pro version.
-              Licensing information: https://bootstrapmade.com/license/
-              Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Ninestars
-            -->
-            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-          </div>
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 col-lg-12">
+        <p>&copy; Ninestars - Theme</p>
+        <div class="credits">
+          <!--
+            All the links in the footer should remain intact.
+            You can delete the links only if you purchased the pro version.
+            Licensing information: https://bootstrapmade.com/license/
+            Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Ninestars
+          -->
+          Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
         </div>
       </div>
     </div>
-  </footer>
+  </div>
+</footer>
 
-  <!-- Core JavaScript Files -->
-  <script src="js/jquery.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/jquery.easing.min.js"></script>
-  <script src="js/classie.js"></script>
-  <script src="js/gnmenu.js"></script>
-  <script src="js/jquery.scrollTo.js"></script>
-  <script src="js/nivo-lightbox.min.js"></script>
-  <script src="js/stellar.js"></script>
-  <script src="js/knockout-3.5.1.js"></script>
-  <!-- Custom Theme JavaScript -->
-  <script src="js/custom.js"></script>
-  <script src="contactform/contactform.js"></script>
+<!-- Core JavaScript Files -->
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.easing.min.js"></script>
+<script src="js/classie.js"></script>
+<script src="js/gnmenu.js"></script>
+<script src="js/jquery.scrollTo.js"></script>
+<script src="js/nivo-lightbox.min.js"></script>
+<script src="js/stellar.js"></script>
+<script src="js/knockout-3.5.1.js"></script>
+<!-- Custom Theme JavaScript -->
+<script src="js/custom.js"></script>
+<script src="contactform/contactform.js"></script>
 
-  <script>
-    var bar_model = new function () {
-      this.progress_from_backend = ko.observable(0)
-      this.progress_rate = ko.computed(function () {
-        if (this.progress_from_backend() != this.progress_from_backend() || this.progress_from_backend() == "NaN") {
-          return 0
-        } else {
-          return Number(this.progress_from_backend());
-        }
-      }, this)
-      this.progress_rate_str = ko.computed(function () {
-        return this.progress_rate() * 100 + "%"
+<script>
+  var bar_model = new function () {
+    this.progress_from_backend = ko.observable(0);
+    this.progress_rate = ko.computed(function () {
+      if (this.progress_from_backend() != this.progress_from_backend() || this.progress_from_backend() == "NaN") {
+        return 0
+      } else {
+        return Number(this.progress_from_backend());
+      }
+    }, this);
+    this.progress_rate_str = ko.computed(function () {
+      return this.progress_rate() * 100 + "%"
 
-      }, this)
-      this.generate_str = ko.observable("Generating...")
-      this.movie_url=ko.observable("")
-      this.finished=ko.observable(false)
-    }
-    function generate() {
-      //检查参数。
-      //调用视频生成器。
-      var form=new FormData();
-      var data_array=$("#config input")
-      console.log(data_array)
-      var flag=false
-      data_array.each(function(){
-        var name=$(this).attr("name")
-        var value=(name=="file")?$(this)[0].files[0]:$(this).val()
-        if(!value){
-          flag=true
-          return
-        }
-        form.append(name,value)
-      })
-      if(flag){
-        alert("The input is wrong")
+    }, this);
+    this.generate_str = ko.observable("Generating...");
+    this.movie_url=ko.observable("");
+    this.finished=ko.observable(false);
+    this.canShowGenerateButton = ko.observable(false);
+  };
+
+  function checkParams() {
+    var form=new FormData();
+    var data_array=$("#config input");
+    console.log(data_array);
+    var flag=false;
+    data_array.each(function(){
+      var name=$(this).attr("name");
+      var value=(name=="file")?$(this)[0].files[0]:$(this).val();
+      if(!value){
+        flag=true;
         return
       }
-      window.location="#service"
-      var timer_id=setInterval("getRate()",1000)
-      bar_model.finished(false)
-      $.ajax({
-            url: '/generateVideo',
-            type: 'post',
-            processData: false,
-            contentType: false,
-            data: form,
-            success: function (success,status) {
-                if(success){
-                  bar_model.generate_str("Success")
-                  bar_model.progress_from_backend(1)
-                  bar_model.finished(true)
-                  bar_model.movie_url(success)
-                }else{
-                  alert("Olde movie generating!")
-                }
-                clearInterval(timer_id)
-            }
-        })
+      form.append(name,value)
+    });
+    if(flag){
+      alert("The input is wrong");
+      return
     }
-    function getRate() {
-      $.get("/getRate", (success, status) => {
-          console.log(success,status)
-          bar_model.generate_str("Generating...")
-          bar_model.progress_from_backend(success)
-      })
-    }
-    $(document).ready(function () {
-      ko.applyBindings(bar_model)
-      $.get("/createSession",success=>{
-      })
+    var _this = this;
+    $.ajax({
+      url: '/checkParams',
+      type: 'post',
+      processData: false,
+      contentType: false,
+      data: form,
+      success: function (res, status) {
+        console.log("result:" + res);
+        if(res === "success"){
+          console.log("really??");
+          console.log(status);
+          alert(res);
+          bar_model.canShowGenerateButton(true);
+        }else{
+          bar_model.canShowGenerateButton(false);
+          alert("wrong format: " + res)
+        }
+      }
+    });
+  }
+  function generate() {
+    //检查参数。
+    //调用视频生成器。
+    var form=new FormData();
+    var data_array=$("#config input")
+    console.log(data_array)
+    var flag=false
+    data_array.each(function(){
+      var name=$(this).attr("name")
+      var value=(name=="file")?$(this)[0].files[0]:$(this).val()
+      if(!value){
+        flag=true
+        return
+      }
+      form.append(name,value)
     })
-  </script>
+    if(flag){
+      alert("The input is wrong")
+      return
+    }
+    window.location="#service"
+    var timer_id=setInterval("getRate()",1000)
+    bar_model.finished(false)
+    $.ajax({
+      url: '/generateVideo',
+      type: 'post',
+      processData: false,
+      contentType: false,
+      data: form,
+      success: function (success,status) {
+        if(success){
+          bar_model.generate_str("Success")
+          bar_model.progress_from_backend(1)
+          bar_model.finished(true)
+          bar_model.movie_url(success)
+        }else{
+          alert("Olde movie generating!")
+        }
+        clearInterval(timer_id)
+      }
+    })
+  }
+  function getRate() {
+    $.get("/getRate", (success, status) => {
+      console.log(success,status)
+      bar_model.generate_str("Generating...")
+      bar_model.progress_from_backend(success)
+    })
+  }
+  $(document).ready(function () {
+    ko.applyBindings(bar_model)
+    $.get("/createSession",success=>{
+    })
+  })
+</script>
 
 </body>
 

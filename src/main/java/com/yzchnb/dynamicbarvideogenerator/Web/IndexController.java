@@ -18,6 +18,36 @@ public class IndexController {
     @Autowired
     GeneratorService generatorService;
 
+    @RequestMapping(value = "/checkParams", method = RequestMethod.POST, consumes = {MediaType.ALL_VALUE})
+    @ResponseBody
+    public String checkParams(@ModelAttribute UserInputConfiguration userInputConfiguration,
+                                @RequestParam(value = "file") MultipartFile multipartFile,
+                                HttpServletRequest request) {
+        GeneratorConfiguration generatorConfiguration = new GeneratorConfiguration(userInputConfiguration);
+        if(multipartFile.isEmpty()){
+            System.out.println("上传失败");
+            return "上传失败";
+        }
+        File tempFile = new File(Utils.getDataFileDir() + userInputConfiguration.hashCode() + ".csv");
+
+        try{
+            multipartFile.transferTo(tempFile);
+        }catch (Exception e){
+            e.printStackTrace();
+            return e.getMessage();
+        }
+        String result = null;
+        //上传csv文件
+        try{
+            generatorService.checkParams(generatorConfiguration, tempFile);
+            result = "success";
+        }catch (Exception e){
+            e.printStackTrace();
+            result = e.getMessage();
+        }finally {
+            return result;
+        }
+    }
 
     @RequestMapping(value = "/generateVideo", method = RequestMethod.POST, consumes = {MediaType.ALL_VALUE})
     @ResponseBody
@@ -26,12 +56,12 @@ public class IndexController {
                                 HttpServletRequest request){
         //System.out.println(userInputConfiguration);
         //UserInputConfiguration userInputConfiguration1 = new UserInputConfiguration();
-        if(request.getSession(false)!=null){
-            if(request.getSession(false).getAttribute("fileId")!=null){
+        if(request.getSession(false) != null){
+            if(request.getSession(false).getAttribute("fileId") != null){
                 return null;
             }
         }
-        request.getSession(true).setAttribute("fileId",userInputConfiguration.hashCode());
+        request.getSession(true).setAttribute("fileId", userInputConfiguration.hashCode());
 
         GeneratorConfiguration generatorConfiguration = new GeneratorConfiguration(userInputConfiguration);
         if(multipartFile.isEmpty()){
@@ -46,7 +76,7 @@ public class IndexController {
             e.printStackTrace();
             return e.getMessage();
         }
-        String result=null;
+        String result = null;
         //上传csv文件
         try{
              result = generatorService.generateVideo(generatorConfiguration, tempFile, Utils.getMoviesDir(),
@@ -64,7 +94,7 @@ public class IndexController {
     @RequestMapping(value = "/getRate", method = RequestMethod.GET)
     @ResponseBody
     public Double getRateOfGeneration(HttpServletRequest request){
-        if(request.getSession(false)!=null&&request.getSession(false).getAttribute("fileId")!=null){
+        if(request.getSession(false) != null && request.getSession(false).getAttribute("fileId") != null){
             return generatorService.getRateOfGeneration(request.getSession().getAttribute("fileId").toString());
         }else{
             return Double.NaN;
