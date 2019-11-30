@@ -111,6 +111,12 @@
             <p>Customize your configuration and generate your video with your data.</p>
             <form id="config" method="post" role="form" class="contactForm config-form">
               <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" name="title" class="form-control" id="title" data-rule="required"
+                       placeholder="Title" />
+                <div class="validation"></div>
+              </div>
+              <div class="form-group">
                 <label for="FPS">FPS</label>
                 <input oninput="bar_model.canShowGenerateButton(false)" type="number" name="FPS" class="form-control" id="FPS" data-rule="required"
                        placeholder="Frames count per second (Recommend: 30)" />

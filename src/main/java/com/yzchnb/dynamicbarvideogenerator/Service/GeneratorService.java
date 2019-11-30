@@ -105,6 +105,8 @@ public class GeneratorService {
             throw e;
         }catch (Exception e){
             throw e;
+        }finally {
+            csvFile.delete();
         }
     }
 
