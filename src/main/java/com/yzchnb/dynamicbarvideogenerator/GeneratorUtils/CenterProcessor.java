@@ -9,37 +9,20 @@ import org.jim2mov.utils.MovieUtils;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 
 public class CenterProcessor implements ImageProvider, FrameSavedListener {
-    //一次性生成帧的数量
-    private int linesSize;
-    //存储一次性生成帧数量的集合
-    private ArrayList<Line> lines;
     //并发链表队列，用于给视频生成器提供数据
     private ConcurrentLinkedQueue<BufferedImage> bufferedImages;
     //生成器所需全部配置内容
     private GeneratorConfiguration generatorConfiguration;
-    //用户输入的配置内容
-    private UserInputConfiguration userInputConfiguration;
-    //标志视频生成是否结束
-    private boolean finished = false;
-    //表示视频生成是否成功
-    private boolean success = false;
     //
     private boolean dataEnd = false;
     //总的帧数
     private int frameCount;
     //已生成帧数
     private int savedFrameNum;
-    //获取资源文件
-    private static final ResourceBundle resourceBundle;
-    static{
-        resourceBundle = ResourceBundle.getBundle("application");
-    }
     //视频生成地址。
     private String videoSavingPath;
     //视频名字
@@ -50,16 +33,12 @@ public class CenterProcessor implements ImageProvider, FrameSavedListener {
     private ImageGenerator imageGenerator;
     //用于生成视频的线程
     private Thread savingMovieThread;
-
-    //与11月10日 晚11:55编辑
     private Frame lastFrame = null;
 
 
     //构造函数
-    public CenterProcessor(GeneratorConfiguration generatorConfiguration, ArrayList<String> types, int frameCount, String generateDir){
+    public CenterProcessor(GeneratorConfiguration generatorConfiguration, int frameCount, String generateDir){
         this.generatorConfiguration = generatorConfiguration;
-        this.userInputConfiguration = generatorConfiguration.getUserInputConfiguration();
-        this.lines = new ArrayList<>(linesSize);
         this.frameCount = frameCount;
         this.bufferedImages = new ConcurrentLinkedQueue<>();
         this.transitionFrameGenerator = new TransitionFrameGenerator(generatorConfiguration);
@@ -76,20 +55,7 @@ public class CenterProcessor implements ImageProvider, FrameSavedListener {
         Frame currFrame = transitionFrameGenerator.generateFrame(lastFrame, line);
         bufferedImages.offer(imageGenerator.generateImage(currFrame));
         lastFrame = currFrame;
-//        lines.add(line);
-//        if(lines.size() == linesSize){
-//            transferToTransitionFrameGenerator();
-//        }
     }
-
-//    private void transferToTransitionFrameGenerator() {
-//        //到一次性生成帧的数量，传递给过度帧生成器
-//        ArrayList<Frame> frames = transitionFrameGenerator.generateFrames(lines);
-//        lines.clear();
-//        for (int i = 0; i < frames.size(); i++) {
-//            bufferedImages.offer(imageGenerator.generateImage(frames.get(i)));
-//        }
-//    }
 
     private void startSavingMovie() {
         savingMovieThread = new Thread(() -> {
@@ -107,18 +73,13 @@ public class CenterProcessor implements ImageProvider, FrameSavedListener {
                 new Jim2Mov(this, dmip, this).saveMovie(MovieInfoProvider.TYPE_AVI_MJPEG);
             }catch (MovieSaveException e){
                 e.printStackTrace();
-                success = false;
-                finished = true;
             }
-            success = true;
-            finished = true;
 
         });
         savingMovieThread.start();
     }
 
     public void dispose() {
-//        transferToTransitionFrameGenerator();
         dataEnd = true;
     }
 
