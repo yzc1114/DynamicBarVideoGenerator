@@ -5,7 +5,7 @@ import com.yzchnb.dynamicbarvideogenerator.GeneratorUtils.CenterProcessor;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class ProcessorMap {
-    private static ConcurrentHashMap<String, CenterProcessor> processors;
+    private static ConcurrentHashMap<String, CenterProcessor> processors = new ConcurrentHashMap<>();
 
     public static CenterProcessor getCenterProcessor(String key){
         return processors.get(key);

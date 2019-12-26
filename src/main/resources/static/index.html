@@ -572,17 +572,19 @@
   function checkParams() {
     var form=new FormData();
     var data_array=$("#config input");
-    console.log(data_array);
+    console.log("data_array", data_array);
     var flag=false;
     data_array.each(function(){
       var name=$(this).attr("name");
       var value=(name=="file")?$(this)[0].files[0]:$(this).val();
       if(!value){
+        console.log($(this));
         flag=true;
         return
       }
       form.append(name,value)
     });
+    form.set("predict", $("#Predict").is(":checked"));
     if(flag){
       alert("The input is wrong");
       return

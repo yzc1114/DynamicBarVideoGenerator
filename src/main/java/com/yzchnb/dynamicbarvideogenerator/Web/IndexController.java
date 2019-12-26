@@ -24,7 +24,7 @@ public class IndexController {
     public String checkParams(@ModelAttribute UserInputConfiguration userInputConfiguration,
                                 @RequestParam(value = "file") MultipartFile multipartFile,
                                 HttpServletRequest request) {
-        GeneratorConfiguration generatorConfiguration = new GeneratorConfiguration(userInputConfiguration);
+        GeneratorConfiguration generatorConfiguration = GeneratorConfiguration.from(userInputConfiguration);
         if(multipartFile.isEmpty()){
             System.out.println("上传失败");
             return "上传失败";
@@ -64,7 +64,7 @@ public class IndexController {
         }
         request.getSession(true).setAttribute("fileId", userInputConfiguration.hashCode());
 
-        GeneratorConfiguration generatorConfiguration = new GeneratorConfiguration(userInputConfiguration);
+        GeneratorConfiguration generatorConfiguration = GeneratorConfiguration.from(userInputConfiguration);
         if(multipartFile.isEmpty()){
             System.out.println("上传失败");
             return "上传失败";
