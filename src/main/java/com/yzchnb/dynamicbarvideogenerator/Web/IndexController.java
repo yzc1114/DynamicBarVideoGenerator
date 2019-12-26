@@ -2,7 +2,8 @@ package com.yzchnb.dynamicbarvideogenerator.Web;
 
 import com.yzchnb.dynamicbarvideogenerator.ConfigurationEntity.GeneratorConfiguration;
 import com.yzchnb.dynamicbarvideogenerator.ConfigurationEntity.UserInputConfiguration;
-import com.yzchnb.dynamicbarvideogenerator.Service.GeneratorService;
+import com.yzchnb.dynamicbarvideogenerator.Service.IGeneratorService;
+import com.yzchnb.dynamicbarvideogenerator.Service.impls.GeneratorService;
 import com.yzchnb.dynamicbarvideogenerator.Utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -16,7 +17,7 @@ import java.io.*;
 @RestController
 public class IndexController {
     @Autowired
-    GeneratorService generatorService;
+    private IGeneratorService generatorService;
 
     @RequestMapping(value = "/checkParams", method = RequestMethod.POST, consumes = {MediaType.ALL_VALUE})
     @ResponseBody
