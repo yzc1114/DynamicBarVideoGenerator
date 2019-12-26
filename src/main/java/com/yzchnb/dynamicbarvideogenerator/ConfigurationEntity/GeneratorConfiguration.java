@@ -23,6 +23,10 @@ public class GeneratorConfiguration {
         return userInputConfiguration;
     }
 
+    public String getTitle(){
+        return userInputConfiguration.getTitle();
+    }
+
     public double getWidthOfBarChart() {
         return widthOfBarChart;
     }
