@@ -9,8 +9,6 @@ import org.jim2mov.utils.MovieUtils;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 
