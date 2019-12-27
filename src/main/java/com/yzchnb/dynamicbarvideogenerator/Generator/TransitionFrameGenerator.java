@@ -1,21 +1,21 @@
-package com.yzchnb.dynamicbarvideogenerator.GeneratorUtils;
+package com.yzchnb.dynamicbarvideogenerator.Generator;
 
-import com.yzchnb.dynamicbarvideogenerator.ConfigurationEntity.GeneratorConfiguration;
-import com.yzchnb.dynamicbarvideogenerator.GeneratorUtils.UtilEntity.Bar;
-import com.yzchnb.dynamicbarvideogenerator.GeneratorUtils.UtilEntity.Frame;
-import com.yzchnb.dynamicbarvideogenerator.GeneratorUtils.UtilEntity.Line;
+import com.yzchnb.dynamicbarvideogenerator.Entity.ConfigurationEntity.GeneratorConfiguration;
+import com.yzchnb.dynamicbarvideogenerator.Entity.GeneratorEntity.Bar;
+import com.yzchnb.dynamicbarvideogenerator.Entity.GeneratorEntity.Frame;
+import com.yzchnb.dynamicbarvideogenerator.Entity.GeneratorEntity.Line;
 
 import java.util.*;
 
-public class TransitionFrameGenerator {
+class TransitionFrameGenerator {
 
     private GeneratorConfiguration generatorConfiguration;
 
-    public TransitionFrameGenerator(GeneratorConfiguration generatorConfiguration){
+    TransitionFrameGenerator(GeneratorConfiguration generatorConfiguration){
         this.generatorConfiguration = generatorConfiguration;
     }
 
-    public Frame generateFrame(Frame lastFrame, Line currLine){
+    Frame generateFrame(Frame lastFrame, Line currLine){
         //TODO 增加配置选项 加速度
         double aInc = 0.15;
         double aDec = 0.5;
@@ -27,7 +27,7 @@ public class TransitionFrameGenerator {
         HashMap<String, Double> targetType2Position = getType2Position(currLine, generatorConfiguration.getUserInputConfiguration().getNumOfBarsInChart());
         HashMap<Double, String> targetPosition2Type = new HashMap<>();
         targetType2Position.forEach((type, position) -> targetPosition2Type.put(position, type));
-        HashMap<String, Integer> targetType2Value = currLine.getType2Value();
+        HashMap<String, Double> targetType2Value = currLine.getType2Value();
         ArrayList<Bar> bars = new ArrayList<>(targetType2Position.size());
         targetType2Value.forEach((type, value) ->
                 bars.add(new Bar(type, value))
@@ -223,10 +223,10 @@ public class TransitionFrameGenerator {
 
     private HashMap<String, Double> getType2Position(Line line, int numOfBarsInChart){
         HashMap<String, Double> type2Position = new HashMap<>();
-        HashMap<String, Integer> firstLineType2Value = line.getType2Value();
+        HashMap<String, Double> firstLineType2Value = line.getType2Value();
         List<Bar> firstBars = new ArrayList<>(firstLineType2Value.size());
         firstLineType2Value.forEach((type, value) -> firstBars.add(new Bar(type, value)));
-        firstBars.sort(Comparator.comparingInt((bar) ->
+        firstBars.sort(Comparator.comparingDouble((bar) ->
             -bar.getValue()
         ));
         for (int i = 0; i < firstBars.size(); i++) {

@@ -1,9 +1,8 @@
-package com.yzchnb.dynamicbarvideogenerator.WebConfig;
+package com.yzchnb.dynamicbarvideogenerator.Config.WebConfig;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @Configuration
 public class InterceptorRegister implements WebMvcConfigurer {
@@ -13,13 +12,6 @@ public class InterceptorRegister implements WebMvcConfigurer {
      */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        //定义到新文件夹
-//        registry.addResourceHandler("/**")
-//                .addResourceLocations("classpath:/static/")
-//                .addResourceLocations("classpath:/resources/");
-        //定义到硬盘
-//        registry.addResourceHandler("/picture/**")
-//                .addResourceLocations("file:D:/picture/");
         registry.addResourceHandler("/movie/**")
                 .addResourceLocations("classpath:/resources/resources/movies/");
     }

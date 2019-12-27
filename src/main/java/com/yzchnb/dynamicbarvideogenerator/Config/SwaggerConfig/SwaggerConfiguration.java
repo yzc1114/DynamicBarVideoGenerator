@@ -1,4 +1,4 @@
-package com.yzchnb.dynamicbarvideogenerator.SwaggerConfig;
+package com.yzchnb.dynamicbarvideogenerator.Config.SwaggerConfig;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,10 +18,10 @@ public class SwaggerConfiguration {
         return new Docket(DocumentationType.SWAGGER_2)
                 .pathMapping("/")
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.yzchnb.dynamicbarvideogenerator.Web"))
+                .apis(RequestHandlerSelectors.basePackage("com.yzchnb.dynamicbarvideogenerator.Controller"))
                 .paths(PathSelectors.any())
                 .build().apiInfo(new ApiInfoBuilder()
-                        .title("twitter back-end api")
+                        .title("dynamic bar video generator back-end api")
                         .version("9.0")
                         .contact(new Contact("杨紫超","www.yzchnb.com","1021777674@qq.com"))
                         .build());

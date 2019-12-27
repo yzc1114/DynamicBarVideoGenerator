@@ -1,6 +1,6 @@
 package com.yzchnb.dynamicbarvideogenerator.ContextStorage;
 
-import com.yzchnb.dynamicbarvideogenerator.GeneratorUtils.CenterProcessor;
+import com.yzchnb.dynamicbarvideogenerator.Generator.CenterProcessor;
 
 import java.util.concurrent.ConcurrentHashMap;
 

@@ -1,9 +1,9 @@
-package com.yzchnb.dynamicbarvideogenerator.Web;
+package com.yzchnb.dynamicbarvideogenerator.Controller;
 
-import com.yzchnb.dynamicbarvideogenerator.ConfigurationEntity.GeneratorConfiguration;
-import com.yzchnb.dynamicbarvideogenerator.ConfigurationEntity.UserInputConfiguration;
+import com.yzchnb.dynamicbarvideogenerator.Entity.ConfigurationEntity.GeneratorConfiguration;
+import com.yzchnb.dynamicbarvideogenerator.Entity.ConfigurationEntity.UserInputConfiguration;
+import com.yzchnb.dynamicbarvideogenerator.Logger.Logger;
 import com.yzchnb.dynamicbarvideogenerator.Service.IGeneratorService;
-import com.yzchnb.dynamicbarvideogenerator.Service.impls.GeneratorService;
 import com.yzchnb.dynamicbarvideogenerator.Utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -13,21 +13,28 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.time.LocalDateTime;
 
 @RestController
 public class IndexController {
     @Autowired
     private IGeneratorService generatorService;
 
+    /**
+     * 检查参数和数据文件
+     * @param userInputConfiguration
+     * @param multipartFile
+     * @return
+     */
     @RequestMapping(value = "/checkParams", method = RequestMethod.POST, consumes = {MediaType.ALL_VALUE})
     @ResponseBody
     public String checkParams(@ModelAttribute UserInputConfiguration userInputConfiguration,
-                                @RequestParam(value = "file") MultipartFile multipartFile,
-                                HttpServletRequest request) {
+                                @RequestParam(value = "file") MultipartFile multipartFile) throws Exception{
         GeneratorConfiguration generatorConfiguration = GeneratorConfiguration.from(userInputConfiguration);
         if(multipartFile.isEmpty()){
-            System.out.println("上传失败");
-            return "上传失败";
+            String error = "文件上传失败";
+            Logger.log(LocalDateTime.now().toString() + error);
+            throw new Exception(error);
         }
         File tempFile = new File(Utils.getDataFileDir() + userInputConfiguration.hashCode() + ".csv");
 
@@ -35,9 +42,11 @@ public class IndexController {
             multipartFile.transferTo(tempFile);
         }catch (Exception e){
             e.printStackTrace();
-            return e.getMessage();
+            String error = "文件转换失败";
+            Logger.log(error);
+            throw new Exception(error);
         }
-        String result = null;
+        String result;
         //上传csv文件
         try{
             generatorService.checkParams(generatorConfiguration, tempFile);
@@ -45,18 +54,23 @@ public class IndexController {
         }catch (Exception e){
             e.printStackTrace();
             result = e.getMessage();
-        }finally {
-            return result;
         }
+        return result;
     }
 
+    /**
+     * 生成视频
+     * @param userInputConfiguration
+     * @param multipartFile
+     * @param request
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(value = "/generateVideo", method = RequestMethod.POST, consumes = {MediaType.ALL_VALUE})
     @ResponseBody
     public String generateVideo(@ModelAttribute UserInputConfiguration userInputConfiguration,
                                 @RequestParam(value = "file") MultipartFile multipartFile,
-                                HttpServletRequest request){
-        //System.out.println(userInputConfiguration);
-        //UserInputConfiguration userInputConfiguration1 = new UserInputConfiguration();
+                                HttpServletRequest request) throws Exception{
         if(request.getSession(false) != null){
             if(request.getSession(false).getAttribute("fileId") != null){
                 return null;
@@ -66,8 +80,9 @@ public class IndexController {
 
         GeneratorConfiguration generatorConfiguration = GeneratorConfiguration.from(userInputConfiguration);
         if(multipartFile.isEmpty()){
-            System.out.println("上传失败");
-            return "上传失败";
+            String error = "文件上传失败";
+            Logger.log(error);
+            throw new Exception(error);
         }
         File tempFile = new File(Utils.getDataFileDir() + userInputConfiguration.hashCode() + ".csv");
 
@@ -75,9 +90,11 @@ public class IndexController {
             multipartFile.transferTo(tempFile);
         }catch (Exception e){
             e.printStackTrace();
-            return e.getMessage();
+            String error = "文件转换失败";
+            Logger.log(error);
+            throw new Exception(error);
         }
-        String result = null;
+        String result;
         //上传csv文件
         try{
              result = generatorService.generateVideo(generatorConfiguration, tempFile, Utils.getMoviesDir(),
@@ -85,13 +102,18 @@ public class IndexController {
 
         }catch (Exception e){
             e.printStackTrace();
-            result =e.getMessage();
+            throw e;
         }finally {
             request.getSession(true).removeAttribute("fileId");
-            return result;
         }
+        return result;
     }
 
+    /**
+     * 获取生成率
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "/getRate", method = RequestMethod.GET)
     @ResponseBody
     public Double getRateOfGeneration(HttpServletRequest request){
@@ -102,24 +124,27 @@ public class IndexController {
         }
     }
 
+    /**
+     * 创建会话
+     * @param request
+     */
     @RequestMapping(value = "createSession",method = RequestMethod.GET)
     @ResponseBody
     public void createSession(HttpServletRequest request){
         request.getSession(true);
     }
 
+    /**
+     * 下载视频接口
+     * @param fileName
+     * @param response
+     * @throws Exception
+     */
     @RequestMapping(value = "/download", method = RequestMethod.GET)
-    public void download(@RequestParam("fileName") String fileName, HttpServletResponse response){
+    public void download(@RequestParam("fileName") String fileName, HttpServletResponse response) throws Exception{
         File file = new File(Utils.getMoviesDir() + fileName);
         if(!file.exists()){
-            try{
-                System.out.println("文件不存在！");
-                response.setContentType("application/text");
-                response.getWriter().println("file doesn't exists!");
-            }catch (IOException e){
-                e.printStackTrace();
-            }
-            return;
+            throw new Exception("文件不存在！");
         }
         downloadFile(response, file);
     }

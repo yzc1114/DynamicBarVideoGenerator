@@ -1,21 +1,12 @@
 package com.yzchnb.dynamicbarvideogenerator.DataProcessor;
 
-import com.yzchnb.dynamicbarvideogenerator.ConfigurationEntity.GeneratorConfiguration;
-import com.yzchnb.dynamicbarvideogenerator.ConfigurationEntity.UserInputConfiguration;
-import com.yzchnb.dynamicbarvideogenerator.GeneratorUtils.UtilEntity.Line;
-
+import com.yzchnb.dynamicbarvideogenerator.Entity.ConfigurationEntity.GeneratorConfiguration;
+import com.yzchnb.dynamicbarvideogenerator.Entity.ConfigurationEntity.UserInputConfiguration;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.time.Duration;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.HashMap;
-
-import static com.yzchnb.dynamicbarvideogenerator.DataProcessor.LineProvider.boxLine;
 
 public class ParamsChecker {
     public static void checkParams(GeneratorConfiguration generatorConfiguration, File csvFile) throws Exception{
@@ -45,30 +36,30 @@ public class ParamsChecker {
                 types.add(splitedfirstLine[i]);
             }
 
-            Line lastLine = null;
-            Long lastDuration = null;
-            while(true){
-                String lineStr = bufferedReader.readLine();
-                if(lineStr == null){
-                    break;
-                }
-                Line newLine = boxLine(lineStr, types);
-                if(lastLine != null){
-                    if(lastDuration != null){
-                        long newDuration = Duration.between(lastLine.getLocalDateTime(), newLine.getLocalDateTime()).toNanos();
-                        if(newDuration != lastDuration){
-                            throw new Exception("时间间隔不同！");
-                        }
-                        lastDuration = newDuration;
-                    }else{
-                        lastDuration = Duration.between(lastLine.getLocalDateTime(), newLine.getLocalDateTime()).toNanos();
-                    }
-                    lastLine = newLine;
-                }else{
-                    lastLine = boxLine(lineStr, types);
-                }
-
-            }
+//            Line lastLine = null;
+//            Long lastDuration = null;
+//            while(true){
+//                String lineStr = bufferedReader.readLine();
+//                if(lineStr == null){
+//                    break;
+//                }
+//                Line newLine = boxLine(lineStr, types);
+//                if(lastLine != null){
+//                    if(lastDuration != null){
+//                        long newDuration = Duration.between(lastLine.getLocalDateTime(), newLine.getLocalDateTime()).toNanos();
+//                        if(newDuration != lastDuration){
+//                            throw new Exception("时间间隔不同！");
+//                        }
+//                        lastDuration = newDuration;
+//                    }else{
+//                        lastDuration = Duration.between(lastLine.getLocalDateTime(), newLine.getLocalDateTime()).toNanos();
+//                    }
+//                    lastLine = newLine;
+//                }else{
+//                    lastLine = boxLine(lineStr, types);
+//                }
+//
+//            }
 
         }catch (IOException e){
             e.printStackTrace();

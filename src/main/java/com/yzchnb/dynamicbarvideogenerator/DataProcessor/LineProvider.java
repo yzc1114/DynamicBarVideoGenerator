@@ -1,8 +1,8 @@
 package com.yzchnb.dynamicbarvideogenerator.DataProcessor;
 
-import com.yzchnb.dynamicbarvideogenerator.ConfigurationEntity.GeneratorConfiguration;
-import com.yzchnb.dynamicbarvideogenerator.ConfigurationEntity.UserInputConfiguration;
-import com.yzchnb.dynamicbarvideogenerator.GeneratorUtils.UtilEntity.Line;
+import com.yzchnb.dynamicbarvideogenerator.Entity.ConfigurationEntity.GeneratorConfiguration;
+import com.yzchnb.dynamicbarvideogenerator.Entity.ConfigurationEntity.UserInputConfiguration;
+import com.yzchnb.dynamicbarvideogenerator.Entity.GeneratorEntity.Line;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -36,10 +36,10 @@ public class LineProvider {
             //没有支持的时间格式
             throw new Exception("没有支持的时间格式！");
         }
-        HashMap<String, Integer> type2Value = new HashMap<>();
+        HashMap<String, Double> type2Value = new HashMap<>();
         for (int i = 1; i < values.length; i++) {
             try{
-                type2Value.put(types.get(i-1), Integer.parseInt(values[i]));
+                type2Value.put(types.get(i-1), Double.parseDouble(values[i]));
             }catch (NumberFormatException e){
                 throw new Exception("某数据列不是整数！");
             }

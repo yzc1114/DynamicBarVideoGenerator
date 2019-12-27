@@ -20,12 +20,6 @@
   <!-- Squad theme CSS -->
   <link href="css/style.css" rel="stylesheet">
   <link href="color/default.css" rel="stylesheet">
-  <!-- =======================================================
-    Theme Name: Ninestars
-    Theme URL: https://bootstrapmade.com/ninestars-free-bootstrap-3-theme-for-creative/
-    Author: BootstrapMade
-    Author URL: https://bootstrapmade.com
-  ======================================================= -->
   <style>
     .config-form {
       width: 60%;
@@ -44,32 +38,16 @@
       <nav class="gn-menu-wrapper">
         <div class="gn-scroller">
           <ul class="gn-menu">
-            <!--              <li class="gn-search-item">-->
-            <!--                <input placeholder="Search" type="search" class="gn-search">-->
-            <!--                <a class="gn-icon gn-icon-search"><span>Search</span></a>-->
-            <!--              </li>-->
             <li>
               <a href="#configuration" class="gn-icon gn-icon-download">Configuration</a>
             </li>
             <li><a href="#generate" class="gn-icon gn-icon-cog">Generate</a></li>
-            <!--              <li><a href="#works" class="gn-icon gn-icon-help">Works</a></li>-->
-            <!--              <li>-->
-            <!--                <a href="#contact" class="gn-icon gn-icon-archive">Contact</a>-->
-            <!--              </li>-->
           </ul>
         </div>
         <!-- /gn-scroller -->
       </nav>
     </li>
     <li><a href="index.html">Dynamic Bar Chart</a></li>
-    <!--      <li class="hidden-xs">-->
-    <!--        <ul class="company-social">-->
-    <!--          <li class="social-facebook"><a href="#" target="_blank"><i class="fa fa-facebook"></i></a></li>-->
-    <!--          <li class="social-twitter"><a href="#" target="_blank"><i class="fa fa-twitter"></i></a></li>-->
-    <!--          <li class="social-dribble"><a href="#" target="_blank"><i class="fa fa-dribbble"></i></a></li>-->
-    <!--          <li class="social-google"><a href="#" target="_blank"><i class="fa fa-google-plus"></i></a></li>-->
-    <!--        </ul>-->
-    <!--      </li>-->
   </ul>
 </div>
 
@@ -163,112 +141,17 @@
                 <input oninput="bar_model.canShowGenerateButton(false)" type="file" class="form-control" name="file" id="File" placeholder="File" />
                 <div class="validation"></div>
               </div>
-<!--              <div class="form-group">-->
-<!--                  <textarea class="form-control" name="message" rows="5"-->
-<!--                            data-msg="Please write something for us" placeholder="Message"></textarea>-->
-<!--                <div class="validation"></div>-->
-<!--              </div>-->
-
               <div data-bind="if : canShowGenerateButton" class="text-center"><button type="button" class="btn btn-skin" onclick="generate()">Generate Video</button>
               </div>
               <div data-bind="ifnot: canShowGenerateButton" class="text-center"><button type="button" class="btn btn-skin" onclick="checkParams()">Check Params</button>
               </div>
             </form>
-            <!--              <form id="config" class="">-->
-            <!--                <div class="mb-3 form-group">-->
-            <!--                  <label for="FPS" class="col-sm-2">Username</label>-->
-            <!--                  <div class="input-group">-->
-            <!--                    <div class="input-group-prepend">-->
-            <!--                      <span class="input-group-text">FPS</span>-->
-            <!--                    </div>-->
-            <!--                    <input type="number" class="form-control" id="FPS" placeholder="FPS" required>-->
-            <!--                    <div class="invalid-feedback" style="width: 100%;">-->
-            <!--                      FPS is required.-->
-            <!--                    </div>-->
-            <!--                  </div>-->
-            <!--                </div>-->
-
-            <!--                <div class="mb-3 form-group">-->
-            <!--                  <label for="DPS">DPS</label>-->
-            <!--                  <div class="input-group">-->
-            <!--                    <div class="input-group-prepend">-->
-            <!--                      <span class="input-group-text">DPS</span>-->
-            <!--                    </div>-->
-            <!--                    <input type="number" class="form-control" id="DPS" placeholder="DPS" required>-->
-            <!--                    <div class="invalid-feedback" style="width: 100%;">-->
-            <!--                      DPS is required.-->
-            <!--                    </div>-->
-            <!--                  </div>-->
-            <!--                </div>-->
-
-            <!--                <div class="mb-3 form-group">-->
-            <!--                  <label for="BFC">BFC</label>-->
-            <!--                  <div class="input-group">-->
-            <!--                    <div class="input-group-prepend">-->
-            <!--                      <span class="input-group-text">BFC</span>-->
-            <!--                    </div>-->
-            <!--                    <input type="number" class="form-control" id="BFC" placeholder="Buffered Frame Count" required>-->
-            <!--                    <div class="invalid-feedback" style="width: 100%;">-->
-            <!--                      Buffered Frame Count is required.-->
-            <!--                    </div>-->
-            <!--                  </div>-->
-            <!--                </div>-->
-            <!--              </form>-->
           </div>
 
         </div>
       </div>
     </div>
   </div>
-  <!--    <div class="container">-->
-
-  <!--      <div class="row">-->
-  <!--        <div class="col-xs-6 col-sm-3 col-md-3">-->
-
-  <!--          <div class="team boxed-grey">-->
-  <!--            <div class="inner">-->
-  <!--              <h5>Anna Hanaceck</h5>-->
-  <!--              <p class="subtitle">Pixel Crafter</p>-->
-  <!--              <div class="avatar"><img src="img/team/1.jpg" alt="" class="img-responsive" /></div>-->
-  <!--            </div>-->
-  <!--          </div>-->
-
-  <!--        </div>-->
-  <!--        <div class="col-xs-6 col-sm-3 col-md-3">-->
-
-  <!--          <div class="team boxed-grey">-->
-  <!--            <div class="inner">-->
-  <!--              <h5>Maura Daniels</h5>-->
-  <!--              <p class="subtitle">Ruby on Rails</p>-->
-  <!--              <div class="avatar"><img src="img/team/2.jpg" alt="" class="img-responsive" /></div>-->
-  <!--            </div>-->
-
-  <!--          </div>-->
-  <!--        </div>-->
-  <!--        <div class="col-xs-6 col-sm-3 col-md-3">-->
-
-  <!--          <div class="team boxed-grey">-->
-  <!--            <div class="inner">-->
-  <!--              <h5>Jack Briane</h5>-->
-  <!--              <p class="subtitle">jQuery Ninja</p>-->
-  <!--              <div class="avatar"><img src="img/team/3.jpg" alt="" class="img-responsive" /></div>-->
-  <!--            </div>-->
-  <!--          </div>-->
-
-  <!--        </div>-->
-  <!--        <div class="col-xs-6 col-sm-3 col-md-3">-->
-
-  <!--          <div class="team boxed-grey">-->
-  <!--            <div class="inner">-->
-  <!--              <h5>Tom Petterson</h5>-->
-  <!--              <p class="subtitle">Typographer</p>-->
-  <!--              <div class="avatar"><img src="img/team/4.jpg" alt="" class="img-responsive" /></div>-->
-  <!--            </div>-->
-  <!--          </div>-->
-
-  <!--        </div>-->
-  <!--      </div>-->
-  <!--    </div>-->
 </section>
 <!-- /Section: about -->
 
@@ -304,223 +187,12 @@
       </div>
     </div>
   </div>
-  <!--    <div class="container">-->
-  <!--      <div class="row">-->
-  <!--        <div class="col-sm-3 col-md-3">-->
-
-  <!--          <div class="service-box">-->
-  <!--            <div class="service-icon">-->
-  <!--              <i class="fa fa-code fa-3x"></i>-->
-  <!--            </div>-->
-  <!--            <div class="service-desc">-->
-  <!--              <h5>Print</h5>-->
-  <!--              <p>Vestibulum tincidunt enim in pharetra malesuada. Duis semper magna metus electram accommodare.</p>-->
-  <!--            </div>-->
-  <!--          </div>-->
-
-  <!--        </div>-->
-  <!--        <div class="col-sm-3 col-md-3">-->
-
-  <!--          <div class="service-box">-->
-  <!--            <div class="service-icon">-->
-  <!--              <i class="fa fa-suitcase fa-3x"></i>-->
-  <!--            </div>-->
-  <!--            <div class="service-desc">-->
-  <!--              <h5>Web Design</h5>-->
-  <!--              <p>Vestibulum tincidunt enim in pharetra malesuada. Duis semper magna metus electram accommodare.</p>-->
-  <!--            </div>-->
-  <!--          </div>-->
-
-  <!--        </div>-->
-  <!--        <div class="col-sm-3 col-md-3">-->
-
-  <!--          <div class="service-box">-->
-  <!--            <div class="service-icon">-->
-  <!--              <i class="fa fa-cog fa-3x"></i>-->
-  <!--            </div>-->
-  <!--            <div class="service-desc">-->
-  <!--              <h5>Photography</h5>-->
-  <!--              <p>Vestibulum tincidunt enim in pharetra malesuada. Duis semper magna metus electram accommodare.</p>-->
-  <!--            </div>-->
-  <!--          </div>-->
-
-  <!--        </div>-->
-  <!--        <div class="col-sm-3 col-md-3">-->
-
-  <!--          <div class="service-box">-->
-  <!--            <div class="service-icon">-->
-  <!--              <i class="fa fa-rocket fa-3x"></i>-->
-  <!--            </div>-->
-  <!--            <div class="service-desc">-->
-  <!--              <h5>Cloud System</h5>-->
-  <!--              <p>Vestibulum tincidunt enim in pharetra malesuada. Duis semper magna metus electram accommodare.</p>-->
-  <!--            </div>-->
-  <!--          </div>-->
-
-  <!--        </div>-->
-  <!--      </div>-->
-  <!--    </div>-->
 </section>
-<!-- /Section: services -->
-
-
-<!-- Section: works -->
-<!--  <section id="works" class="home-section text-center bg-gray">-->
-<!--    <div class="heading-works marginbot-50">-->
-<!--      <div class="container">-->
-<!--        <div class="row">-->
-<!--          <div class="col-lg-8 col-lg-offset-2">-->
-
-<!--            <div class="section-heading">-->
-<!--              <h2>Recent Works</h2>-->
-<!--              <p>Lorem ipsum dolor sit amet, no nisl mentitum recusabo per, vim at blandit qualisque dissentiunt. Diam-->
-<!--                efficiantur conclusionemque ut has</p>-->
-<!--            </div>-->
-
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--    <div class="container">-->
-
-<!--      <div class="row">-->
-<!--        <div class="col-sm-12 col-md-12 col-lg-12">-->
-
-<!--          <div class="row gallery-item">-->
-<!--            <div class="col-md-3">-->
-<!--              <a href="img/works/1.jpg" title="This is an image title" data-lightbox-gallery="gallery1"-->
-<!--                data-lightbox-hidpi="img/works/1@2x.jpg">-->
-<!--                <img src="img/works/1.jpg" class="img-responsive" alt="img">-->
-<!--              </a>-->
-<!--            </div>-->
-<!--            <div class="col-md-3">-->
-<!--              <a href="img/works/2.jpg" title="This is an image title" data-lightbox-gallery="gallery1"-->
-<!--                data-lightbox-hidpi="img/works/1@2x.jpg">-->
-<!--                <img src="img/works/2.jpg" class="img-responsive" alt="img">-->
-<!--              </a>-->
-<!--            </div>-->
-<!--            <div class="col-md-3">-->
-<!--              <a href="img/works/3.jpg" title="This is an image title" data-lightbox-gallery="gallery1"-->
-<!--                data-lightbox-hidpi="img/works/1@2x.jpg">-->
-<!--                <img src="img/works/3.jpg" class="img-responsive" alt="img">-->
-<!--              </a>-->
-<!--            </div>-->
-<!--            <div class="col-md-3">-->
-<!--              <a href="img/works/4.jpg" title="This is an image title" data-lightbox-gallery="gallery1"-->
-<!--                data-lightbox-hidpi="img/works/1@2x.jpg">-->
-<!--                <img src="img/works/4.jpg" class="img-responsive" alt="img">-->
-<!--              </a>-->
-<!--            </div>-->
-<!--            <div class="col-md-3">-->
-<!--              <a href="img/works/5.jpg" title="This is an image title" data-lightbox-gallery="gallery1"-->
-<!--                data-lightbox-hidpi="img/works/1@2x.jpg">-->
-<!--                <img src="img/works/5.jpg" class="img-responsive" alt="img">-->
-<!--              </a>-->
-<!--            </div>-->
-<!--            <div class="col-md-3">-->
-<!--              <a href="img/works/6.jpg" title="This is an image title" data-lightbox-gallery="gallery1"-->
-<!--                data-lightbox-hidpi="img/works/1@2x.jpg">-->
-<!--                <img src="img/works/6.jpg" class="img-responsive" alt="img">-->
-<!--              </a>-->
-<!--            </div>-->
-<!--            <div class="col-md-3">-->
-<!--              <a href="img/works/7.jpg" title="This is an image title" data-lightbox-gallery="gallery1"-->
-<!--                data-lightbox-hidpi="img/works/1@2x.jpg">-->
-<!--                <img src="img/works/7.jpg" class="img-responsive" alt="img">-->
-<!--              </a>-->
-<!--            </div>-->
-<!--            <div class="col-md-3">-->
-<!--              <a href="img/works/8.jpg" title="This is an image title" data-lightbox-gallery="gallery1"-->
-<!--                data-lightbox-hidpi="img/works/1@2x.jpg">-->
-<!--                <img src="img/works/8.jpg" class="img-responsive" alt="img">-->
-<!--              </a>-->
-<!--            </div>-->
-<!--          </div>-->
-
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </section>-->
-<!-- /Section: works -->
-
-<!-- Section: contact -->
-<!--  <section id="contact" class="home-section text-center">-->
-<!--    <div class="heading-contact marginbot-50">-->
-<!--      <div class="container">-->
-<!--        <div class="row">-->
-<!--          <div class="col-lg-8 col-lg-offset-2">-->
-
-<!--            <div class="section-heading">-->
-<!--              <h2>Get in touch</h2>-->
-<!--              <p>Lorem ipsum dolor sit amet, no nisl mentitum recusabo per, vim at blandit qualisque dissentiunt. Diam-->
-<!--                efficiantur conclusionemque ut has</p>-->
-<!--            </div>-->
-
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--    <div class="container">-->
-
-<!--      <div class="row">-->
-<!--        <div class="col-lg-8 col-md-offset-2">-->
-<!--          <div class="boxed-grey">-->
-<!--            <div id="sendmessage">Your message has been sent. Thank you!</div>-->
-<!--            <div id="errormessage"></div>-->
-<!--            &lt;!&ndash;            <form action="" method="post" role="form" class="contactForm">&ndash;&gt;-->
-<!--            &lt;!&ndash;              <div class="form-group">&ndash;&gt;-->
-<!--            &lt;!&ndash;                <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />&ndash;&gt;-->
-<!--            &lt;!&ndash;                <div class="validation"></div>&ndash;&gt;-->
-<!--            &lt;!&ndash;              </div>&ndash;&gt;-->
-<!--            &lt;!&ndash;              <div class="form-group">&ndash;&gt;-->
-<!--            &lt;!&ndash;                <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />&ndash;&gt;-->
-<!--            &lt;!&ndash;                <div class="validation"></div>&ndash;&gt;-->
-<!--            &lt;!&ndash;              </div>&ndash;&gt;-->
-<!--            &lt;!&ndash;              <div class="form-group">&ndash;&gt;-->
-<!--            &lt;!&ndash;                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />&ndash;&gt;-->
-<!--            &lt;!&ndash;                <div class="validation"></div>&ndash;&gt;-->
-<!--            &lt;!&ndash;              </div>&ndash;&gt;-->
-<!--            &lt;!&ndash;              <div class="form-group">&ndash;&gt;-->
-<!--            &lt;!&ndash;                <textarea class="form-control" name="message" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>&ndash;&gt;-->
-<!--            &lt;!&ndash;                <div class="validation"></div>&ndash;&gt;-->
-<!--            &lt;!&ndash;              </div>&ndash;&gt;-->
-
-<!--            &lt;!&ndash;              <div class="text-center"><button type="submit" class="btn btn-skin">Send Message</button></div>&ndash;&gt;-->
-<!--            &lt;!&ndash;            </form>&ndash;&gt;-->
-<!--          </div>-->
-
-<!--          <div class="widget-contact row">-->
-<!--            <div class="col-lg-6">-->
-<!--              <address>-->
-<!--                <strong>Ninestars Ltd.</strong><br>-->
-<!--                Big Villa 334 Awesome, Beautiful Suite 1200<br>-->
-<!--                San Francisco, CA 94107<br>-->
-<!--                <abbr title="Phone">P:</abbr> (123) 456-7890-->
-<!--              </address>-->
-<!--            </div>-->
-
-<!--            <div class="col-lg-6">-->
-<!--              <address>-->
-<!--                <strong>Email</strong><br>-->
-<!--                <a href="mailto:#">email.name@example.com</a><br />-->
-<!--                <a href="mailto:#">name.name@example.com</a>-->
-<!--              </address>-->
-
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-
-<!--      </div>-->
-
-<!--    </div>-->
-<!--  </section>-->
-<!-- /Section: contact -->
-
 <footer>
   <div class="container">
     <div class="row">
       <div class="col-md-12 col-lg-12">
-        <p>&copy; Ninestars - Theme</p>
+        <p>Dynamic Bar Video Generator</p>
         <div class="credits">
           <!--
             All the links in the footer should remain intact.
@@ -598,6 +270,10 @@
       data: form,
       success: function (res, status) {
         console.log("result:" + res);
+        if(status != 200){
+          error_handler();
+          return;
+        }
         if(res === "success"){
           console.log("really??");
           console.log(status);
@@ -610,6 +286,14 @@
       }
     });
   }
+
+  function error_handler(){
+    alert("error!");
+    bar_model.canShowGenerateButton(false);
+    bar_model.finished(false);
+    bar_model.movie_url("");
+  }
+
   function generate() {
     //检查参数。
     //调用视频生成器。
@@ -639,14 +323,17 @@
       processData: false,
       contentType: false,
       data: form,
-      success: function (success,status) {
+      success: function (success, status) {
+        if(status != 200){
+          error_handler();
+        }
         if(success){
-          bar_model.generate_str("Success")
-          bar_model.progress_from_backend(1)
-          bar_model.finished(true)
+          bar_model.generate_str("Success");
+          bar_model.progress_from_backend(1);
+          bar_model.finished(true);
           bar_model.movie_url(success)
         }else{
-          alert("Olde movie generating!")
+          alert("Old movie generating!")
         }
         clearInterval(timer_id)
       }
@@ -654,10 +341,14 @@
   }
   function getRate() {
     $.get("/getRate", (success, status) => {
+      if(status != 200){
+          error_handler();
+          return;
+      }
       console.log(success,status)
       bar_model.generate_str("Generating...")
       bar_model.progress_from_backend(success)
-    })
+    });
   }
   $(document).ready(function () {
     ko.applyBindings(bar_model)

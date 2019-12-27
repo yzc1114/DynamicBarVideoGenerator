@@ -1,6 +1,5 @@
-package com.yzchnb.dynamicbarvideogenerator.ConfigurationEntity;
+package com.yzchnb.dynamicbarvideogenerator.Entity.ConfigurationEntity;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 

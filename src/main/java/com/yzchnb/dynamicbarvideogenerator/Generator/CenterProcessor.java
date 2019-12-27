@@ -1,8 +1,8 @@
-package com.yzchnb.dynamicbarvideogenerator.GeneratorUtils;
-import com.yzchnb.dynamicbarvideogenerator.ConfigurationEntity.GeneratorConfiguration;
-import com.yzchnb.dynamicbarvideogenerator.ConfigurationEntity.UserInputConfiguration;
-import com.yzchnb.dynamicbarvideogenerator.GeneratorUtils.UtilEntity.Frame;
-import com.yzchnb.dynamicbarvideogenerator.GeneratorUtils.UtilEntity.Line;
+package com.yzchnb.dynamicbarvideogenerator.Generator;
+import com.yzchnb.dynamicbarvideogenerator.Entity.ConfigurationEntity.GeneratorConfiguration;
+import com.yzchnb.dynamicbarvideogenerator.Entity.GeneratorEntity.Frame;
+import com.yzchnb.dynamicbarvideogenerator.Entity.GeneratorEntity.Line;
+import com.yzchnb.dynamicbarvideogenerator.Logger.Logger;
 import org.jim2mov.core.*;
 import org.jim2mov.utils.MovieUtils;
 
@@ -34,7 +34,6 @@ public class CenterProcessor implements ImageProvider, FrameSavedListener {
     //用于生成视频的线程
     private Thread savingMovieThread;
     private Frame lastFrame = null;
-
 
     //构造函数
     public CenterProcessor(GeneratorConfiguration generatorConfiguration, int frameCount, String generateDir){
@@ -73,6 +72,7 @@ public class CenterProcessor implements ImageProvider, FrameSavedListener {
                 new Jim2Mov(this, dmip, this).saveMovie(MovieInfoProvider.TYPE_AVI_MJPEG);
             }catch (MovieSaveException e){
                 e.printStackTrace();
+                Logger.log(e.getMessage());
             }
 
         });
@@ -83,19 +83,14 @@ public class CenterProcessor implements ImageProvider, FrameSavedListener {
         dataEnd = true;
     }
 
-    public String waitResult() {
-        try{
-            savingMovieThread.join();
-            VideoTransformer videoTransformer = new VideoTransformer();
-            File videoSavedFile = new File(videoSavingPath);
-            if(!videoSavedFile.exists()){
-                throw new Exception("视频生成失败。");
-            }
-            return videoTransformer.transformVideo(new File(videoSavingPath));
-        }catch (Exception e){
-            e.printStackTrace();
-            return null;
+    public String waitResult() throws Exception{
+        savingMovieThread.join();
+        VideoTransformer videoTransformer = new VideoTransformer();
+        File videoSavedFile = new File(videoSavingPath);
+        if(!videoSavedFile.exists()){
+            throw new Exception("视频生成失败。");
         }
+        return videoTransformer.transformVideo(new File(videoSavingPath));
     }
     public Double getRate(){
         return (double)savedFrameNum/frameCount;
@@ -103,7 +98,7 @@ public class CenterProcessor implements ImageProvider, FrameSavedListener {
     @Override
     public void frameSaved(int i) {
         savedFrameNum = i;
-        System.out.println("saved frame " + i);
+        Logger.log("saved frame " + i);
     }
 
     @Override

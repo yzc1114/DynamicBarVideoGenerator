@@ -1,6 +1,6 @@
 package com.yzchnb.dynamicbarvideogenerator.Service;
 
-import com.yzchnb.dynamicbarvideogenerator.ConfigurationEntity.GeneratorConfiguration;
+import com.yzchnb.dynamicbarvideogenerator.Entity.ConfigurationEntity.GeneratorConfiguration;
 import java.io.File;
 
 public interface IGeneratorService {

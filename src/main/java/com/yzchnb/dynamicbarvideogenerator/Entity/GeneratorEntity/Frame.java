@@ -1,4 +1,4 @@
-package com.yzchnb.dynamicbarvideogenerator.GeneratorUtils.UtilEntity;
+package com.yzchnb.dynamicbarvideogenerator.Entity.GeneratorEntity;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -8,7 +8,7 @@ import java.util.List;
 public class Frame {
     private List<Bar> bars;
     private ArrayList<HashSet<String>> visiteds = new ArrayList<>();
-    private Integer peekValue;
+    private Double peekValue;
     private Integer peekDegree;
     private Integer baseDegree;
     private String timeStr;
@@ -22,7 +22,7 @@ public class Frame {
     public Integer getBaseDegree(){
         return baseDegree;
     }
-    public Integer getPeekValue() {
+    public Double getPeekValue() {
         return peekValue;
     }
     public Integer getPeekDegree(){
@@ -31,7 +31,7 @@ public class Frame {
 
     public Frame(List<Bar> bars) {
         this.bars = bars;
-        int peekValue = Integer.MIN_VALUE;
+        Double peekValue = Double.MIN_VALUE;
         for (Bar bar: bars) {
             if(bar.getValue() > peekValue){
                 peekValue = bar.getValue();
@@ -50,15 +50,15 @@ public class Frame {
         bars.sort(Comparator.comparingDouble((bar) ->
             -bar.getPosition()
         ));
-        int min_v = Integer.MAX_VALUE;
-        int max_v = Integer.MIN_VALUE;
+        double min_v = Double.MAX_VALUE;
+        double max_v = Double.MIN_VALUE;
         for(Bar bar :bars){
             if(bar.getPosition()<=1){
                 min_v = Math.min(min_v, bar.getValue());
                 max_v = Math.max(max_v, bar.getValue());
             }
         }
-        peekDegree = max_v*5/4;
+        peekDegree = (int)(max_v*5/4);
         baseDegree = 0;
     }
 

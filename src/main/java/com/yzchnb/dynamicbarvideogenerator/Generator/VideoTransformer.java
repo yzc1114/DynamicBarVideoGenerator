@@ -1,18 +1,20 @@
-package com.yzchnb.dynamicbarvideogenerator.GeneratorUtils;
+package com.yzchnb.dynamicbarvideogenerator.Generator;
+
+import com.yzchnb.dynamicbarvideogenerator.Logger.Logger;
 
 import java.io.*;
 
-public class VideoTransformer {
+class VideoTransformer {
     private transient boolean error = false;
     private transient boolean finished = false;
 
-    public String transformVideo(File sourceVideo) throws Exception{
+    String transformVideo(File sourceVideo) throws Exception{
         //待执行的dos命令
         String targetVideoPath = sourceVideo.getAbsolutePath().replaceFirst("\\.avi", "_h264.mp4");
         File targetFile = new File(targetVideoPath);
         if(targetFile.exists()){
             //视频若存在，则删掉，重新转码
-            System.out.println("视频已经存在，先将其删除，再转码。");
+            Logger.log("视频已经存在，先将其删除，再转码。");
             if(!targetFile.delete()){
                 throw new Exception("已有的视频删除失败。");
             }
@@ -27,7 +29,7 @@ public class VideoTransformer {
                     String line = null;
                     try {
                         while ((line = in.readLine()) != null) {
-                            System.out.println("input:"+line);
+                            Logger.log("input:"+line);
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -44,7 +46,7 @@ public class VideoTransformer {
                     String line = null;
                     try {
                         while ((line = in.readLine()) != null) {
-                            System.out.println("error:"+line);
+                            Logger.log("error:"+line);
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -81,7 +83,7 @@ public class VideoTransformer {
             throw new Exception("视频转码出错。");
         }
         if(!sourceVideo.delete()){
-            System.out.println("原视频删除失败。");
+            Logger.log("原视频删除失败。");
         }
         return targetFile.getName();
     }
@@ -95,12 +97,5 @@ public class VideoTransformer {
         }catch (Exception e){
             e.printStackTrace();
         }
-//        String strCmd = "ffmpeg -i " + source.getAbsolutePath() + " -f mp4 -vcodec mpeg4 " + target.getAbsolutePath();
-//        try{
-//            Process process = Runtime.getRuntime().exec(strCmd);
-//            System.out.println(process.waitFor());
-//        }catch (IOException | InterruptedException e){
-//            e.printStackTrace();
-//        }
     }
 }

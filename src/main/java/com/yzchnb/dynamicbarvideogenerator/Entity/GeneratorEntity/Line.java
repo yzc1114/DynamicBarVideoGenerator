@@ -1,11 +1,11 @@
-package com.yzchnb.dynamicbarvideogenerator.GeneratorUtils.UtilEntity;
+package com.yzchnb.dynamicbarvideogenerator.Entity.GeneratorEntity;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
 
 public class Line {
     private LocalDateTime localDateTime = null;
-    private HashMap<String, Integer> type2Value = null;
+    private HashMap<String, Double> type2Value = null;
 
     public LocalDateTime getLocalDateTime() {
         return localDateTime;
@@ -15,11 +15,11 @@ public class Line {
         this.localDateTime = localDateTime;
     }
 
-    public HashMap<String, Integer> getType2Value() {
+    public HashMap<String, Double> getType2Value() {
         return type2Value;
     }
 
-    public void setType2Value(HashMap<String, Integer> type2Value) {
+    public void setType2Value(HashMap<String, Double> type2Value) {
         this.type2Value = type2Value;
     }
 }

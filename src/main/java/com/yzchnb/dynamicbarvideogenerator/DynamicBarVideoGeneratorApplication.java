@@ -12,5 +12,4 @@ public class DynamicBarVideoGeneratorApplication {
         builder.headless(false).run(args);
         //SpringApplication.run(DynamicBarVideoGeneratorApplication.class, args);
     }
-
 }

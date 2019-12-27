@@ -1,28 +1,18 @@
 package com.yzchnb.dynamicbarvideogenerator.Service.impls;
 
-import com.yzchnb.dynamicbarvideogenerator.ConfigurationEntity.GeneratorConfiguration;
-import com.yzchnb.dynamicbarvideogenerator.ConfigurationEntity.UserInputConfiguration;
+import com.yzchnb.dynamicbarvideogenerator.Entity.ConfigurationEntity.GeneratorConfiguration;
 import com.yzchnb.dynamicbarvideogenerator.ContextStorage.ProcessorMap;
 import com.yzchnb.dynamicbarvideogenerator.DataProcessor.LineProvider;
 import com.yzchnb.dynamicbarvideogenerator.DataProcessor.ParamsChecker;
-import com.yzchnb.dynamicbarvideogenerator.GeneratorUtils.CenterProcessor;
-import com.yzchnb.dynamicbarvideogenerator.GeneratorUtils.UtilEntity.Line;
+import com.yzchnb.dynamicbarvideogenerator.Generator.CenterProcessor;
+import com.yzchnb.dynamicbarvideogenerator.Entity.GeneratorEntity.Line;
 import com.yzchnb.dynamicbarvideogenerator.Service.IGeneratorService;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
-import java.text.NumberFormat;
-import java.time.Duration;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Random;
-import java.util.concurrent.ConcurrentHashMap;
 
 import static com.yzchnb.dynamicbarvideogenerator.DataProcessor.DataForecaster.doPredict;
-import static com.yzchnb.dynamicbarvideogenerator.DataProcessor.LineProvider.boxLine;
 
 @Service
 public class GeneratorService implements IGeneratorService {
@@ -43,14 +33,13 @@ public class GeneratorService implements IGeneratorService {
             centerController.dispose();
             String result = "/movies/" + centerController.waitResult();
             ProcessorMap.removeCenterProcessor(fileId);
+            csvFile.delete();
             return result;
         }catch (IOException e){
             e.printStackTrace();
             throw e;
         }catch (Exception e){
             throw e;
-        }finally {
-            csvFile.delete();
         }
     }
 

@@ -1,11 +1,11 @@
-package com.yzchnb.dynamicbarvideogenerator.GeneratorUtils.UtilEntity;
+package com.yzchnb.dynamicbarvideogenerator.Entity.GeneratorEntity;
 
 
 import java.awt.*;
 
 public class Bar {
     private String typeName;
-    private Integer value;
+    private Double value;
     private Double position;
     private Color color;
     private Double speed;
@@ -23,7 +23,7 @@ public class Bar {
         return typeName;
     }
 
-    public Integer getValue() {
+    public Double getValue() {
         return value;
     }
 
@@ -87,7 +87,7 @@ public class Bar {
         this.justStartedMoving = justStartedMoving;
     }
 
-    public Bar(String typeName, Integer value){
+    public Bar(String typeName, Double value){
         this.typeName = typeName;
         this.value = value;
         this.color=color_array[Math.abs(this.typeName.hashCode())%color_array.length];

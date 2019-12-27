@@ -1,6 +1,6 @@
 package com.yzchnb.dynamicbarvideogenerator.DataProcessor;
 
-import com.yzchnb.dynamicbarvideogenerator.GeneratorUtils.UtilEntity.Line;
+import com.yzchnb.dynamicbarvideogenerator.Entity.GeneratorEntity.Line;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -20,20 +20,20 @@ public class DataForecaster {
         long sepNanos = d.toNanos() / newLines.size();
         LocalDateTime lLineTime = lLine.getLocalDateTime();
 
-        HashMap<String, Integer> fLineType2Value = fLine.getType2Value();
-        HashMap<String, Integer> lLineType2Value = lLine.getType2Value();
+        HashMap<String, Double> fLineType2Value = fLine.getType2Value();
+        HashMap<String, Double> lLineType2Value = lLine.getType2Value();
         HashMap<String, Double> type2Grad = new HashMap<>();
         fLineType2Value.forEach((k, v) -> type2Grad.put(k, (lLineType2Value.get(k) - v) / (1.0 * length)));
 
         for (int i = 0; i < length * proportion; i++){
             Line newLine = new Line();
 
-            newLine.setType2Value((HashMap<String, Integer>) lLineType2Value.clone());
+            newLine.setType2Value((HashMap<String, Double>) lLineType2Value.clone());
 
             newLine.getType2Value().forEach((k, v) -> {
                 Random r = new Random();
                 double ratio = (r.nextInt(60) - 30) / 100.0;
-                int newValue = v + (int)((1 + ratio) * type2Grad.get(k));
+                Double newValue = v + (int)((1 + ratio) * type2Grad.get(k));
                 newLine.getType2Value().put(k, newValue);
             });
 

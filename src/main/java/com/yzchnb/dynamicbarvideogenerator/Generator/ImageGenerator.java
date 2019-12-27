@@ -1,22 +1,23 @@
-package com.yzchnb.dynamicbarvideogenerator.GeneratorUtils;
+package com.yzchnb.dynamicbarvideogenerator.Generator;
 
-import com.yzchnb.dynamicbarvideogenerator.ConfigurationEntity.GeneratorConfiguration;
-import com.yzchnb.dynamicbarvideogenerator.ConfigurationEntity.UserInputConfiguration;
-import com.yzchnb.dynamicbarvideogenerator.GeneratorUtils.UtilEntity.Bar;
-import com.yzchnb.dynamicbarvideogenerator.GeneratorUtils.UtilEntity.Frame;
+import com.yzchnb.dynamicbarvideogenerator.Entity.ConfigurationEntity.GeneratorConfiguration;
+import com.yzchnb.dynamicbarvideogenerator.Entity.ConfigurationEntity.UserInputConfiguration;
+import com.yzchnb.dynamicbarvideogenerator.Entity.GeneratorEntity.Bar;
+import com.yzchnb.dynamicbarvideogenerator.Entity.GeneratorEntity.Frame;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.text.DecimalFormat;
 import java.util.Comparator;
 
-public class ImageGenerator {
+class ImageGenerator {
     private GeneratorConfiguration generatorConfiguration;
     private UserInputConfiguration userInputConfiguration;
-    public ImageGenerator(GeneratorConfiguration generatorConfiguration){
+    ImageGenerator(GeneratorConfiguration generatorConfiguration){
         this.generatorConfiguration = generatorConfiguration;
         this.userInputConfiguration = generatorConfiguration.getUserInputConfiguration();
     }
-    public BufferedImage generateImage(Frame frame) {
+    BufferedImage generateImage(Frame frame) {
 
         //TODO 读取配置，获得长和宽
         int width = userInputConfiguration.getWidth();
@@ -110,7 +111,8 @@ public class ImageGenerator {
             graphics.fillRect(originX,real_bar_position,bar_length,Math.min(widthOfBar,originY+(int)heightOfBarChart-real_bar_position));
 
             graphics.setFont(value_font);
-            graphics.drawString(bar.getValue().toString(),originX+bar_length,real_bar_position+(value_font_size_px+widthOfBar)/2);
+            DecimalFormat f = new DecimalFormat("#.00");
+            graphics.drawString(f.format(bar.getValue()),originX+bar_length,real_bar_position+(value_font_size_px+widthOfBar)/2);
         }
         graphics.dispose();
 
