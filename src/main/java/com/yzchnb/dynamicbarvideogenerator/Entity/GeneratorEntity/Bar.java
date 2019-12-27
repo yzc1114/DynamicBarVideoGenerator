@@ -90,7 +90,7 @@ public class Bar {
     public Bar(String typeName, Double value){
         this.typeName = typeName;
         this.value = value;
-        this.color=color_array[Math.abs(this.typeName.hashCode())%color_array.length];
+        this.color=generateColor(typeName);
         this.speed = 0.0;
         this.waitingTime = 0.0;
         this.targetPosition = null;
@@ -103,5 +103,21 @@ public class Bar {
         this.moving = false;
         this.currMovingTargetPosition = null;
         this.justStartedMoving = false;
+    }
+
+    private Color generateColor(String typeName){
+        final int MAX_OFFSET=100;
+        final int MAX_COLOR_DEGREE=256;
+        int[] offset_rgb=new int[3];
+        int offset_value=typeName.hashCode();
+        for(int i=0;i<3;++i){
+            offset_rgb[i]=offset_value%MAX_COLOR_DEGREE%MAX_OFFSET;
+            offset_value/=MAX_COLOR_DEGREE;
+        }
+        Color base=new Color(128,128,128);
+        int red=(offset_rgb[0]+base.getRed()+MAX_COLOR_DEGREE)%MAX_COLOR_DEGREE;
+        int green=(offset_rgb[1]+base.getGreen()+MAX_COLOR_DEGREE)%MAX_COLOR_DEGREE;
+        int blue=(offset_rgb[2]+base.getBlue()+MAX_COLOR_DEGREE)%MAX_COLOR_DEGREE;
+        return new Color(red,green,blue);
     }
 }

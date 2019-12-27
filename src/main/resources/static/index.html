@@ -299,22 +299,13 @@
     //调用视频生成器。
     var form=new FormData();
     var data_array=$("#config input")
-    console.log(data_array)
-    var flag=false
     data_array.each(function(){
       var name=$(this).attr("name")
       var value=(name=="file")?$(this)[0].files[0]:$(this).val()
-      if(!value){
-        flag=true
-        return
-      }
       form.append(name,value)
     })
-    if(flag){
-      alert("The input is wrong")
-      return
-    }
-    window.location="#service"
+    
+    window.location="#generate"
     var timer_id=setInterval("getRate()",1000)
     bar_model.finished(false)
     $.ajax({

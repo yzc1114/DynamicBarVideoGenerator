@@ -88,12 +88,21 @@ class ImageGenerator {
         graphics.setColor(Color.BLACK);
         //graphics.drawRect(originX,originY,(int)widthOfBarChart,(int)heightOfBarChart);
         //绘制时间
-        int time_font_size_px=width/30;
+        int title_font_size_px=height/20;
+        int title_font_size_pt=title_font_size_px*4/3;
+        Font title_font=new Font("黑体",Font.BOLD,title_font_size_pt);
+        graphics.setFont(title_font);
+        String title=userInputConfiguration.getTitle();
+        FontMetrics title_fm=graphics.getFontMetrics();
+        graphics.drawString(title, (width-title_fm.stringWidth(title))/2, (int)(title_font_size_px*1.2));
+
+        int time_font_size_px=height/30;
         int time_font_size_pt=time_font_size_px*4/3;
         Font time_font=new Font("黑体",Font.PLAIN,time_font_size_pt);
         graphics.setFont(time_font);
+        String time_str=frame.getTimeStr();
         FontMetrics t_fm=graphics.getFontMetrics();
-        graphics.drawString(frame.getTimeStr(),(width-t_fm.stringWidth(frame.getTimeStr()))/2,2*time_font_size_px);
+        graphics.drawString(time_str, (width-t_fm.stringWidth(time_str))/2, (time_font_size_px*4));
 
         for(int i=0;i<bars.size();++i){
             Bar bar=bars.get(i);

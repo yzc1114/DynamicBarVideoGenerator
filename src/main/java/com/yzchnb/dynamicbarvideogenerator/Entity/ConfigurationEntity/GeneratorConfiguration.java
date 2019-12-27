@@ -22,6 +22,9 @@ public class GeneratorConfiguration {
         return userInputConfiguration;
     }
 
+    public String getTitle() {
+        return userInputConfiguration.getTitle();
+    }
     public static GeneratorConfiguration from(UserInputConfiguration u){
         return new GeneratorConfiguration(u);
     }
