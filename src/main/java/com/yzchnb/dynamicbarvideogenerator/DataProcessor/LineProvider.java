@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class LineProvider {
-    public static Line boxLine(String lineStr, ArrayList<String> types) throws Exception{
+    private static Line boxLine(String lineStr, ArrayList<String> types) throws Exception{
         String[] values = lineStr.split(",");
         if(values.length != types.size() + 1){
             throw new Exception("数据列数不够");
