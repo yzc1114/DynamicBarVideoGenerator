@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Aspect
 @Component
 public class ControllerAdvice {
-    @Pointcut("execution(public * com.yzchnb.dynamicbarvideogenerator.Controller.*(..))")
+    @Pointcut("execution(public * com.yzchnb.dynamicbarvideogenerator.Controller..*(..))")
     private void addAdvice() {}
 
     @Around("addAdvice()")
