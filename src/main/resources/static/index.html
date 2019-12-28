@@ -270,8 +270,9 @@
       data: form,
       success: function (res, status) {
         console.log("result:" + res);
-        if(status != 200){
-          error_handler();
+        console.log(status);
+        if(status != "success"){
+          errorHandler();
           return;
         }
         if(res === "success"){
@@ -287,7 +288,7 @@
     });
   }
 
-  function error_handler(){
+  function errorHandler(){
     alert("error!");
     bar_model.canShowGenerateButton(false);
     bar_model.finished(false);
@@ -298,12 +299,12 @@
     //检查参数。
     //调用视频生成器。
     var form=new FormData();
-    var data_array=$("#config input")
+    var data_array=$("#config input");
     data_array.each(function(){
-      var name=$(this).attr("name")
+      var name=$(this).attr("name");
       var value=(name=="file")?$(this)[0].files[0]:$(this).val()
       form.append(name,value)
-    })
+    });
     
     window.location="#generate"
     var timer_id=setInterval("getRate()",1000)
@@ -315,8 +316,9 @@
       contentType: false,
       data: form,
       success: function (success, status) {
-        if(status != 200){
-          error_handler();
+        if(status != "success"){
+          errorHandler();
+          return;
         }
         if(success){
           bar_model.generate_str("Success");
@@ -332,9 +334,9 @@
   }
   function getRate() {
     $.get("/getRate", (success, status) => {
-      if(status != 200){
-          error_handler();
-          return;
+      if(status != "success"){
+        errorHandler();
+        return;
       }
       console.log(success,status)
       bar_model.generate_str("Generating...")
