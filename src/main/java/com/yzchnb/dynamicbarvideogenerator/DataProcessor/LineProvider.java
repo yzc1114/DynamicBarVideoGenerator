@@ -49,25 +49,18 @@ public class LineProvider {
     }
 
     public static ArrayList<Line> generateLines(GeneratorConfiguration generatorConfiguration, File csvFile) throws Exception{
-        BufferedReader bufferedReader = new BufferedReader(new FileReader(csvFile));
-        long linesCount = bufferedReader.lines().count();
-        if(linesCount <= 2){
-            throw new Exception("数据太少！");
-        }
-        bufferedReader = new BufferedReader(new FileReader(csvFile));
-        String firstLine = bufferedReader.readLine();
-        String[] splitedfirstLine = firstLine.split(",");
+        ParamsChecker.checkParams(generatorConfiguration,csvFile);
+
 
         UserInputConfiguration userInputConfiguration = generatorConfiguration.getUserInputConfiguration();
         int DPS = userInputConfiguration.getDPS();
         int FPS = userInputConfiguration.getFPS();
-        if(DPS % FPS != 0 && FPS % DPS != 0){
-            throw new Exception("DPS 与 FPS 不是整数倍关系！");
-        }
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(csvFile));
+        long linesCount = bufferedReader.lines().count();
+        bufferedReader = new BufferedReader(new FileReader(csvFile));
+        String firstLine = bufferedReader.readLine();
+        String[] splitedfirstLine = firstLine.split(",");
 
-        if(splitedfirstLine.length <= 1){
-            throw new Exception("输入文件格式不对：列太少");
-        }
 
         ArrayList<String> types = new ArrayList<>(splitedfirstLine.length - 1);
         for (int i = 1; i < splitedfirstLine.length; i++) {

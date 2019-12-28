@@ -31,11 +31,6 @@ public class ParamsChecker {
                 throw new Exception("输入文件格式不对：列太少");
             }
 
-            ArrayList<String> types = new ArrayList<>(splitedfirstLine.length - 1);
-            for (int i = 1; i < splitedfirstLine.length; i++) {
-                types.add(splitedfirstLine[i]);
-            }
-
 //            Line lastLine = null;
 //            Long lastDuration = null;
 //            while(true){
