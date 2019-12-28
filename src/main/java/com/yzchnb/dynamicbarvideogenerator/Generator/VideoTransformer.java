@@ -87,15 +87,4 @@ class VideoTransformer {
         }
         return targetFile.getName();
     }
-
-    public static void main(String[] args) {
-        File source = new File("/Users/purchaser/IdeaProjects/dynamic-bar-video-generator/target/classes/resources/movies/1763913741.avi");
-        File target = new File("/Users/purchaser/IdeaProjects/dynamic-bar-video-generator/target/classes/resources/movies/1763913741_h264.mp4");
-        VideoTransformer videoTransformer = new VideoTransformer();
-        try{
-            System.out.println(videoTransformer.transformVideo(source));
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
 }
