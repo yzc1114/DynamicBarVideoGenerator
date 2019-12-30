@@ -18,7 +18,6 @@ public class Bar {
     private boolean moving;
     //是否刚刚开始移动
     private boolean justStartedMoving;
-    private static Color[] color_array={Color.RED,Color.BLUE,Color.GREEN,Color.YELLOW,Color.PINK,Color.CYAN, Color.ORANGE, Color.MAGENTA};
     public String getTypeName() {
         return typeName;
     }
