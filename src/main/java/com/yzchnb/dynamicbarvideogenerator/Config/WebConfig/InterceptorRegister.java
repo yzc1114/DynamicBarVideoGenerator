@@ -13,6 +13,6 @@ public class InterceptorRegister implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/movie/**")
-                .addResourceLocations("classpath:/resources/resources/movies/");
+                .addResourceLocations("classpath:/resources/resources/movies/").resourceChain(true);
     }
 }

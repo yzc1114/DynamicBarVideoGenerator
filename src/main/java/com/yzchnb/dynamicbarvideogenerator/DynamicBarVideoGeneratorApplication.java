@@ -18,8 +18,8 @@ public class DynamicBarVideoGeneratorApplication {
     }
 
     public static void main(String[] args) {
-        SpringApplicationBuilder builder = new SpringApplicationBuilder(DynamicBarVideoGeneratorApplication.class);
-        builder.headless(false).run(args);
-        //SpringApplication.run(DynamicBarVideoGeneratorApplication.class, args);
+        //SpringApplicationBuilder builder = new SpringApplicationBuilder(DynamicBarVideoGeneratorApplication.class);
+        //builder.headless(false).run(args);
+        SpringApplication.run(DynamicBarVideoGeneratorApplication.class, args);
     }
 }

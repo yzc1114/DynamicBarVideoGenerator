@@ -27,6 +27,32 @@
       margin: auto;
     }
   </style>
+  <style>
+    .markdown-body {
+      box-sizing: border-box;
+      min-width: 200px;
+      max-width: 980px;
+      padding: 45px;
+    }
+    .markdown-body table {
+      display: table;
+    }
+    .markdown-body li.task-list-item {
+      list-style-type: none;
+    }
+    .markdown-body li > [type=checkbox] {
+      margin: 0 0 0 -1.3em;
+    }
+    .markdown-body input[type="checkbox"] ~ p {
+      margin-top: 0;
+      display: inline-block;
+    }
+    @media (max-width: 767px) {
+      .markdown-body {
+        padding: 15px;
+      }
+    }
+  </style>
 </head>
 
 <body data-spy="scroll">
@@ -76,13 +102,25 @@
   <div class="heading-about marginbot-50">
     <div class="container">
       <div class="row">
-        <div class="col-lg-4 col-md-4">
-          <h4>Data Format</h4>
-          <p>
-            We are using csv file to be the input file. .......
-          </p>
+        <div class="col-lg-6 col-md-6">
+          <h4>Params </h4>
+          <article style="text-align: left">
+            <p><strong><em>Title:</em></strong> 视频标题，字符串类型；</p>
+            <p><strong><em>FPS:</em></strong> 视频帧率，单位为每秒播放的帧数，正整数，建议值为30，可根据数据量的大小自定义，帧率越大视频播放越快，与DPS必须形成整数倍关系；</p>
+            <p><strong><em>DPS:</em></strong> 数据流速，单位为每秒流过的数据行数，正整数，建议值为30，可根据数据量的大小自定义，数据流速越快，转换生成的总帧数越少，与FPS必须形成整数倍关系；(FPS /DPS 余数为0或者 DPS / FPS 余数为0)</p>
+            <p><strong><em>Buffered Frame Count:</em></strong> 缓冲延迟，单位为帧数，正整数，决定了当柱图数据排序产生变化时，延时多少帧进行位置的改变，当缓冲延迟的帧数和FPS相同时，即为延时1秒；</p>
+            <p><strong><em>Num Of Bars In Chart:</em></strong> 柱图数量，正整数，决定了视频内柱图的数目；</p>
+            <p><strong><em>Video Height:</em></strong> 视频高度，单位为像素，建议值为1080；</p>
+            <p><strong><em>Video Width:</em></strong> 视频宽度，单位为像素，建议值1920；</p>
+            <p><strong><em>Predict Data:</em></strong> 勾选参数，决定是否使用预测模型；</p>
+            <p><strong><em>Data File:</em></strong> 数据文件，格式为<strong>csv</strong>格式。</p>
+          </article>
+          <h3 id="Data Format">Data Format</h3>
+          <p style="display: flex; align-items: center; justify-content: center"><img width="100%" height="auto" src="img/1.png"></p>
+          <p style="text-align: left;">数据文件格式应类似上图所示，第一行除第一格为时间外，其余均为柱图表示的实体名称；第一列为时间，需要注意的是，各行的时间间隔应该相同，否则无法执行视频转换算法；其余各列为各项实体的数据值。</p>
+
         </div>
-        <div class="col-lg-8 col-md-8">
+        <div class="col-lg-6 col-md-6">
 
           <div class="section-heading row">
             <h4>Generator Configuration</h4>
