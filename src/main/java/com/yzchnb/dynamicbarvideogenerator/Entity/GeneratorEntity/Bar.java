@@ -2,6 +2,9 @@ package com.yzchnb.dynamicbarvideogenerator.Entity.GeneratorEntity;
 
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Bar {
     private String typeName;
@@ -103,17 +106,37 @@ public class Bar {
         this.currMovingTargetPosition = null;
         this.justStartedMoving = false;
     }
-
+    static Color[] BaseColor;
+    static{
+        int[] base_value={200,100,50,0};
+        List<Color> colorList=new ArrayList<>();
+        for(int i=0;i<base_value.length;++i){
+            for(int j=0;j<base_value.length;++j){
+                for(int k=0;k<base_value.length;++k){
+                    int r=base_value[i];
+                    int g=base_value[j];
+                    int b=base_value[k];
+                    if(r==g&&g==b){
+                        continue;
+                    }else {
+                        colorList.add(new Color(r,g,b));
+                    }
+                }
+            }
+        }
+        BaseColor=new Color[colorList.size()];
+        colorList.toArray(BaseColor);
+    }
     private Color generateColor(String typeName){
-        final int MAX_OFFSET=100;
+        final int MAX_OFFSET=50;
         final int MAX_COLOR_DEGREE=256;
         int[] offset_rgb=new int[3];
-        int offset_value=typeName.hashCode();
+        int hash_code=typeName.hashCode();
         for(int i=0;i<3;++i){
-            offset_rgb[i]=offset_value%MAX_COLOR_DEGREE%MAX_OFFSET;
-            offset_value/=MAX_COLOR_DEGREE;
+            offset_rgb[i]=hash_code%MAX_COLOR_DEGREE%MAX_OFFSET;
+            hash_code*=hash_code;
         }
-        Color base=new Color(128,128,128);
+        Color base=BaseColor[(hash_code%BaseColor.length+BaseColor.length)%BaseColor.length];
         int red=(offset_rgb[0]+base.getRed()+MAX_COLOR_DEGREE)%MAX_COLOR_DEGREE;
         int green=(offset_rgb[1]+base.getGreen()+MAX_COLOR_DEGREE)%MAX_COLOR_DEGREE;
         int blue=(offset_rgb[2]+base.getBlue()+MAX_COLOR_DEGREE)%MAX_COLOR_DEGREE;
