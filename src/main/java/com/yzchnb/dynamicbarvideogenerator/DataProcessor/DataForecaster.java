@@ -21,7 +21,7 @@ public class DataForecaster {
         Period d = Period.between(fLine.getLocalDate(), lLine.getLocalDate());
         long sepDays = d.getDays() / newLines.size();
         LocalDate lLineTime = lLine.getLocalDate();
-        int same_time_count=0;
+        int same_time_count=1;
         LocalDate last_day=fLine.getLocalDate();
         for(int i=1;i<newLines.size();++i){
             if(last_day.toString().equals(newLines.get(i).getLocalDate().toString())){
