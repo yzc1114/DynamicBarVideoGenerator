@@ -106,7 +106,7 @@ public class Bar {
         this.currMovingTargetPosition = null;
         this.justStartedMoving = false;
     }
-    static Color[] BaseColor;
+    private static Color[] BaseColor;
     static{
         int[] base_value={200,100,50,0};
         List<Color> colorList=new ArrayList<>();
