@@ -3,22 +3,24 @@ package com.yzchnb.dynamicbarvideogenerator.DataProcessor;
 import com.yzchnb.dynamicbarvideogenerator.Entity.GeneratorEntity.Line;
 
 import java.time.Duration;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 
 public class DataForecaster {
-    public static ArrayList<Line> doPredict(ArrayList<Line> lines, double proportion){
+    public static ArrayList<Line> doPredict(List<Line> lines, double proportion){
         assert proportion < 1;
-        ArrayList<Line> newLines = (ArrayList<Line>) lines.clone();
+        ArrayList<Line> newLines = new ArrayList<>(lines);
 
         Line fLine = newLines.get(0);
         Line lLine = newLines.get(newLines.size() - 1);
         int length = newLines.size();
-        Duration d = Duration.between(fLine.getLocalDateTime(), lLine.getLocalDateTime());
-        long sepNanos = d.toNanos() / newLines.size();
-        LocalDateTime lLineTime = lLine.getLocalDateTime();
+        Period d = Period.between(fLine.getLocalDate(), lLine.getLocalDate());
+        long sepDays = d.getDays() / newLines.size();
+        LocalDate lLineTime = lLine.getLocalDate();
 
         HashMap<String, Double> fLineType2Value = fLine.getType2Value();
         HashMap<String, Double> lLineType2Value = lLine.getType2Value();
@@ -40,8 +42,8 @@ public class DataForecaster {
             lLineType2Value.clear();
             lLineType2Value.putAll(newLine.getType2Value());
 
-            lLineTime = lLineTime.plusNanos(sepNanos);
-            newLine.setLocalDateTime(lLineTime);
+            lLineTime = lLineTime.plusDays(sepDays);
+            newLine.setLocalDate(lLineTime);
             newLines.add(newLine);
         }
         return newLines;

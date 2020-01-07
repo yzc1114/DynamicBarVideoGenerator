@@ -1,17 +1,31 @@
 package com.yzchnb.dynamicbarvideogenerator.Entity.GeneratorEntity;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.HashMap;
 
 public class Line {
-    private LocalDateTime localDateTime = null;
+    public enum TimeFormat{
+        YYYY_MM_DD,
+        YYYY_MM,
+        YYYY
+    }
+    private LocalDate localDateTime = null;
+    private TimeFormat timeFormat = null;
     private HashMap<String, Double> type2Value = null;
 
-    public LocalDateTime getLocalDateTime() {
+    public TimeFormat getTimeFormat() {
+        return timeFormat;
+    }
+
+    public void setTimeFormat(TimeFormat timeFormat) {
+        this.timeFormat = timeFormat;
+    }
+
+    public LocalDate getLocalDate() {
         return localDateTime;
     }
 
-    public void setLocalDateTime(LocalDateTime localDateTime) {
+    public void setLocalDate(LocalDate localDateTime) {
         this.localDateTime = localDateTime;
     }
 

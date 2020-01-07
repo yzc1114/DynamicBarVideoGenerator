@@ -5,6 +5,7 @@ import com.yzchnb.dynamicbarvideogenerator.Entity.GeneratorEntity.Bar;
 import com.yzchnb.dynamicbarvideogenerator.Entity.GeneratorEntity.Frame;
 import com.yzchnb.dynamicbarvideogenerator.Entity.GeneratorEntity.Line;
 
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 class TransitionFrameGenerator {
@@ -42,7 +43,7 @@ class TransitionFrameGenerator {
             });
             Frame frame = new Frame(bars);
             frame.calPeekDegree();
-            frame.setTimeStr(currLine.getLocalDateTime().toString());
+            frame.setTimeStr(currLine.getLocalDate().toString());
             return frame;
         }
         List<Bar> lastBarsList = lastFrame.getBars();
@@ -215,7 +216,7 @@ class TransitionFrameGenerator {
         }
         //
         Frame frame = new Frame(bars);
-        frame.setTimeStr(currLine.getLocalDateTime().toString());
+        frame.setTimeStr(DateTimeFormatter.ofPattern("yyyy-MM-dd").format(currLine.getLocalDate()));
         frame.setVisiteds(currVisiteds);
         frame.calPeekDegree();
         return frame;

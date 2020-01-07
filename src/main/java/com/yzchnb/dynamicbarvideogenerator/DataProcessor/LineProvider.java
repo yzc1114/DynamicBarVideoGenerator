@@ -7,35 +7,23 @@ import com.yzchnb.dynamicbarvideogenerator.Entity.GeneratorEntity.Line;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class LineProvider {
-    private static Line boxLine(String lineStr, ArrayList<String> types) throws Exception{
+    static Line boxLine(Line lastLine, String lineStr, List<String> types) throws Exception{
         String[] values = lineStr.split(",");
         if(values.length != types.size() + 1){
             throw new Exception("数据列数不够");
         }
         Line line = new Line();
 
-        ArrayList<String> supportedFormats = new ArrayList<String>() {{
-            add("yyyy-MM-dd HH:mm:ss"); add("yyyy-MM-dd"); add("yyyy-MM"); add("yyyy");
-        }};
+        setLocalDateTime(line, values[0]);
 
-        for(String format : supportedFormats){
-            try{
-                line.setLocalDateTime(LocalDateTime.parse(values[0], DateTimeFormatter.ofPattern(format)));
-            }catch (DateTimeParseException e){
-                //try again
-            }
-        }
-        if(line.getLocalDateTime() == null){
-            //没有支持的时间格式
-            throw new Exception("没有支持的时间格式！");
-        }
         HashMap<String, Double> type2Value = new HashMap<>();
         for (int i = 1; i < values.length; i++) {
             try{
@@ -69,6 +57,7 @@ public class LineProvider {
 
         ArrayList<Line> lines = new ArrayList<>((int)linesCount);
         int frameCount;
+        Line lastLine = null;
         if(DPS > FPS){
             int skipNum = DPS / FPS - 1;
 
@@ -81,8 +70,8 @@ public class LineProvider {
                 if(lineStr == null){
                     break;
                 }
-                Line line = boxLine(lineStr, types);
-                lines.add(line);
+                lastLine = boxLine(lastLine, lineStr, types);
+                lines.add(lastLine);
             }
         }else{
             while(true){
@@ -91,14 +80,54 @@ public class LineProvider {
                 if(lineStr == null){
                     break;
                 }
-                Line line = boxLine(lineStr, types);
+                lastLine = boxLine(lastLine, lineStr, types);
                 //add same line for multiple times
                 for (int i = 0; i < FPS / DPS; i++) {
-                    lines.add(line);
+                    lines.add(lastLine);
                 }
             }
         }
         return lines;
+    }
+
+    private static void setLocalDateTime(Line line, String timeStr) throws Exception{
+        timeStr = timeStr.trim();
+        String[] supported_formats = {"yyyy-mm-dd", "yyyy-mm", "yyyy"};
+        String yyyymmdd = "^(\\d{4})-(\\d{2})-(\\d{2})$";
+        String yyyymm = "^(\\d{4})-(\\d{2})$";
+        String yyyy = "^(\\d{4})$";
+        Pattern pyyyymmdd = Pattern.compile(yyyymmdd);
+        Pattern pyyyymm = Pattern.compile(yyyymm);
+        Pattern pyyyy = Pattern.compile(yyyy);
+        Pattern[] patterns = {pyyyymmdd, pyyyymm, pyyyy};
+        for(Pattern pattern : patterns){
+            Matcher matcher = pattern.matcher(timeStr);
+            if(matcher.find()){
+                if(pattern == pyyyymmdd){
+                    line.setTimeFormat(Line.TimeFormat.YYYY_MM_DD);
+                    int year = Integer.parseInt(matcher.group(1));
+                    int month = Integer.parseInt(matcher.group(2));
+                    int day = Integer.parseInt(matcher.group(3));
+                    line.setLocalDate(LocalDate.of(year, month, day));
+                }
+                if(pattern == pyyyymm){
+                    int year = Integer.parseInt(matcher.group(1));
+                    int month = Integer.parseInt(matcher.group(2));
+                    line.setLocalDate(LocalDate.of(year, month, 1));
+                    line.setTimeFormat(Line.TimeFormat.YYYY_MM);
+                }
+                if(pattern == pyyyy){
+                    int year = Integer.parseInt(matcher.group(1));
+                    line.setLocalDate(LocalDate.of(year, 1, 1));
+                    line.setTimeFormat(Line.TimeFormat.YYYY);
+                }
+
+            }
+        }
+        if(line.getLocalDate() == null){
+            //没有支持的时间格式
+            throw new Exception("没有支持的时间格式！");
+        }
     }
 
 }

@@ -7,7 +7,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Ninestars bootstrap 3 one page template</title>
+  <title>Dynamic Bar Video Generator</title>
 
   <!-- Bootstrap Core CSS -->
   <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
@@ -171,7 +171,7 @@
               </div>
               <div class="form-group">
                 <label for="Predict">Predict Data</label>
-                <input type="checkbox" style="margin-left: 5px" name="predict" id="Predict"/>
+                <input oninput="bar_model.canShowGenerateButton(false)" type="checkbox" style="margin-left: 5px" name="predict" id="Predict"/>
                 <div class="validation"></div>
               </div>
               <div class="form-group">
@@ -231,15 +231,6 @@
     <div class="row">
       <div class="col-md-12 col-lg-12">
         <p>Dynamic Bar Video Generator</p>
-        <div class="credits">
-          <!--
-            All the links in the footer should remain intact.
-            You can delete the links only if you purchased the pro version.
-            Licensing information: https://bootstrapmade.com/license/
-            Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Ninestars
-          -->
-          Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-        </div>
       </div>
     </div>
   </div>
@@ -280,21 +271,9 @@
   };
 
   function checkParams() {
-    var form=new FormData();
-    var data_array=$("#config input");
-    console.log("data_array", data_array);
-    var flag=false;
-    data_array.each(function(){
-      var name=$(this).attr("name");
-      var value=(name=="file")?$(this)[0].files[0]:$(this).val();
-      if(!value){
-        console.log($(this));
-        flag=true;
-        return
-      }
-      form.append(name,value)
-    });
-    form.set("predict", $("#Predict").is(":checked"));
+    var formAndFlag = getFormAndFlag();
+    var form = formAndFlag.form;
+    var flag = formAndFlag.flag;
     if(flag){
       alert("The input is wrong");
       return
@@ -333,16 +312,31 @@
     bar_model.movie_url("");
   }
 
+
+  function getFormAndFlag(){
+    var form=new FormData();
+    var data_array=$("#config input");
+    console.log("data_array", data_array);
+    var flag=false;
+    data_array.each(function(){
+      var name=$(this).attr("name");
+      var value=(name=="file")?$(this)[0].files[0]:$(this).val();
+      if(!value){
+        console.log($(this));
+        flag=true;
+        return
+      }
+      form.append(name,value)
+    });
+    form.set("predict", $("#Predict").is(":checked"));
+    return {'form':form,'flag': flag};
+  }
   function generate() {
     //检查参数。
     //调用视频生成器。
-    var form=new FormData();
-    var data_array=$("#config input");
-    data_array.each(function(){
-      var name=$(this).attr("name");
-      var value=(name=="file")?$(this)[0].files[0]:$(this).val()
-      form.append(name,value)
-    });
+    var formAndFlag = getFormAndFlag();
+    var form = formAndFlag.form;
+    var flag = formAndFlag.flag;
     
     window.location="#generate"
     var timer_id=setInterval("getRate()",1000)
