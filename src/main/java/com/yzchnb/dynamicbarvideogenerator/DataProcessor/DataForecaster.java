@@ -21,7 +21,15 @@ public class DataForecaster {
         Period d = Period.between(fLine.getLocalDate(), lLine.getLocalDate());
         long sepDays = d.getDays() / newLines.size();
         LocalDate lLineTime = lLine.getLocalDate();
-
+        int same_time_count=0;
+        LocalDate last_day=fLine.getLocalDate();
+        for(int i=1;i<newLines.size();++i){
+            if(last_day.toString().equals(newLines.get(i).getLocalDate().toString())){
+                same_time_count++;
+            }else {
+                break;
+            }
+        }
         HashMap<String, Double> fLineType2Value = fLine.getType2Value();
         HashMap<String, Double> lLineType2Value = lLine.getType2Value();
         HashMap<String, Double> type2Grad = new HashMap<>();
@@ -41,8 +49,9 @@ public class DataForecaster {
 
             lLineType2Value.clear();
             lLineType2Value.putAll(newLine.getType2Value());
-
-            lLineTime = lLineTime.plusDays(sepDays);
+            if(i%same_time_count==0) {
+                lLineTime = lLineTime.plusDays(sepDays);
+            }
             newLine.setLocalDate(lLineTime);
             newLines.add(newLine);
         }
