@@ -23,7 +23,7 @@ public class GeneratorService implements IGeneratorService {
             ArrayList<Line> lines = LineProvider.generateLines(generatorConfiguration, csvFile);
             boolean predict = generatorConfiguration.getUserInputConfiguration().isPredict();
             if(predict){
-                lines = doPredict(lines, 0.1);
+                lines = doPredict(lines, 0.2);
             }
             CenterProcessor centerController = new CenterProcessor(generatorConfiguration, lines.size(), generateDir);
             ProcessorMap.putCenterProcessor(fileId,centerController);

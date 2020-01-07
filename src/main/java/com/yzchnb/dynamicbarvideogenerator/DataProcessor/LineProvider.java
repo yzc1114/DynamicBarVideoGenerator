@@ -92,10 +92,12 @@ public class LineProvider {
 
     private static void setLocalDateTime(Line line, String timeStr) throws Exception{
         timeStr = timeStr.trim();
-        String[] supported_formats = {"yyyy-mm-dd", "yyyy-mm", "yyyy"};
+        String[] supported_formats = {"yyyy-mm-dd hh:mm:ss", "yyyy-mm-dd", "yyyy-mm", "yyyy"};
+        String yyyymmddhhmmss = "^(\\d{4})-(\\d{2})-(\\d{2}) \\d{2}:\\d{2}:\\d{2}$";
         String yyyymmdd = "^(\\d{4})-(\\d{2})-(\\d{2})$";
         String yyyymm = "^(\\d{4})-(\\d{2})$";
         String yyyy = "^(\\d{4})$";
+        Pattern pyyyymmddhhmmss = Pattern.compile(yyyymmddhhmmss);
         Pattern pyyyymmdd = Pattern.compile(yyyymmdd);
         Pattern pyyyymm = Pattern.compile(yyyymm);
         Pattern pyyyy = Pattern.compile(yyyy);
@@ -103,6 +105,13 @@ public class LineProvider {
         for(Pattern pattern : patterns){
             Matcher matcher = pattern.matcher(timeStr);
             if(matcher.find()){
+                if(pattern == pyyyymmddhhmmss){
+                    line.setTimeFormat(Line.TimeFormat.YYYY_MM_DD);
+                    int year = Integer.parseInt(matcher.group(1));
+                    int month = Integer.parseInt(matcher.group(2));
+                    int day = Integer.parseInt(matcher.group(3));
+                    line.setLocalDate(LocalDate.of(year, month, day));
+                }
                 if(pattern == pyyyymmdd){
                     line.setTimeFormat(Line.TimeFormat.YYYY_MM_DD);
                     int year = Integer.parseInt(matcher.group(1));
@@ -127,6 +136,9 @@ public class LineProvider {
         if(line.getLocalDate() == null){
             //没有支持的时间格式
             throw new Exception("没有支持的时间格式！");
+        }
+        if(line.getTimeFormat() == null){
+            throw new Exception("no time format");
         }
     }
 

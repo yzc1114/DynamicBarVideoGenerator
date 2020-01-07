@@ -5,9 +5,15 @@ import java.util.HashMap;
 
 public class Line {
     public enum TimeFormat{
-        YYYY_MM_DD,
-        YYYY_MM,
-        YYYY
+        YYYY_MM_DD("yyyy-mm-dd"),
+        YYYY_MM("yyyy-mm"),
+        YYYY("yyyy");
+
+        public String format;
+
+        TimeFormat(String s){
+            format = s;
+        }
     }
     private LocalDate localDateTime = null;
     private TimeFormat timeFormat = null;

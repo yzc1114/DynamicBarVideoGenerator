@@ -43,7 +43,7 @@ class TransitionFrameGenerator {
             });
             Frame frame = new Frame(bars);
             frame.calPeekDegree();
-            frame.setTimeStr(currLine.getLocalDate().toString());
+            frame.setTimeStr(DateTimeFormatter.ofPattern(currLine.getTimeFormat().format).format(currLine.getLocalDate()));
             return frame;
         }
         List<Bar> lastBarsList = lastFrame.getBars();
@@ -216,7 +216,8 @@ class TransitionFrameGenerator {
         }
         //
         Frame frame = new Frame(bars);
-        frame.setTimeStr(DateTimeFormatter.ofPattern("yyyy-MM-dd").format(currLine.getLocalDate()));
+
+        frame.setTimeStr(DateTimeFormatter.ofPattern(currLine.getTimeFormat().format).format(currLine.getLocalDate()));
         frame.setVisiteds(currVisiteds);
         frame.calPeekDegree();
         return frame;
